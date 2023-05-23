@@ -14,13 +14,13 @@ class onbonding2 : AppCompatActivity() {
         supportActionBar?.hide()
         val buttomskip = findViewById<Button>(R.id.skip)
         buttomskip.setOnClickListener{
-            val intent = Intent(this, onbonding2::class.java)
+            val intent = Intent(this, onbonding3::class.java)
             startActivity(intent)
         }
 
         val buttomnext = findViewById<Button>(R.id.next)
         buttomnext.setOnClickListener {
-            val intent = Intent(this, onbonding2::class.java)
+            val intent = Intent(this, onbonding3::class.java)
             startActivity(intent)
         }
     }
