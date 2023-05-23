@@ -13,6 +13,23 @@
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
         <activity
+            android:name=".view.onbonding3"
+            android:exported="false" />
+        <activity
+            android:name=".view.onbonding2"
+            android:exported="false" />
+        <activity
+            android:name=".view.onbonding1"
+            android:exported="false" />
+        <activity
+            android:name=".view.SplassScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
             android:name=".Register_Activity"
             android:exported="false" />
     </application>
