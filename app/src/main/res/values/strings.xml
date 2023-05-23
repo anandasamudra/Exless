@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Exless</string>
+    <string name="ketentuan_layanan">Dengan membuat akun berarti kamu setuju dengan <b><u>Ketentuan Layanan Kami</u></b></string>
+    <string name="daftarlogin"><u>Udah daftar ? Login disini</u></string>
 </resources>
