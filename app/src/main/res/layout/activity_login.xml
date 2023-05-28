@@ -118,7 +118,7 @@
 
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/button"
         android:layout_width="375dp"
         android:layout_height="60dp"
         android:backgroundTint="#E86A33"
