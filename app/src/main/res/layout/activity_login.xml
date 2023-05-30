@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".LoginActivity">
+    tools:context=".view.LoginActivity">
 
     <TextView
         android:id="@+id/textView1"
@@ -23,24 +23,24 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="387dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:text="Yuk Masuk Akunmu Untuk Lebih Lanjut"
-        android:textColor="#000000"
+        android:textColor="#626262"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="Email"
         android:textColor="#626262"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="157dp" />
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView4"
@@ -57,36 +57,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="128dp"
         android:text="atau login dengan"
-        android:textColor="#000000"
+        android:textColor="#626262"
         app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_toregister"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/button"
-        app:layout_constraintTop_toBottomOf="@id/button">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
-            android:textAlignment="center"
-            android:text="Belum punya akun?            "
-            android:textColor="#000000" />
-        <TextView
-            android:id="@+id/regitser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
-            android:layout_marginLeft="249dp"
-            android:textStyle="bold"
-            android:text="Daftar"
-            android:textColor="#0018cf" />
-    </RelativeLayout>
+        android:layout_marginTop="13dp"
+        android:text="@string/akanregister"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logingoogle" />
 
 
     <EditText
@@ -99,46 +86,80 @@
         android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textColor="#626262"
+        android:textCursorDrawable="@drawable/cursorcolor"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextTextPassword"
         android:layout_width="375dp"
         android:layout_height="48dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/border_inputtext"
-        android:drawableEnd="@drawable/baseline_remove_red_eye_24"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:textColor="#000000"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#000000">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_null"
+            android:ems="10"
+            android:gravity="center|start|left"
+            android:inputType="textPassword"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:textColor="#626262" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
         android:id="@+id/button"
         android:layout_width="375dp"
         android:layout_height="60dp"
-        android:backgroundTint="#E86A33"
+        android:layout_marginTop="17dp"
+        android:backgroundTint="#FF9F29"
         android:text="Masuk"
-        android:textColor="#FFFFFFFF"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:cornerRadius="15dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="349dp" />
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="20dp"
+        android:background="#E0E0E0"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="20dp"
+        android:background="#E0E0E0"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <Button
         android:id="@+id/logingoogle"
         android:layout_width="362dp"
         android:layout_height="57dp"
+        android:layout_marginTop="7dp"
         android:backgroundTint="#FFFFFF"
-        android:drawableStart="@drawable/logogoogle"
+        android:drawableLeft="@drawable/logogoogle"
         android:text="Login dengan Google"
         android:textColor="#FF000000"
         app:cornerRadius="15dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="455dp" />
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
