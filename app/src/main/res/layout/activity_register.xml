@@ -13,6 +13,7 @@
         android:layout_height="49dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="54dp"
+        android:fontFamily="@font/medium"
         android:text="Mari Bergabung Dengan Kami"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Nama Lengkap"
+        android:fontFamily="@font/medium"
         android:textColor="#626262"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -36,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Email"
+        android:fontFamily="@font/medium"
         android:textColor="#626262"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
@@ -46,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Password"
+        android:fontFamily="@font/medium"
         android:textColor="#626262"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
@@ -56,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Konfirmasi Password"
+        android:fontFamily="@font/medium"
         android:textColor="#626262"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
@@ -65,6 +70,7 @@
         android:layout_width="375dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/medium"
         android:text="@string/ketentuan_layanan"
         android:textColor="#626262"
         app:layout_constraintStart_toStartOf="@+id/textView4"
@@ -76,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/medium"
         android:text="@string/daftarlogin"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/button"
@@ -167,6 +174,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="#FF9F29"
+        android:fontFamily="@font/medium"
         android:text="Button"
         android:textColor="#000000"
         android:textStyle="bold"

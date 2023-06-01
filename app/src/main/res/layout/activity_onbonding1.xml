@@ -20,6 +20,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:background="@color/transparans"
+            android:fontFamily="@font/medium"
             android:text="SKIP"
             android:textSize="15sp"
             android:id="@+id/skip"
@@ -43,6 +44,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/transparans"
             android:textColor="@color/black"
+            android:fontFamily="@font/medium"
             android:text="NEXT->"
             android:textSize="15sp"
             android:textStyle="bold"/>
