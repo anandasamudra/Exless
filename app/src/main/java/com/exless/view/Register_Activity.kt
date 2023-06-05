@@ -3,20 +3,70 @@ package com.exless.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.exless.R
+import com.google.firebase.auth.FirebaseAuth
 
 class Register_Activity : AppCompatActivity() {
+
+    private lateinit var fullNameEditText: EditText
+    private lateinit var emailEditText: EditText
+    private lateinit var passwordEditText: EditText
+    private lateinit var confirmPasswordEditText: EditText
+    private lateinit var registerButton: Button
+    private lateinit var toLoginTextView: TextView
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         supportActionBar?.hide()
 
-        val buttonlogin = findViewById<TextView>(R.id.tv_tologin)
-        buttonlogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        fullNameEditText = findViewById(R.id.editTextText)
+        emailEditText = findViewById(R.id.editTextTextEmailAddress)
+        passwordEditText = findViewById(R.id.pass)
+        confirmPasswordEditText = findViewById(R.id.pass2)
+        registerButton = findViewById(R.id.button)
+        toLoginTextView = findViewById(R.id.tv_tologin)
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        registerButton.setOnClickListener {
+            val fullName = fullNameEditText.text.toString()
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            val confirmPassword = confirmPasswordEditText.text.toString()
+
+            if (fullName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+                if (password == confirmPassword) {
+                    firebaseAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                // Registrasi berhasil, lakukan tindakan yang diinginkan
+                                Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
+                                // Contoh: Pindah ke halaman utama aplikasi
+                                startActivity(Intent(this, LoginActivity::class.java))
+                                finish()
+                            } else {
+                                // Registrasi gagal, tampilkan pesan error
+                                Toast.makeText(this, "Registrasi gagal: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                } else {
+                    Toast.makeText(this, "Konfirmasi password tidak sesuai", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Mohon lengkapi semua field", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        toLoginTextView.setOnClickListener {
+            // Pindah ke halaman login
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 }

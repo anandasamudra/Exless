@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".view.LoginActivity">
+    tools:context=".view.Register_Activity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="256dp"
-        android:layout_height="49dp"
+        android:layout_height="51dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="54dp"
         android:fontFamily="@font/medium"
@@ -129,11 +129,12 @@
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="#000000">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
+            android:id="@+id/pass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_null"
             android:ems="10"
+            android:background="@drawable/bg_null"
             android:gravity="center|start|left"
             android:inputType="textPassword"
             android:paddingTop="0dp"
@@ -153,20 +154,18 @@
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="#000000">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
+            android:id="@+id/pass2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_null"
             android:ems="10"
+            android:background="@drawable/bg_null"
             android:gravity="center|start|left"
             android:inputType="textPassword"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
             android:textColor="#626262" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
     <Button
         android:id="@+id/button"

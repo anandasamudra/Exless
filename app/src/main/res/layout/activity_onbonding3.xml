@@ -9,8 +9,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/llaction">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FOODSPLUS+"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="40dp" />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/onbonding3"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginLeft="40dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:id="@+id/llaction"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
@@ -20,12 +48,12 @@
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/bold"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="289dp"
             android:background="@color/transparans"
-            android:text="NEXT->"
             android:textColor="@color/black"
+            android:fontFamily="@font/bold"
+            android:text="NEXT->"
             android:textSize="16sp" />
     </LinearLayout>
 
