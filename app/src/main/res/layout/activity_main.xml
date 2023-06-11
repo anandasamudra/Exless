@@ -5,14 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
+    <FrameLayout
+        android:id="@+id/fragment_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottomNavigationView_layout"
         app:itemIconSize="46dp"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="#FFFFFF"
-        android:onClick="assda"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottomnavigationbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

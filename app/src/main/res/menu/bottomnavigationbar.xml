@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_beranda"
         />
     <item
-        android:id="@+id/innventory"
+        android:id="@+id/inventory"
 
         android:icon="@drawable/ic_simpanan"
         />
