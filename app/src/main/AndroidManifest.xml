@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
         <activity
+            android:name=".view.Tambahbahan_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".view.seeitems_Activity"
+            android:exported="false" />
+        <activity
             android:name=".view.MainActivity"
             android:exported="false" />
         <activity
