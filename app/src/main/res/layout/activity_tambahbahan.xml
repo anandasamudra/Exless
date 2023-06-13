@@ -69,9 +69,9 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
         app:layout_constraintTop_toBottomOf="@+id/editTextText7" />
 
     <View
@@ -79,9 +79,9 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
         app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
 
     <EditText
@@ -117,9 +117,9 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
         app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
 
     <ImageView
@@ -159,8 +159,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <EditText
-        android:id="@+id/editTextText2"
+    <AutoCompleteTextView
+        android:id="@+id/auto_namabahan"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginEnd="20dp"
@@ -179,9 +179,9 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
+        app:layout_constraintTop_toBottomOf="@+id/auto_namabahan" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -190,7 +190,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_null"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
         app:boxBackgroundColor="#FFF"
@@ -276,9 +276,9 @@
         android:layout_marginTop="3dp"
         android:background="#000000"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
         app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
 
     <Button
