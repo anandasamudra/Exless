@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
         <activity
+            android:name=".view.SeeExpiredActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.onbonding3"
             android:exported="false" />
         <activity
@@ -31,8 +34,8 @@
             </intent-filter>
         </activity>
         <activity
-        android:name=".view.LoginActivity"
-        android:exported="false" />
+            android:name=".view.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".view.Register_Activity"
             android:exported="false" />
