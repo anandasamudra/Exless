@@ -183,20 +183,30 @@
         app:layout_constraintStart_toStartOf="@+id/editTextText2"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
-    <EditText
-        android:id="@+id/editTextText3"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dp_jenismakanan"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_null"
-        android:ems="10"
-        android:fontFamily="@font/regular"
-        android:hint="Makanan laut"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="@+id/editTextText2"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        tools:textColorHint="#AFB1B6" />
+        app:boxBackgroundColor="#FFF"
+        app:boxStrokeColor="@color/black">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_jenismakan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            android:inputType="none"
+            android:text="abc"
+            android:background="@drawable/bg_null"
+            android:paddingStart="0dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView14"
@@ -216,26 +226,35 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText3"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/dp_jenismakanan"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+        app:layout_constraintStart_toStartOf="@+id/dp_jenismakanan"
+        app:layout_constraintTop_toBottomOf="@+id/dp_jenismakanan" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextText4"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_null"
-        android:ems="10"
-        android:fontFamily="@font/regular"
-        android:hint="Kulkas"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:boxBackgroundColor="#FFF"
+        app:layout_constraintEnd_toEndOf="@+id/dp_jenismakanan"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView15"
-        tools:textColorHint="#AFB1B6" />
+        app:boxStrokeColor="@color/black">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_jenispenyimpanan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_null"
+            android:editable="false"
+            android:inputType="none"
+            android:paddingStart="0dp"
+            android:text="abc" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView15"
@@ -256,6 +275,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="#000000"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/editTextText2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/editTextText2"
