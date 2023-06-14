@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="100dp"
+    android:layout_marginHorizontal="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/makanan"
+            android:scaleType="centerCrop"
+            android:id="@+id/resepmakan"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:textSize="10sp"
+            android:textAlignment="center"
+            android:background="@drawable/framedurasi"
+            android:text="8 - 10 min"
+            android:textColor="@color/white"
+            android:id="@+id/durasi"
+            android:layout_marginTop="75dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/regular"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
