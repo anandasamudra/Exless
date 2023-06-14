@@ -174,7 +174,7 @@
         android:layout_marginTop="30dp"
         android:backgroundTint="#FF9F29"
         android:fontFamily="@font/medium"
-        android:text="Button"
+        android:text="Daftar"
         android:textColor="#000000"
         android:textStyle="bold"
         app:cornerRadius="15dp"

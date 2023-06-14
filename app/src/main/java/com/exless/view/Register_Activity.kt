@@ -3,6 +3,7 @@ package com.exless.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -22,6 +23,7 @@ class Register_Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_register)
 
         supportActionBar?.hide()
@@ -48,7 +50,7 @@ class Register_Activity : AppCompatActivity() {
                                 // Registrasi berhasil, lakukan tindakan yang diinginkan
                                 Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
                                 // Contoh: Pindah ke halaman utama aplikasi
-                                startActivity(Intent(this, LoginActivity::class.java))
+                                startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             } else {
                                 // Registrasi gagal, tampilkan pesan error

@@ -2,6 +2,7 @@ package com.exless.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.exless.R
 import com.exless.view.fragment.fragmentbelanja

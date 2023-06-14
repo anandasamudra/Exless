@@ -19,7 +19,15 @@
             android:exported="false" />
         <activity
             android:name=".view.SeeExpiredActivity"
-            android:exported="false" />
+            android:exported="false"/>
+        <activity
+            android:name=".view.Tambahbahan_Activity"
+            android:exported="false"
+            android:theme="@style/Theme.dropdown"/>
+        <activity
+            android:name=".view.seeitems_Activity"
+            android:exported="false"
+            tools:ignore="ExtraText" />
         <activity
             android:name=".view.MainActivity"
             android:exported="false" />
