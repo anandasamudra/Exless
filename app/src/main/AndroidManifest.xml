@@ -15,8 +15,11 @@
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
         <activity
+            android:name=".view.DetailItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SeeExpiredActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".view.MainActivity"
             android:exported="false" />
