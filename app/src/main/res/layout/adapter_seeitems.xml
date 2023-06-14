@@ -50,8 +50,9 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:background="#CCCCCC"
             app:layout_constraintBottom_toTopOf="@+id/tv_labeltempatseeitems"
-            app:layout_constraintEnd_toEndOf="@+id/tv_pcsseeitems"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="@+id/tv_tanggalseeitems"
             app:layout_constraintTop_toBottomOf="@+id/tv_tanggalseeitems" />
 
@@ -89,12 +90,22 @@
             android:id="@+id/tv_pcsseeitems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:fontFamily="@font/regular"
             android:text="TextView"
             android:textColor="#1A4D2E"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_tanggalseeitems"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/imageView3" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:scaleX="-1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_pcsseeitems"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_pcsseeitems"
+            app:srcCompat="@drawable/icon_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
