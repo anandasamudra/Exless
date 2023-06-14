@@ -8,7 +8,7 @@
     tools:context=".view.Tambahbahan_Activity">
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/et_tglkadal"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginEnd="20dp"
@@ -16,7 +16,7 @@
         android:ems="10"
         android:fontFamily="@font/regular"
         android:hint="dd/mm/yy"
-        android:inputType="text"
+        android:inputType="datetime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -45,7 +45,7 @@
         android:ems="10"
         android:fontFamily="@font/regular"
         android:hint="1 buah"
-        android:inputType="text"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -61,7 +61,7 @@
         android:text="Jumlah"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextText6"
+        app:layout_constraintStart_toStartOf="@+id/et_tglpembel"
         app:layout_constraintTop_toBottomOf="@+id/view7" />
 
     <View
@@ -69,9 +69,9 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
         app:layout_constraintTop_toBottomOf="@+id/editTextText7" />
 
     <View
@@ -79,13 +79,13 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
+        app:layout_constraintTop_toBottomOf="@+id/et_tglkadal" />
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/et_tglpembel"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginEnd="20dp"
@@ -93,7 +93,7 @@
         android:ems="10"
         android:fontFamily="@font/regular"
         android:hint="dd/mm/yy"
-        android:inputType="text"
+        android:inputType="datetime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -109,7 +109,7 @@
         android:text="Tanggal Pembelian"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextText5"
+        app:layout_constraintStart_toStartOf="@+id/et_tglkadal"
         app:layout_constraintTop_toBottomOf="@+id/view6" />
 
     <View
@@ -117,13 +117,13 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
+        app:layout_constraintTop_toBottomOf="@+id/et_tglpembel" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/back_tambahbahan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -159,8 +159,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <EditText
-        android:id="@+id/editTextText2"
+    <AutoCompleteTextView
+        android:id="@+id/auto_namabahan"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginEnd="20dp"
@@ -179,33 +179,33 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
+        app:layout_constraintTop_toBottomOf="@+id/auto_namabahan" />
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dp_jenismakanan"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:background="@drawable/bg_null"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
         app:boxBackgroundColor="#FFF"
-        app:boxStrokeColor="@color/black">
+        app:boxStrokeColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
 
         <AutoCompleteTextView
             android:id="@+id/auto_jenismakan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/bg_null"
             android:editable="false"
             android:inputType="none"
-            android:text="abc"
-            android:background="@drawable/bg_null"
+            android:padding="0dp"
             android:paddingStart="0dp"
-            />
+            android:text="Ayam" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -236,14 +236,14 @@
         android:id="@+id/editTextText4"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:background="@drawable/bg_null"
         app:boxBackgroundColor="#FFF"
+        app:boxStrokeColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/dp_jenismakanan"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:boxStrokeColor="@color/black">
+        app:layout_constraintTop_toBottomOf="@+id/textView15">
 
         <AutoCompleteTextView
             android:id="@+id/auto_jenispenyimpanan"
@@ -252,8 +252,9 @@
             android:background="@drawable/bg_null"
             android:editable="false"
             android:inputType="none"
+            android:padding="0dp"
             android:paddingStart="0dp"
-            android:text="abc" />
+            android:text="Kulkas" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -276,17 +277,17 @@
         android:layout_marginTop="3dp"
         android:background="#000000"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
         app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_orangebutton"
+        android:backgroundTint="#B52525"
         android:fontFamily="@font/bold"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
@@ -295,5 +296,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextText7"
         app:layout_constraintStart_toStartOf="@+id/editTextText7"
-        tools:text="Add Item" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextText7"
+        tools:text="Add Item"
+        android:theme="@style/Theme.Exless"/>
+
+    <ImageView
+        android:id="@+id/iv_tglkadal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/et_tglkadal"
+        app:layout_constraintEnd_toEndOf="@+id/et_tglkadal"
+        app:layout_constraintTop_toTopOf="@+id/et_tglkadal"
+        app:srcCompat="@drawable/baseline_calendar_month_24" />
+
+    <ImageView
+        android:id="@+id/iv_tglpembel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/et_tglpembel"
+        app:layout_constraintEnd_toEndOf="@+id/et_tglpembel"
+        app:layout_constraintTop_toTopOf="@+id/et_tglpembel"
+        app:srcCompat="@drawable/baseline_calendar_month_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
