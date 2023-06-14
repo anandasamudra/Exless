@@ -13,4 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.dropdown" parent="Theme.MaterialComponents.Light.DarkActionBar">
+      <item name="boxStrokeColor">#000000</item>
+        <item name="android:textColorHint">#AFB1B6</item>
+        <item name="endIconDrawable">@drawable/selector_tambahmakan</item>
+        <item name="color">#FFFFFF</item>
+    </style>
 </resources>
