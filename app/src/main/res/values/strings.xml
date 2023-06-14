@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Exless</string>
     <string name="ketentuan_layanan">Dengan membuat akun berarti kamu setuju dengan <b><u>Ketentuan Layanan Kami</u></b></string>
-    <string name="daftarlogin"><u>Sudah punya akun? Login disini</u></string>
+    <string name="daftarlogin"><u>Sudah punya akun? Masuk disini</u></string>
     <string name="akanregister"><u>Belum punya akun? Daftar</u></string>
     <string name="onbonding1">Ayo susun makanan sesuai kebutuhan demi kurangi sampah makanan ❤️</string>
     <string name="onbonding2">Menjaga makanan dengan baik, membuat kulkas kita lebih bersih ️️</string>
