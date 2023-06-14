@@ -7,49 +7,50 @@
     android:background="@drawable/onbonding1"
     tools:context=".view.onbonding1">
 
-<!--    <Button-->
-<!--        android:id="@+id/bt_totambah"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="tambah bahan"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.125"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.582" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/bt_totambah"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="tambah bahan"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.125"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.582" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/llaction">
+        app:layout_constraintBottom_toTopOf="@+id/llaction"
+        tools:layout_editor_absoluteX="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PLAN YOUR FOODS"
+            android:layout_marginLeft="40dp"
             android:fontFamily="@font/bold"
+            android:text="PLAN YOUR FOODS"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginLeft="40dp" />
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@string/onbonding1"
+            android:layout_marginLeft="40dp"
             android:fontFamily="@font/regular"
+            android:text="@string/onbonding1"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginLeft="40dp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llaction"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,24 +61,25 @@
             android:id="@+id/skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginRight="100dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/transparans"
-            android:textColor="@color/black"
             android:fontFamily="@font/bold"
             android:text="SKIP"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="100dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/transparans"
-            android:textColor="@color/black"
             android:fontFamily="@font/bold"
             android:text="NEXT->"
+            android:textColor="@color/black"
             android:textSize="16sp" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
