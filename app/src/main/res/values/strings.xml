@@ -6,6 +6,9 @@
     <string name="onbonding1">Ayo susun makanan sesuai kebutuhan demi kurangi sampah makanan ❤️</string>
     <string name="onbonding2">Menjaga makanan dengan baik, membuat kulkas kita lebih bersih ️️</string>
     <string name="onbonding3">Oper makanan sisa kepada pengelola sisa makanan agar bermanfaat ya!</string>
+    <string name="tettlehome">Ada menambah makanan hari ini ?</string>
+    <string name="subhome">Temukan referensi resep untuk dimasak hari ini</string>
+    <string name="subwaster">Temukan kabar terbaru seputar sampah makanan</string>
 <string-array name="Jenis_makanan">
     <item>a</item>
     <item>b</item>

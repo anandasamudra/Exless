@@ -3,6 +3,7 @@ package com.exless.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import com.exless.R
 import com.exless.view.fragment.fragmentbelanja
@@ -14,7 +15,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            isAppearanceLightStatusBars = true
+        }
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 //bottom navigation fragment \/\/\/
         val fraghome = fragmenthome()
         val fragbel = fragmentbelanja()
