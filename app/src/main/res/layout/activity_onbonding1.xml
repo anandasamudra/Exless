@@ -82,25 +82,4 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/test_totambah"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="to tambah"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <Button
-        android:id="@+id/test_see_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="to see item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/test_totambah" />
 </androidx.constraintlayout.widget.ConstraintLayout>

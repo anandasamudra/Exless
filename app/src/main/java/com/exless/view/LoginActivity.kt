@@ -9,6 +9,8 @@ import android.widget.Toast
 import com.exless.R
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
@@ -37,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+
                             // Login berhasil, lakukan tindakan yang diinginkan
                             Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
                             // Contoh: Pindah ke halaman utama aplikasi

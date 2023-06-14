@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_namaitemseeitems" />
 
         <TextView
-            android:id="@+id/tv_labelnamaseeitems"
+            android:id="@+id/tv_labeljenisseeitem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -70,9 +70,9 @@
             android:text="TextView"
             android:textColor="#FFFFFF"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_labelnamaseeitems"
-            app:layout_constraintStart_toEndOf="@+id/tv_labelnamaseeitems"
-            app:layout_constraintTop_toTopOf="@+id/tv_labelnamaseeitems" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_labeljenisseeitem"
+            app:layout_constraintStart_toEndOf="@+id/tv_labeljenisseeitem"
+            app:layout_constraintTop_toTopOf="@+id/tv_labeljenisseeitem" />
 
         <TextView
             android:id="@+id/tv_labelkadaluarsaseeitems"

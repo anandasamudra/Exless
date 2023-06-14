@@ -28,16 +28,5 @@ class onbonding1 : AppCompatActivity() {
             val intent = Intent(this, onbonding2::class.java)
             startActivity(intent)
         }
-//         testing to tambah
-        val totambah = findViewById<Button>(R.id.test_totambah)
-        totambah.setOnClickListener {
-            val intent = Intent(this, Tambahbahan_Activity::class.java)
-            startActivity(intent)
-        }
-        val tosee = findViewById<Button>(R.id.test_see_item)
-        tosee.setOnClickListener {
-            val intent = Intent(this, seeitems_Activity::class.java)
-            startActivity(intent)
-        }
     }
 }
