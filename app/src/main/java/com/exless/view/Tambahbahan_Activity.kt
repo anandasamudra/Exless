@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.exless.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -28,6 +29,7 @@ class Tambahbahan_Activity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId", "SetTextI18n", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//disable auto darkmode
         setContentView(R.layout.activity_tambahbahan)
 var database = FirebaseDatabase.getInstance().reference //connect to firebase
         findViewById<Button>(R.id.bt_addseeitem).setOnClickListener{
