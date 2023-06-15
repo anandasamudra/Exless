@@ -10,14 +10,13 @@
     <string name="subhome">Temukan referensi resep untuk dimasak hari ini</string>
     <string name="subwaster">Temukan kabar terbaru seputar sampah makanan</string>
 <string-array name="Jenis_makanan">
-    <item>a</item>
-    <item>b</item>
-    <item>c</item>
+    <item>Daging &amp; Unggas</item>
+    <item>Makanan kaleng</item>
+    <item>Makanan laut</item>
 </string-array>
     <string-array name="Jenis_penyimpanan">
-        <item>a</item>
-        <item>b</item>
-        <item>c</item>
+        <item>Kulkas</item>
+        <item>Rak</item>
     </string-array>
 =
 <string-array name="nama_bahan">

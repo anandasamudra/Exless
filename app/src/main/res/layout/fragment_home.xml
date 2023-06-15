@@ -64,16 +64,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:gravity="center">
+
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_bhnmakan"
                     android:layout_width="370dp"
                     android:layout_height="70dp"
-                    android:id="@+id/btn_bhnmakan"
                     android:background="@drawable/btn_add_food"
+                    android:fontFamily="@font/regular"
+                    android:onClick="toaddbahan"
                     android:text="Tambah Bahan Makanan"
-                    android:textColor="@color/black"
                     android:textAllCaps="false"
-                    android:textSize="17sp"
-                    android:fontFamily="@font/regular"/>
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

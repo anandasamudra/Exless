@@ -29,26 +29,20 @@ class Tambahbahan_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tambahbahan)
-var database = FirebaseDatabase.getInstance().reference
-//        database.setValue("adiiii")
-//        var namabahan = findViewById<AutoCompleteTextView>(R.id.auto_namabahan)
-//        var jenisbahan = findViewById<AutoCompleteTextView>(R.id.auto_jenismakan)
-//        var jenissimpan = findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan)
-//        var tglkadal = findViewById<EditText>(R.id.et_tglkadal)
-//        var tglbeli = findViewById<EditText>(R.id.et_tglpembel)
-//        var jumlah = findViewById<EditText>(R.id.et_jumlah)
-//        bahanbaru = FirebaseDatabase.getInstance().getReference().child("Users")
+var database = FirebaseDatabase.getInstance().reference //connect to firebase
         findViewById<Button>(R.id.bt_addseeitem).setOnClickListener{
-//            insertbahan()
         var name =  findViewById<AutoCompleteTextView>(R.id.auto_namabahan).text.toString()
         var jenisbah =  findViewById<AutoCompleteTextView>(R.id.auto_jenismakan).text.toString()
         var jenissim =  findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan).text.toString()
         var tglkadal = findViewById<EditText>(R.id.et_tglkadal).text.toString()
         var tglbeli = findViewById<EditText>(R.id.et_tglpembel).text.toString()
         var jumlah = findViewById<EditText>(R.id.et_jumlah).text.toString()
-            var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+            var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()//get user id
 
-            database.child("/Users/"+currentuser).push().setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah,jenissim))
+            database.child("/Users/"+currentuser+"/Inventory").push().setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah +" pcs",jenissim))//push new value
+            Toast.makeText(this, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, seeitems_Activity::class.java))
+            finish()
         }
         supportActionBar?.hide()
         //adapter dropdown \/\/\/
@@ -100,18 +94,5 @@ var database = FirebaseDatabase.getInstance().reference
             startActivity(Intent(this, MainActivity::class.java))
         }
         }
-
-//    private fun insertbahan() {
-//        var name =  findViewById<AutoCompleteTextView>(R.id.auto_namabahan).text.toString()
-//        var jenisbah =  findViewById<AutoCompleteTextView>(R.id.auto_jenismakan).text.toString()
-//        var jenissim =  findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan).text.toString()
-//        var tglkadal = findViewById<EditText>(R.id.et_tglkadal).text.toString()
-//        var tglbeli = findViewById<EditText>(R.id.et_tglpembel).text.toString()
-//        var jumlah = findViewById<EditText>(R.id.et_jumlah).text.toString()
-//
-//        var databahan : datarv_bahan = datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah,jenissim)
-//        bahanbaru.push().setValue(databahan)
-//    }
-
 
 }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import com.exless.R
@@ -24,6 +25,7 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//disable auto darkmode
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         WindowInsetsControllerCompat(window, window.decorView).apply {
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     // bottom navigation fragment /\/\/\
-    fun totambah(view: View) {
+    fun toaddbahan(view: View) {
         startActivity(Intent(this, Tambahbahan_Activity::class.java))
         finish()
     }

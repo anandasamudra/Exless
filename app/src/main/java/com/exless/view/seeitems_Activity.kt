@@ -24,21 +24,28 @@ class seeitems_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seeitems)
+        supportActionBar?.hide()
+        findViewById<ImageView>(R.id.back_seeitem).setOnClickListener{
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
         findViewById<ImageView>(R.id.bt_addbahan).setOnClickListener{
             startActivity(Intent(this, Tambahbahan_Activity::class.java))
             finish()
         }
+        //Recylerview \/\/\/
         bahanrecylerview = findViewById(R.id.recyclerView_seeitem)
         bahanrecylerview.layoutManager = LinearLayoutManager(this)
         bahanrecylerview.setHasFixedSize(true)
 
         bahanarraylist = arrayListOf<datarv_bahan>()
         getbahandata()
+
     }
 
     private fun getbahandata() {
         var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        dbref = FirebaseDatabase.getInstance().getReference("/Users/"+currentuser)
+        dbref = FirebaseDatabase.getInstance().getReference("/Users/"+currentuser+"/Inventory")
         dbref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
@@ -56,4 +63,5 @@ class seeitems_Activity : AppCompatActivity() {
 
         })
     }
+    //Recylerview /\/\/\
 }
