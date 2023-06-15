@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view5" />
 
     <EditText
-        android:id="@+id/editTextText7"
+        android:id="@+id/et_jumlah"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginEnd="20dp"
@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText7" />
+        app:layout_constraintTop_toBottomOf="@+id/et_jumlah" />
 
     <View
         android:id="@+id/view6"
@@ -205,7 +205,7 @@
             android:inputType="none"
             android:padding="0dp"
             android:paddingStart="0dp"
-            android:text="Ayam" />
+            android:text="Daging &amp; Unggas" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -283,22 +283,21 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bt_addseeitem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_orangebutton"
-        android:backgroundTint="#B52525"
         android:fontFamily="@font/bold"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
         android:text="Button"
         android:textColor="#FFFFFF"
+        android:theme="@style/Theme.button"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText7"
-        app:layout_constraintStart_toStartOf="@+id/editTextText7"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText7"
-        tools:text="Add Item"
-        android:theme="@style/Theme.Exless"/>
+        app:layout_constraintEnd_toEndOf="@+id/et_jumlah"
+        app:layout_constraintStart_toStartOf="@+id/et_jumlah"
+        app:layout_constraintTop_toBottomOf="@+id/et_jumlah"
+        tools:text="Add Item" />
 
     <ImageView
         android:id="@+id/iv_tglkadal"

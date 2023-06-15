@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="110dp">
+    android:layout_height="110dp"
+    android:layout_margin="15dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,13 +37,14 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_namaitemseeitems" />
 
         <TextView
-            android:id="@+id/tv_labelnamaseeitems"
+            android:id="@+id/tv_labeljenisseeitem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_seeitems_green"
             android:fontFamily="@font/regular"
-            android:padding="3dp"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="3dp"
             android:text="TextView"
             android:textColor="#FFFFFF"
             android:textSize="10sp"
@@ -52,7 +56,7 @@
             android:layout_height="1dp"
             android:background="#CCCCCC"
             app:layout_constraintBottom_toTopOf="@+id/tv_labeltempatseeitems"
-            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/bt_addbahan"
             app:layout_constraintStart_toStartOf="@+id/tv_tanggalseeitems"
             app:layout_constraintTop_toBottomOf="@+id/tv_tanggalseeitems" />
 
@@ -63,13 +67,14 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/bg_seeitems_green"
             android:fontFamily="@font/regular"
-            android:padding="3dp"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="3dp"
             android:text="TextView"
             android:textColor="#FFFFFF"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_labelnamaseeitems"
-            app:layout_constraintStart_toEndOf="@+id/tv_labelnamaseeitems"
-            app:layout_constraintTop_toTopOf="@+id/tv_labelnamaseeitems" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_labeljenisseeitem"
+            app:layout_constraintStart_toEndOf="@+id/tv_labeljenisseeitem"
+            app:layout_constraintTop_toTopOf="@+id/tv_labeljenisseeitem" />
 
         <TextView
             android:id="@+id/tv_labelkadaluarsaseeitems"
@@ -78,7 +83,8 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/bg_seeitems_green"
             android:fontFamily="@font/regular"
-            android:padding="3dp"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="3dp"
             android:text="TextView"
             android:textColor="#FFFFFF"
             android:textSize="10sp"
@@ -95,10 +101,10 @@
             android:textColor="#1A4D2E"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_tanggalseeitems"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3" />
+            app:layout_constraintEnd_toStartOf="@+id/bt_addbahan" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/bt_addbahan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"

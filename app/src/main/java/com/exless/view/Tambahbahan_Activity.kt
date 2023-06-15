@@ -9,19 +9,41 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.exless.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import java.util.Calendar
 
 class Tambahbahan_Activity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId", "SetTextI18n")
+
+    @SuppressLint("MissingInflatedId", "SetTextI18n", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tambahbahan)
+var database = FirebaseDatabase.getInstance().reference //connect to firebase
+        findViewById<Button>(R.id.bt_addseeitem).setOnClickListener{
+        var name =  findViewById<AutoCompleteTextView>(R.id.auto_namabahan).text.toString()
+        var jenisbah =  findViewById<AutoCompleteTextView>(R.id.auto_jenismakan).text.toString()
+        var jenissim =  findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan).text.toString()
+        var tglkadal = findViewById<EditText>(R.id.et_tglkadal).text.toString()
+        var tglbeli = findViewById<EditText>(R.id.et_tglpembel).text.toString()
+        var jumlah = findViewById<EditText>(R.id.et_jumlah).text.toString()
+            var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()//get user id
 
+            database.child("/Users/"+currentuser+"/Inventory").push().setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah +" pcs",jenissim))//push new value
+            Toast.makeText(this, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, seeitems_Activity::class.java))
+            finish()
+        }
         supportActionBar?.hide()
         //adapter dropdown \/\/\/
         val items = resources.getStringArray(R.array.Jenis_makanan)
@@ -72,6 +94,5 @@ class Tambahbahan_Activity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
         }
-
 
 }

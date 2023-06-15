@@ -3,18 +3,196 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
->
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+    android:layout_height="match_parent">
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sv_home"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bold"
+                            android:text="Halo,"
+                            android:textColor="@color/black"
+                            android:textSize="40dp" />
+                        <TextView
+                            android:id="@+id/nama"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bold"
+                            android:layout_marginTop="45dp"
+                            android:text="Cahyo"
+                            android:textColor="@color/black"
+                            android:textSize="40dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tettlehome"
+                            android:layout_marginTop="105dp"
+                            android:fontFamily="@font/regular"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+                </LinearLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="320dp"
+                    android:layout_marginTop="60dp"
+                    android:src="@drawable/kucing"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_bhnmakan"
+                    android:layout_width="370dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/btn_add_food"
+                    android:fontFamily="@font/regular"
+                    android:onClick="toaddbahan"
+                    android:text="Tambah Bahan Makanan"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aktivitas Makananmu"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/semibold"
+                    android:layout_marginRight="110dp"
+                    android:textSize="15sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp">
+<!--                    masuk keluar notifikasi-->
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <RelativeLayout
+                        android:layout_width="280dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resep Seimbang"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/semibold"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/subhome"
+                            android:textSize="10sp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@color/grey"/>
+                    </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lihat Semua >"
+                                android:id="@+id/fullresep"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/ijotuo"
+                                android:fontFamily="@font/semibold"/>
+                        </LinearLayout>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/item_list_resep"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+                    <RelativeLayout
+                        android:layout_width="280dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Food Wasting Update"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/semibold"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/subwaster"
+                            android:textSize="11sp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@color/grey"/>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lihat Semua >"
+                            android:id="@+id/fullberita"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/ijotuo"
+                            android:fontFamily="@font/semibold"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/item_list_wasting"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

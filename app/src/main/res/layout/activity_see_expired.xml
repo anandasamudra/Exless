@@ -23,7 +23,7 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_back"
+        app:srcCompat="@drawable/icon_back"
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="12dp"
         tools:ignore="MissingConstraints" />

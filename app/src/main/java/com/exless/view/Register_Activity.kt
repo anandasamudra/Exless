@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.WindowInsetsControllerCompat
 import com.exless.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -23,9 +24,11 @@ class Register_Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            isAppearanceLightStatusBars = true
+        }
         setContentView(R.layout.activity_register)
-
         supportActionBar?.hide()
 
         fullNameEditText = findViewById(R.id.editTextText)
@@ -69,6 +72,15 @@ class Register_Activity : AppCompatActivity() {
             // Pindah ke halaman login
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+        //         testing to tambah
+        findViewById<Button>(R.id.test_totambah).setOnClickListener {
+            val intent = Intent(this, Tambahbahan_Activity::class.java)
+            startActivity(intent)
+        }
+        findViewById<Button>(R.id.test_see_item).setOnClickListener {
+            val intent = Intent(this, seeitems_Activity::class.java)
+            startActivity(intent)
         }
     }
 }
