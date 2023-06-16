@@ -39,11 +39,11 @@
             android:gravity="center">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_seeexpired"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:orientation="horizontal"
-                android:id="@+id/rv_seeexpired"
-                tools:listitem="@layout/item_list_expired"/>
+                tools:listitem="@layout/item_list_expired" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,10 +68,12 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_jenisbahan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_list_seeitems"/>
+            tools:listitem="@layout/item_list_seeitems" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

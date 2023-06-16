@@ -29,13 +29,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp">
+
                 <TextView
+                    android:id="@+id/tv_titlejenis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
                     android:text="Kacang dan Protein"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/semibold"
-                    android:textSize="17sp"/>
+                    android:textSize="17sp" />
             </LinearLayout>
             <View
                 android:layout_width="180dp"
@@ -48,13 +50,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="55dp">
+
                 <TextView
+                    android:id="@+id/tv_deskjenis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
                     android:text="Kamu mempunyai 5 bahan"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/regular"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
