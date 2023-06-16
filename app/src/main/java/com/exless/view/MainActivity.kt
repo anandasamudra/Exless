@@ -20,8 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var rv_list_jenisbahan: RecyclerView
-    private var jenisbahanarraylist = ArrayList<Datarv_jenisbahan>()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//disable auto darkmode
@@ -50,33 +49,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
         // bottom navigation fragment /\/\/\
-        rv_list_jenisbahan = findViewById(R.id.rv_jenisbahan)
-        rv_list_jenisbahan.setHasFixedSize(true)
 
-        jenisbahanarraylist.addAll(listbahanarray)
-        showRecylerview()
     }
-    private val listbahanarray: ArrayList<Datarv_jenisbahan>
-        get() {
-            val dataTitle = resources.getStringArray(R.array.data_name)
-            val datadesk = resources.getStringArray(R.array.data_description)
-            val dataimage = resources.obtainTypedArray(R.array.data_photo)
-            val datalist = ArrayList<Datarv_jenisbahan>()
 
-            for (i in dataTitle.indices){
-                val bahanlist = Datarv_jenisbahan(
-                    dataTitle[i],
-                    datadesk[i],
-                    dataimage.getResourceId(i, -1)
-                )
-                datalist.add(bahanlist)
-            }
-            return datalist
-        }
-    fun showRecylerview(){
-        rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
-        rv_list_jenisbahan.adapter=adapter_jenisbahan(jenisbahanarraylist)
-    }
     //bottom navigation fragment \/\/\/
     private fun setfragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
