@@ -1,56 +1,29 @@
-{
-    "project_info": {
-    "project_number": "661553876416",
-    "firebase_url": "https://exless-455f4-default-rtdb.firebaseio.com",
-    "project_id": "exless-455f4",
-    "storage_bucket": "exless-455f4.appspot.com"
-    },
-    "client": [
-    {
-    "client_info": {
-    "mobilesdk_app_id": "1:661553876416:android:9cbe84de7ceb1743920c25",
-    "android_client_info": {
-    "package_name": "com.exless"
-    }
-    },
-    "oauth_client": [
-    {
-    "client_id": "661553876416-e6s9jbm4hf3u02guln8es2se26rcecn5.apps.googleusercontent.com",
-    "client_type": 1,
-    "android_info": {
-    "package_name": "com.exless",
-    "certificate_hash": "0288f682442dbe8c481519c7a39795c2ba44762d"
-    }
-    },
-    {
-    "client_id": "661553876416-pf1rf07549e7pg26q8o2rgs76nk1m9ko.apps.googleusercontent.com",
-    "client_type": 1,
-    "android_info": {
-    "package_name": "com.exless",
-    "certificate_hash": "8bdef2f545c52cd91cf7ccb1a7952f967949702f"
-    }
-    },
-    {
-    "client_id": "661553876416-rrjnem7ujkh7til0c8gva9ul6a73ifga.apps.googleusercontent.com",
-    "client_type": 3
-    }
-    ],
-    "api_key": [
-    {
-    "current_key": "AIzaSyD5yTm9kakXhZeqIW0hj_3w0PRyfDCAOqk"
-    }
-    ],
-    "services": {
-    "appinvite_service": {
-    "other_platform_oauth_client": [
-    {
-    "client_id": "661553876416-rrjnem7ujkh7til0c8gva9ul6a73ifga.apps.googleusercontent.com",
-    "client_type": 3
-    }
-    ]
-    }
-    }
-    }
-    ],
-    "configuration_version": "1"
-    }
+<resources>
+    <string name="app_name">Exless</string>
+    <string name="ketentuan_layanan">Dengan membuat akun berarti kamu setuju dengan <b><u>Ketentuan Layanan Kami</u></b></string>
+    <string name="daftarlogin"><u>Sudah punya akun? Masuk disini</u></string>
+    <string name="akanregister"><u>Belum punya akun? Daftar</u></string>
+    <string name="onbonding1">Ayo susun makanan sesuai kebutuhan demi kurangi sampah makanan ❤️</string>
+    <string name="onbonding2">Menjaga makanan dengan baik, membuat kulkas kita lebih bersih ️️</string>
+    <string name="onbonding3">Oper makanan sisa kepada pengelola sisa makanan agar bermanfaat ya!</string>
+    <string name="tettlehome">Ada menambah makanan hari ini ?</string>
+    <string name="subhome">Temukan referensi resep untuk dimasak hari ini</string>
+    <string name="subwaster">Temukan kabar terbaru seputar sampah makanan</string>
+
+    <string name="default_web_client_id">661553876416-pf1rf07549e7pg26q8o2rgs76nk1m9ko.apps.googleusercontent.com</string>
+    <string-array name="Jenis_makanan">
+        <item>Daging &amp; Unggas</item>
+        <item>Makanan kaleng</item>
+        <item>Makanan laut</item>
+    </string-array>
+    <string-array name="Jenis_penyimpanan">
+        <item>Kulkas</item>
+        <item>Rak</item>
+    </string-array>
+    =
+    <string-array name="nama_bahan">
+        <item>daging</item>
+        <item>ikan</item>
+        <item>ayam</item>
+    </string-array>
+</resources>
