@@ -9,6 +9,8 @@
     <string name="tettlehome">Ada menambah makanan hari ini ?</string>
     <string name="subhome">Temukan referensi resep untuk dimasak hari ini</string>
     <string name="subwaster">Temukan kabar terbaru seputar sampah makanan</string>
+
+    <string name="default_web_client_id">661553876416-pf1rf07549e7pg26q8o2rgs76nk1m9ko.apps.googleusercontent.com</string>
 <string-array name="Jenis_makanan">
     <item>Daging &amp; Unggas</item>
     <item>Makanan kaleng</item>

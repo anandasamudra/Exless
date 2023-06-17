@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.WindowInsetsControllerCompat
 import com.exless.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class Register_Activity : AppCompatActivity() {
 
@@ -21,6 +22,7 @@ class Register_Activity : AppCompatActivity() {
     private lateinit var registerButton: Button
     private lateinit var toLoginTextView: TextView
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class Register_Activity : AppCompatActivity() {
         registerButton = findViewById(R.id.button)
         toLoginTextView = findViewById(R.id.tv_tologin)
         firebaseAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
 
         registerButton.setOnClickListener {
             val fullName = fullNameEditText.text.toString()
@@ -51,6 +54,10 @@ class Register_Activity : AppCompatActivity() {
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 // Registrasi berhasil, lakukan tindakan yang diinginkan
+                                val userId = firebaseAuth.currentUser?.uid
+                                val userRef = database.reference.child("users").child(userId ?: "")
+                                userRef.child("fullName").setValue(fullName)
+
                                 Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
                                 // Contoh: Pindah ke halaman utama aplikasi
                                 startActivity(Intent(this, MainActivity::class.java))
