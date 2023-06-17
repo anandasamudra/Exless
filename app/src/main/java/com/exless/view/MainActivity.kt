@@ -17,6 +17,7 @@ import com.exless.view.fragment.fragmenthome
 import com.exless.view.fragment.fragmentkomunitas
 import com.exless.view.fragment.fragmentsimpanan
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
