@@ -289,15 +289,14 @@
         android:fontFamily="@font/bold"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
-        android:text="Button"
+        android:text="Add Item"
         android:textColor="#FFFFFF"
         android:theme="@style/Theme.button"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_jumlah"
         app:layout_constraintStart_toStartOf="@+id/et_jumlah"
-        app:layout_constraintTop_toBottomOf="@+id/et_jumlah"
-        tools:text="Add Item" />
+        app:layout_constraintTop_toBottomOf="@+id/et_jumlah" />
 
     <ImageView
         android:id="@+id/iv_tglkadal"

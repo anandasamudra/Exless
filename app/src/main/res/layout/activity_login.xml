@@ -122,9 +122,8 @@
             android:ems="10"
             android:gravity="center|start|left"
             android:inputType="textPassword"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:textColor="#626262" />
+            android:textColor="#626262"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

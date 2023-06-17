@@ -18,6 +18,7 @@ import com.exless.view.fragment.fragmentkomunitas
 import com.exless.view.fragment.fragmentsimpanan
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rv_list_jenisbahan: RecyclerView
 
     @SuppressLint("MissingInflatedId")
+    private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//disable auto darkmode
         super.onCreate(savedInstanceState)
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             isAppearanceLightStatusBars = true
         }
         setContentView(R.layout.activity_main)
-
+        firebaseAuth = FirebaseAuth.getInstance()
         supportActionBar?.hide()
 
 //bottom navigation fragment \/\/\/
@@ -78,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     // bottom navigation fragment /\/\/\
-
     fun toaddbahan(view: View) {
         startActivity(Intent(this, Tambahbahan_Activity::class.java))
         finish()
