@@ -24,6 +24,7 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
+    private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//disable auto darkmode
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             isAppearanceLightStatusBars = true
         }
         setContentView(R.layout.activity_main)
-
+        firebaseAuth = FirebaseAuth.getInstance()
         supportActionBar?.hide()
 
 //bottom navigation fragment \/\/\/
@@ -68,4 +69,5 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, seeitems_Activity::class.java))
         finish()
     }
+
 }
