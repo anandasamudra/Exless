@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "661553876416-e6s9jbm4hf3u02guln8es2se26rcecn5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exless",
+            "certificate_hash": "0288f682442dbe8c481519c7a39795c2ba44762d"
+          }
+        },
+        {
           "client_id": "661553876416-pf1rf07549e7pg26q8o2rgs76nk1m9ko.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
