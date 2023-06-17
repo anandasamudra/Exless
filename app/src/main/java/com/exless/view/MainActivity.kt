@@ -17,9 +17,20 @@ import com.exless.view.fragment.fragmenthome
 import com.exless.view.fragment.fragmentkomunitas
 import com.exless.view.fragment.fragmentsimpanan
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var dbref : DatabaseReference
+    private lateinit var dbquery : Query
+    lateinit var jumbahanmain : ArrayList<String>
+     lateinit var bahanarraylist : ArrayList<Datarv_jenisbahan>
+    private lateinit var rv_list_jenisbahan: RecyclerView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +61,14 @@ class MainActivity : AppCompatActivity() {
         }
         // bottom navigation fragment /\/\/\
 
+        //Jumlah makanan di kategori fragment simpanan \/\/\/
+        val fragmensimpan = layoutInflater.inflate(R.layout.fragment_simpanan, null)
+        rv_list_jenisbahan = fragmensimpan.findViewById(R.id.rv_jenisbahan)
+        rv_list_jenisbahan.setHasFixedSize(true)
+        jumbahanmain = ArrayList()
+        bahanarraylist = ArrayList<Datarv_jenisbahan>()
+        getbahandata()
+        //Jumlah makanan di kategori fragment simpanan /\/\/\
     }
 
     //bottom navigation fragment \/\/\/
@@ -59,6 +78,7 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     // bottom navigation fragment /\/\/\
+
     fun toaddbahan(view: View) {
         startActivity(Intent(this, Tambahbahan_Activity::class.java))
         finish()
@@ -67,4 +87,49 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, seeitems_Activity::class.java))
         finish()
     }
+
+    //Jumlah makanan di kategori fragment simpanan \/\/\/
+    @SuppressLint("SuspiciousIndentation")
+    private fun getbahandata() {
+        val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
+        val dataTitle = resources.getStringArray(R.array.data_name)
+        val dataimage = resources.obtainTypedArray(R.array.data_photo)
+        for (i in dataTitle.indices) {
+        dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
+        dbquery.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val count: String = snapshot.childrenCount.toString()
+                println("countmain"+count)
+                jumbahanmain.add(count)
+                val bahanList = Datarv_jenisbahan(
+                    dataTitle[i],
+                    "",
+                    dataimage.getResourceId(i, -1)
+                )
+                bahanList.description = "Kamu mempunyai $count macam"
+                bahanarraylist.add(bahanList)
+               println(bahanarraylist)
+
+
+                println(jumbahanmain+"ini datanya cokkkk")
+                println("done datachange")
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Handle the error
+            }
+        })
+        }
+        showRecylerview()
+    }
+
+    fun showRecylerview(){
+        rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
+        rv_list_jenisbahan.adapter= adapter_jenisbahan(bahanarraylist)
+    }
+    fun getBahanArrayList(): ArrayList<Datarv_jenisbahan> {
+        return bahanarraylist
+    }
+    //Jumlah makanan di kategori fragment simpanan /\/\/\
 }

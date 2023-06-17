@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
 import com.exless.databinding.FragmentHomeBinding
 import com.exless.view.Datarv_jenisbahan
+import com.exless.view.MainActivity
 import com.exless.view.adapter_bahan
 import com.exless.view.adapter_jenisbahan
 import com.exless.view.datarv_bahan
@@ -36,20 +37,21 @@ class fragmentsimpanan : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_simpanan,container,false)
-
-            rv_list_jenisbahan = view.findViewById(R.id.rv_jenisbahan)
-            rv_list_jenisbahan.setHasFixedSize(true)
-////
-            jenisbahanarraylist.addAll(listbahanarray)
-            showRecylerview()
+        val view = inflater.inflate(R.layout.fragment_simpanan,container,false)//inflater fragment
+// Recylerview jenis/kategori bahan \/\/\/
+        rv_list_jenisbahan = view.findViewById(R.id.rv_jenisbahan)
+        rv_list_jenisbahan.setHasFixedSize(true)
+        val mainActivity = activity as? MainActivity
+        val bahanarraylist = mainActivity?.getBahanArrayList()
+        jenisbahanarraylist.addAll(bahanarraylist!!)
+        showRecylerview()
         println(jenisbahanarraylist)
         println(listbahanarray)
-        return view
-        }
+        // Recylerview jenis/kategori bahan /\/\/\
+        return view// harus paling bawah(?)
+    }
 
-
-
+    // Recylerview jenis/kategori bahan \/\/\/
     private val listbahanarray: ArrayList<Datarv_jenisbahan>
         get() {
             val dataTitle = resources.getStringArray(R.array.data_name)
@@ -58,25 +60,13 @@ class fragmentsimpanan : Fragment() {
             val datalist = ArrayList<Datarv_jenisbahan>()
 
             for (i in dataTitle.indices) {
-                getbahandata(dataTitle[i], object : BahandataCallback {
-                    override fun onBahandataReceived(count: String) {
-                        println(count)
-                        println(dataTitle[i])
-                        val bahanlist = Datarv_jenisbahan(
-                            dataTitle[i],
-                            datadesk[i],
-                            dataimage.getResourceId(i, -1)
-                        )
-                        datalist.add(bahanlist)
-
-                        // Check if all the data has been retrieved
-                        if (datalist.size == dataTitle.size) {
-                            // All data has been retrieved, update the RecyclerView
-                            showRecylerview()
-                        }
-
-                    }
-                })
+                println(dataTitle[i])
+                val bahanlist = Datarv_jenisbahan(
+                    dataTitle[i],
+                    datadesk[i],
+                    dataimage.getResourceId(i, -1)
+                )
+                datalist.add(bahanlist)
             }
 
             return datalist
@@ -85,24 +75,6 @@ class fragmentsimpanan : Fragment() {
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(requireContext())
         rv_list_jenisbahan.adapter= adapter_jenisbahan(jenisbahanarraylist)
     }
-    private fun getbahandata(titl: String, callback: BahandataCallback) {
-        val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
-        dbquery = dbref.orderByChild("jenismakanan").equalTo(titl)
-        dbquery.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-//                val count: String = snapshot.childrenCount.toString()
-                val count: String = snapshot.childrenCount.toString()
-                callback.onBahandataReceived(count)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle the error
-            }
-        })
-    }
-    interface BahandataCallback {
-        fun onBahandataReceived(count: String)
-    }
+// Recylerview jenis/kategori bahan /\/\/\
 
 }
