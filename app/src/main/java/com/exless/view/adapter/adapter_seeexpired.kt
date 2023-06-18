@@ -23,7 +23,7 @@ class adapter_seeexpired(
     }
 
     override fun onBindViewHolder(holder: adapter_seeexpired.ViewHolder, position: Int) {
-
+        holder.text.text = listName[position]
     }
 
     override fun getItemCount(): Int {
