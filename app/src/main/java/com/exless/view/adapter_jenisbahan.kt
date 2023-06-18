@@ -31,6 +31,7 @@ class adapter_jenisbahan(val array: ArrayList<Datarv_jenisbahan>) : RecyclerView
         val (title, description, imageView) = array[position]
         holder.tvTitle.text = title
         holder.tvdesk.text = description
+        //holder use glide to fix different image size issue and lag
         Glide.with(holder.itemView.context)
             .load(currentItem.imageView)
             .into(holder.imgview)
