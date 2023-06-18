@@ -43,6 +43,7 @@ class fragmentsimpanan : Fragment() {
         rv_list_jenisbahan.setHasFixedSize(true)
         val mainActivity = activity as? MainActivity
         val bahanarraylist = mainActivity?.getBahanArrayList()
+        jenisbahanarraylist.clear()
         jenisbahanarraylist.addAll(bahanarraylist!!)
         showRecylerview()
         // Recylerview jenis/kategori bahan /\/\/\
