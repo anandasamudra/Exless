@@ -24,6 +24,14 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
+//get days
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import com.jakewharton.threetenabp.AndroidThreeTen
+import java.time.format.DateTimeParseException
+import java.util.Calendar
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
@@ -50,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         firebaseAuth = FirebaseAuth.getInstance()
         supportActionBar?.hide()
-
+// Initialize ThreeTenABP
+        AndroidThreeTen.init(this)
 //bottom navigation fragment \/\/\/
         val fraghome = fragmenthome()
         val fragbel = fragmentbelanja()
@@ -144,7 +153,42 @@ class MainActivity : AppCompatActivity() {
                 if (snapshot.exists()){
                     for (bahanSnapshot in snapshot.children){
                         val namabahan = bahanSnapshot.child("nama").getValue().toString()
-                        val tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
+                        //compare today date with expired date \/\/\/
+                        var tglkadal : String
+                        if (bahanSnapshot.child("tglkadaluarsa").getValue().toString() != "") {
+                            tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
+
+                            try {
+                                val startDateStr = getCurrentDate()
+                                val endDateStr = tglkadal
+                                val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                                val startDate = LocalDate.parse(startDateStr, formatter)
+                                val endDate = LocalDate.parse(endDateStr, formatter)
+
+                                if (endDate.isBefore(startDate)) {
+                                    tglkadal = "EXPIRED"
+                                } else {
+                                    val days = ChronoUnit.DAYS.between(startDate, endDate)
+                                    tglkadal = days.toString() + " hari"
+                                }
+
+                                println("Number of days: $tglkadal")
+                            } catch (e: DateTimeParseException) {
+                                // Handle the case when parsing the dates fails
+                                tglkadal = "EXPIRED"
+                                println("Invalid date format")
+                            } catch (e: Exception) {
+                                // Handle any other exceptions that might occur
+                                tglkadal = "EXPIRED"
+                                println("An error occurred: ${e.message}")
+                            }
+                        }
+
+                        else{
+                            tglkadal ="-"
+                        }
+                        println("Number of dayssadasda f: $tglkadal")
+                        //compare today date with expired date /\/\/\
                         val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
                         val bahanList = Datarv_seeexperired(
                             namabahan,
@@ -183,4 +227,13 @@ class MainActivity : AppCompatActivity() {
         return bahanarraylistex
     }
     //Jumlah makanan di kategori fragment simpanan /\/\/\
+    private fun getCurrentDate(): String {
+        val c = Calendar.getInstance()
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val month = c.get(Calendar.MONTH) + 1 // Months are zero-based, so add 1
+        val year = c.get(Calendar.YEAR)
+        return String.format("%02d/%02d/%04d", day, month, year)
+    }
+
+
 }
