@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var jumbahanmain : ArrayList<String>
      lateinit var bahanarraylist : ArrayList<Datarv_jenisbahan>
     private lateinit var rv_list_jenisbahan: RecyclerView
+    //
+    private lateinit var dbrefex : DatabaseReference
+    private lateinit var dbqueryex : Query
+    lateinit var jumbahanmainex : ArrayList<String>
+    lateinit var bahanarraylistex : ArrayList<Datarv_seeexperired>
+    private lateinit var rv_list_jenisbahanex: RecyclerView
 
     @SuppressLint("MissingInflatedId")
     private lateinit var firebaseAuth: FirebaseAuth
@@ -69,6 +75,13 @@ class MainActivity : AppCompatActivity() {
         jumbahanmain = ArrayList()
         bahanarraylist = ArrayList<Datarv_jenisbahan>()
         getbahandata()
+        //
+        val fragmensimpanex = layoutInflater.inflate(R.layout.fragment_simpanan, null)
+        rv_list_jenisbahanex = fragmensimpanex.findViewById(R.id.rv_seeexpired)
+        rv_list_jenisbahanex.setHasFixedSize(true)
+        jumbahanmainex = ArrayList()
+        bahanarraylistex = ArrayList<Datarv_seeexperired>()
+        getbahandataex()
         //Jumlah makanan di kategori fragment simpanan /\/\/\
     }
 
@@ -111,7 +124,6 @@ class MainActivity : AppCompatActivity() {
                 bahanarraylist.add(bahanList)
                println(bahanarraylist)
 
-
                 println(jumbahanmain+"ini datanya cokkkk")
                 println("done datachange")
 
@@ -122,14 +134,53 @@ class MainActivity : AppCompatActivity() {
         })
         }
         showRecylerview()
-    }
+    }///////////////////////////////////////////////////////
+    @SuppressLint("SuspiciousIndentation")
+    private fun getbahandataex() {
+        val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        dbrefex = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
+        dbrefex.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (bahanSnapshot in snapshot.children){
+                        val namabahan = bahanSnapshot.child("nama").getValue().toString()
+                        val tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
+                        val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
+                        val bahanList = Datarv_seeexperired(
+                            namabahan,
+                            tglkadal,
+                            jumlah,
+                            0
+                        )
+                        bahanarraylistex.add(bahanList)
+                        println(bahanarraylistex)
+                        println(namabahan)
+                    }
+//                    bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        showRecylerviewex()
+    }
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
         rv_list_jenisbahan.adapter= adapter_jenisbahan(bahanarraylist)
     }
+    fun showRecylerviewex(){
+        rv_list_jenisbahanex.layoutManager = LinearLayoutManager(this)
+        rv_list_jenisbahanex.adapter= adapter_seeexpiredsimpanan(bahanarraylistex)
+    }
     fun getBahanArrayList(): ArrayList<Datarv_jenisbahan> {
         return bahanarraylist
+    }
+    fun getBahanArrayListex(): ArrayList<Datarv_seeexperired> {
+        return bahanarraylistex
     }
     //Jumlah makanan di kategori fragment simpanan /\/\/\
 }
