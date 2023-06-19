@@ -21,6 +21,7 @@ class seeitems_Activity : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
     private lateinit var bahanrecylerview : RecyclerView
     private lateinit var bahanarraylist : ArrayList<datarv_bahan>
+    private lateinit var namaBahan: String
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,24 +37,30 @@ class seeitems_Activity : AppCompatActivity() {
             finish()
         }
         //Recylerview \/\/\/
+        retrieveDataFromIntent()
         bahanrecylerview = findViewById(R.id.recyclerView_seeitem)
         bahanrecylerview.layoutManager = LinearLayoutManager(this)
         bahanrecylerview.setHasFixedSize(true)
 
         bahanarraylist = arrayListOf<datarv_bahan>()
-        getbahandata()
+        val namabahan = intent.getStringExtra("nama_bahan")
+        getbahandata(namabahan.toString())
 
     }
 
-    private fun getbahandata() {
+    private fun getbahandata(nama : String) {
+//
         var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         dbref = FirebaseDatabase.getInstance().getReference("/Users/"+currentuser+"/Inventory")
         dbref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for (bahanSnapshot in snapshot.children){
-                        val bahan = bahanSnapshot.getValue(datarv_bahan::class.java)
-                        bahanarraylist.add(bahan!!)
+                        if (nama == bahanSnapshot.child("jenismakanan").getValue().toString()){
+                            val bahan = bahanSnapshot.getValue(datarv_bahan::class.java)
+                            bahanarraylist.add(bahan!!)
+                        }
+
                     }
                     bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
                 }
@@ -66,4 +73,12 @@ class seeitems_Activity : AppCompatActivity() {
         })
     }
     //Recylerview /\/\/\
+    private fun retrieveDataFromIntent() {
+        val intent = intent
+        if (intent.hasExtra("nama_bahan")) {
+            namaBahan = intent.getStringExtra("nama_bahan").toString()
+        } else {
+            // Handle the case when the intent extra is not available
+        }
+    }
 }
