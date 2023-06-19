@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer-array name="data_photo" >
-        <item>@drawable/kacang</item>
-        <item>@drawable/kacang</item>
-        <item>@drawable/kacang</item>
+        <item>@drawable/kategori_kacang</item>
+        <item>@drawable/kategori_telur</item>
+        <item>@drawable/kategori_buah</item>
+        <item>@drawable/kategori_sayur</item>
+        <item>@drawable/kategori_meat</item>
+        <item>@drawable/kategori_laut</item>
+        <item>@drawable/kategori_spices</item>
+        <item>@drawable/kategori_bubuktepung</item>
+        <item>@drawable/kategori_botol</item>
+        <item>@drawable/kategori_kaleng</item>
     </integer-array>
-    <string-array name="data_description" >
+    <string-array name="data_description" >//ga dipake
         <item>Pura Besakih</item>
         <item>Pura Besakih</item>
         <item>Pura Besakih</item>
     </string-array>
     <string-array name="data_name" >
-        <item>Daging &amp; Unggas</item>
-        <item>Makanan kaleng</item>
         <item>Kacang &amp; Protein</item>
+        <item>Telur &amp; Bahan Harian</item>
+        <item>Buah-buahan</item>
+        <item>Sayur-sayuran</item>
+        <item>Daging &amp; Unggas</item>
+        <item>Makanan Laut</item>
+        <item>Minyak &amp; Bumbu Dapur</item>
+        <item>Tepung &amp; Olahannya</item>
+        <item>Saos &amp; Kecap</item>
+        <item>Makanan Kaleng</item>
     </string-array>
 </resources>

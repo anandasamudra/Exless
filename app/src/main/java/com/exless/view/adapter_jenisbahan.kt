@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.exless.R
 
 class adapter_jenisbahan(val array: ArrayList<Datarv_jenisbahan>) : RecyclerView.Adapter<adapter_jenisbahan.viewholder_jenisbahan>() {
@@ -26,9 +27,12 @@ class adapter_jenisbahan(val array: ArrayList<Datarv_jenisbahan>) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: viewholder_jenisbahan, position: Int) {
+        val currentItem = array[position]
         val (title, description, imageView) = array[position]
         holder.tvTitle.text = title
         holder.tvdesk.text = description
-        holder.imgview.setImageResource(imageView)
+        Glide.with(holder.itemView.context)
+            .load(currentItem.imageView)
+            .into(holder.imgview)
     }
 }

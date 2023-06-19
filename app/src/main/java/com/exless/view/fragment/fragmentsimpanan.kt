@@ -29,6 +29,7 @@ class fragmentsimpanan : Fragment() {
     private lateinit var dbref : DatabaseReference
     private lateinit var dbquery : Query
     private lateinit var rv_list_jenisbahan: RecyclerView
+    private lateinit var rv_seeexpired : RecyclerView
     private var jenisbahanarraylist = ArrayList<Datarv_jenisbahan>()
     private var binding: FragmentHomeBinding? =null
     @SuppressLint("MissingInflatedId")
@@ -41,36 +42,37 @@ class fragmentsimpanan : Fragment() {
 // Recylerview jenis/kategori bahan \/\/\/
         rv_list_jenisbahan = view.findViewById(R.id.rv_jenisbahan)
         rv_list_jenisbahan.setHasFixedSize(true)
+        rv_seeexpired = view.findViewById(R.id.rv_seeexpired)
+        rv_seeexpired.setHasFixedSize(true)
         val mainActivity = activity as? MainActivity
         val bahanarraylist = mainActivity?.getBahanArrayList()
+        jenisbahanarraylist.clear()
         jenisbahanarraylist.addAll(bahanarraylist!!)
         showRecylerview()
-        println(jenisbahanarraylist)
-        println(listbahanarray)
         // Recylerview jenis/kategori bahan /\/\/\
         return view// harus paling bawah(?)
     }
 
     // Recylerview jenis/kategori bahan \/\/\/
-    private val listbahanarray: ArrayList<Datarv_jenisbahan>
-        get() {
-            val dataTitle = resources.getStringArray(R.array.data_name)
-            val datadesk = resources.getStringArray(R.array.data_description)
-            val dataimage = resources.obtainTypedArray(R.array.data_photo)
-            val datalist = ArrayList<Datarv_jenisbahan>()
-
-            for (i in dataTitle.indices) {
-                println(dataTitle[i])
-                val bahanlist = Datarv_jenisbahan(
-                    dataTitle[i],
-                    datadesk[i],
-                    dataimage.getResourceId(i, -1)
-                )
-                datalist.add(bahanlist)
-            }
-
-            return datalist
-        }
+//    private val listbahanarray: ArrayList<Datarv_jenisbahan>
+//        get() {
+//            val dataTitle = resources.getStringArray(R.array.data_name)
+//            val datadesk = resources.getStringArray(R.array.data_description)
+//            val dataimage = resources.obtainTypedArray(R.array.data_photo)
+//            val datalist = ArrayList<Datarv_jenisbahan>()
+//
+//            for (i in dataTitle.indices) {
+//                println(dataTitle[i])
+//                val bahanlist = Datarv_jenisbahan(
+//                    dataTitle[i],
+//                    datadesk[i],
+//                    dataimage.getResourceId(i, -1)
+//                )
+//                datalist.add(bahanlist)
+//            }
+//
+//            return datalist
+//        }
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(requireContext())
         rv_list_jenisbahan.adapter= adapter_jenisbahan(jenisbahanarraylist)
