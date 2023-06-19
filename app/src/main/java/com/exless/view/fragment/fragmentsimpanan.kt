@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
 import com.exless.databinding.FragmentHomeBinding
 import com.exless.view.Datarv_jenisbahan
+import com.exless.view.Datarv_seeexperired
 import com.exless.view.MainActivity
 import com.exless.view.adapter_bahan
 import com.exless.view.adapter_jenisbahan
+import com.exless.view.adapter_seeexpiredsimpanan
 import com.exless.view.datarv_bahan
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -32,6 +34,11 @@ class fragmentsimpanan : Fragment() {
     private lateinit var rv_seeexpired : RecyclerView
     private var jenisbahanarraylist = ArrayList<Datarv_jenisbahan>()
     private var binding: FragmentHomeBinding? =null
+    //
+    private lateinit var dbrefex : DatabaseReference
+    private lateinit var dbqueryex : Query
+    private lateinit var rv_list_jenisbahanex: RecyclerView
+    private var jenisbahanarraylistex = ArrayList<Datarv_seeexperired>()
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,33 +56,25 @@ class fragmentsimpanan : Fragment() {
         jenisbahanarraylist.clear()
         jenisbahanarraylist.addAll(bahanarraylist!!)
         showRecylerview()
-        // Recylerview jenis/kategori bahan /\/\/\
+        //
+        rv_list_jenisbahanex = view.findViewById(R.id.rv_seeexpired)
+        rv_list_jenisbahanex.setHasFixedSize(true)
+        val bahanarraylistex = mainActivity?.getBahanArrayListex()
+        jenisbahanarraylistex.clear()
+        jenisbahanarraylistex.addAll(bahanarraylistex!!)
+        println(jenisbahanarraylistex)
+        showRecylerviewex()
+//         Recylerview jenis/kategori bahan /\/\/\
         return view// harus paling bawah(?)
     }
 
-    // Recylerview jenis/kategori bahan \/\/\/
-//    private val listbahanarray: ArrayList<Datarv_jenisbahan>
-//        get() {
-//            val dataTitle = resources.getStringArray(R.array.data_name)
-//            val datadesk = resources.getStringArray(R.array.data_description)
-//            val dataimage = resources.obtainTypedArray(R.array.data_photo)
-//            val datalist = ArrayList<Datarv_jenisbahan>()
-//
-//            for (i in dataTitle.indices) {
-//                println(dataTitle[i])
-//                val bahanlist = Datarv_jenisbahan(
-//                    dataTitle[i],
-//                    datadesk[i],
-//                    dataimage.getResourceId(i, -1)
-//                )
-//                datalist.add(bahanlist)
-//            }
-//
-//            return datalist
-//        }
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(requireContext())
         rv_list_jenisbahan.adapter= adapter_jenisbahan(jenisbahanarraylist)
+    }
+    fun showRecylerviewex(){
+        rv_list_jenisbahanex.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        rv_list_jenisbahanex.adapter= adapter_seeexpiredsimpanan(jenisbahanarraylistex)
     }
 // Recylerview jenis/kategori bahan /\/\/\
 
