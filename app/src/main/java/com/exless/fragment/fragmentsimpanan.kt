@@ -1,4 +1,4 @@
-package com.exless.view.fragment
+package com.exless.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle

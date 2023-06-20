@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
-import com.exless.view.fragment.fragmentbelanja
-import com.exless.view.fragment.fragmenthome
-import com.exless.view.fragment.fragmentkomunitas
-import com.exless.view.fragment.fragmentsimpanan
+import com.exless.fragment.fragmentbelanja
+import com.exless.fragment.fragmenthome
+import com.exless.fragment.fragmentkomunitas
+import com.exless.fragment.fragmentsimpanan
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

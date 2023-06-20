@@ -1,6 +1,5 @@
-package com.exless.view.adapter
+package com.exless.adapter
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +15,13 @@ class adapter_seeexpired(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): adapter_seeexpired.ViewHolder {
+    ): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_list_expired,parent,false)
         )
     }
 
-    override fun onBindViewHolder(holder: adapter_seeexpired.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = listName[position]
     }
 
