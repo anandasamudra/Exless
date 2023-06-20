@@ -27,7 +27,6 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
     private lateinit var userRef: DatabaseReference
     private lateinit var currentUser: FirebaseUser
     private lateinit var textViewNama: TextView
-    private lateinit var pemberitahuanMakananterisiBinding: PemberitahuanMakananterisiBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
