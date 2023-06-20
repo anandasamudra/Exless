@@ -1,8 +1,6 @@
 package com.exless.fragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
 import com.exless.adapter.adapter_berita
 import com.exless.adapter.adapter_resep
-import com.exless.databinding.PemberitahuanMakananterisiBinding
+import com.exless.model.model_resep
 import com.exless.`object`.object_berita
-import com.exless.`object`.object_resep
-import com.exless.view.Tambahbahan_Activity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -29,7 +26,6 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
     private lateinit var userRef: DatabaseReference
     private lateinit var currentUser: FirebaseUser
     private lateinit var textViewNama: TextView
-    private lateinit var pemberitahuanMakananterisiBinding: PemberitahuanMakananterisiBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +37,30 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
         // recycleview resep makanan
         val recyclerViewresep = rootView.findViewById<RecyclerView>(R.id.rv_list_resep)
         recyclerViewresep.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewresep.adapter = adapter_resep(object_resep.DaftarResep)
+        database = FirebaseDatabase.getInstance()
+        userRef = database.reference.child("Resep").child("Makanan")
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val daftarResep = mutableListOf<model_resep>()
+
+                    for (resepSnapshot in snapshot.children) {
+                        val key = resepSnapshot.key
+                        val durasi = resepSnapshot.child("Durasi").getValue(String::class.java)
+                        val gambar = resepSnapshot.child("Gambar").getValue(String::class.java)
+                        val resep = model_resep(key, durasi, gambar)
+                        daftarResep.add(resep)
+                    }
+
+                    val adapter = adapter_resep(daftarResep)
+                    recyclerViewresep.adapter = adapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
 
         // recycleview berita
         val recyclerViewberita = rootView.findViewById<RecyclerView>(R.id.rv_list_berita)
@@ -53,12 +72,12 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
         database = FirebaseDatabase.getInstance()
         currentUser = firebaseAuth.currentUser!!
 
-        userRef = database.reference.child("users").child(currentUser.uid)
+        userRef = database.reference.child("Users").child(currentUser.uid)
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val fullName = snapshot.child("fullName").value.toString()
-                    val textViewNama = rootView.findViewById<TextView>(R.id.nama)
+                    val fullName = snapshot.child("FullName").value.toString()
+                    textViewNama = rootView.findViewById<TextView>(R.id.nama)
                     textViewNama.text = fullName
                 }
             }
@@ -69,12 +88,16 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
         })
 
         // Mendapatkan nama pengguna setelah login dengan Google
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
         val googleSignInAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
-        if (googleSignInAccount != null) {
-            val fullName = googleSignInAccount.displayName
-            textViewNama = rootView.findViewById(R.id.nama)
-            textViewNama.text = fullName
-        }
+            if (googleSignInAccount != null) {
+                val FullName = googleSignInAccount.displayName
+                textViewNama = rootView.findViewById(R.id.nama)
+                textViewNama.text = FullName
+            }
 
         //menampilkan aktivitas makanan
         val pemberitahuanMakananterisiLayout = rootView.findViewById<View>(R.id.pemberitahuan_terisi)
@@ -87,20 +110,17 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
                     pemberitahuanMakananterisiLayout.visibility = View.VISIBLE
                     pemberitahuanMakananexpired.visibility = View.VISIBLE
                     pemberitahuanKosong.visibility = View.GONE
-                }else{
+                } else {
                     pemberitahuanMakananterisiLayout.visibility = View.GONE
                     pemberitahuanMakananexpired.visibility = View.GONE
                     pemberitahuanKosong.visibility = View.VISIBLE
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 // Handle error
             }
         })
-
         return rootView
-
-
-
     }
 }
