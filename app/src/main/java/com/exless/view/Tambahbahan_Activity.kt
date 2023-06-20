@@ -16,55 +16,84 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.exless.R
 import com.exless.`object`.datarv_bahan
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.Calendar
 
 class Tambahbahan_Activity : AppCompatActivity() {
 
+    private lateinit var database: DatabaseReference
+
     @SuppressLint("MissingInflatedId", "SetTextI18n", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//disable auto darkmode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        // disable auto dark mode
         setContentView(R.layout.activity_tambahbahan)
-var database = FirebaseDatabase.getInstance().reference //connect to firebase
-        findViewById<Button>(R.id.bt_addseeitem).setOnClickListener{
-        var name =  findViewById<AutoCompleteTextView>(R.id.auto_namabahan).text.toString()
-        var jenisbah =  findViewById<AutoCompleteTextView>(R.id.auto_jenismakan).text.toString()
-        var jenissim =  findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan).text.toString()
-        var tglkadal = findViewById<EditText>(R.id.et_tglkadal).text.toString()
-        var tglbeli = findViewById<EditText>(R.id.et_tglpembel).text.toString()
-        var jumlah = findViewById<EditText>(R.id.et_jumlah).text.toString()
-            var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()//get user id
-
-            database.child("/Users/"+currentuser+"/Inventory/$name$jenissim").setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah +" pcs",jenissim))//push new value
-            Toast.makeText(this, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
         supportActionBar?.hide()
-        //adapter dropdown \/\/\/
+
+        database = FirebaseDatabase.getInstance().reference
+
+        findViewById<Button>(R.id.bt_addseeitem).setOnClickListener {
+            val name = findViewById<AutoCompleteTextView>(R.id.auto_namabahan).text.toString()
+            val jenissim = findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan).text.toString()
+
+            val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+            val itemRef = database.child("/Users/$currentuser/Inventory/$name$jenissim")
+            itemRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        Toast.makeText(
+                            this@Tambahbahan_Activity,
+                            "Item already exists",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        val jenisbah = findViewById<AutoCompleteTextView>(R.id.auto_jenismakan).text.toString()
+                        val tglkadal = findViewById<EditText>(R.id.et_tglkadal).text.toString()
+                        val tglbeli = findViewById<EditText>(R.id.et_tglpembel).text.toString()
+                        val jumlah = findViewById<EditText>(R.id.et_jumlah).text.toString()
+
+                        database.child("/Users/$currentuser/Inventory/$name$jenissim")
+                            .setValue(datarv_bahan(name, jenisbah, tglbeli, tglkadal, "$jumlah pcs", jenissim))
+                        Toast.makeText(this@Tambahbahan_Activity, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@Tambahbahan_Activity, MainActivity::class.java))
+                        finish()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle error
+                }
+            })
+        }
+
+        // Adapter dropdown
         val items = resources.getStringArray(R.array.Jenis_makanan)
         val adapter = ArrayAdapter(this, R.layout.list_dropdown, items)
         val autocomplete = findViewById<AutoCompleteTextView>(R.id.auto_jenismakan)
         autocomplete.setAdapter(adapter)
-        //
+
         val items2 = resources.getStringArray(R.array.Jenis_penyimpanan)
         val adapter2 = ArrayAdapter(this, R.layout.list_dropdown, items2)
         val autocomplete2 = findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan)
         autocomplete2.setAdapter(adapter2)
-        //
+
         val items3 = resources.getStringArray(R.array.nama_bahan)
         val adapter3 = ArrayAdapter(this, R.layout.list_dropdown, items3)
         val autocomplete3 = findViewById<AutoCompleteTextView>(R.id.auto_namabahan)
         autocomplete3.setAdapter(adapter3)
-        //adapter dropdown /\/\/\
 
-        //calendar picker \/\/\/
+        // Calendar picker
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        //
+
         findViewById<ImageView>(R.id.iv_tglkadal).setOnClickListener {
             val dpd = DatePickerDialog(
                 this,
@@ -88,12 +117,9 @@ var database = FirebaseDatabase.getInstance().reference //connect to firebase
             )
             dpd.show()
         }
-        //calendar picker /\/\/\
 
-        findViewById<ImageView>(R.id.back_tambahbahan).setOnClickListener{
+        findViewById<ImageView>(R.id.back_tambahbahan).setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
-        }
-
-
+    }
 }
