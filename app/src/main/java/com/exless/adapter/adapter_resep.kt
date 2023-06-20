@@ -6,29 +6,34 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.exless.R
-import com.exless.`object`.object_resep
+import com.exless.model.model_resep
 
-class adapter_resep(private val DaftarResep: List<object_resep.ResepMakanan>)
-    :RecyclerView.Adapter<adapter_resep.resepViewHolder>(){
-    class resepViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val imageviewResep: ImageView = itemView.findViewById(R.id.resepmakan)
-        val textviewDurasi: TextView = itemView.findViewById(R.id.durasi)
+class adapter_resep(private val daftarResep: List<model_resep>)
+    : RecyclerView.Adapter<adapter_resep.ResepViewHolder>() {
+
+    class ResepViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val imageViewResep: ImageView = itemView.findViewById(R.id.resepmakan)
+        val textViewDurasi: TextView = itemView.findViewById(R.id.durasi)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): resepViewHolder {
-        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.item_list_resep, parent, false)
-        return resepViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResepViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_list_resep, parent, false)
+        return ResepViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        return DaftarResep.size
+        return daftarResep.size
     }
 
-    override fun onBindViewHolder(holder: resepViewHolder, position: Int) {
-        val resep = DaftarResep[position]
-        holder.imageviewResep.setImageResource(resep.gambar)
-        holder.textviewDurasi.text = resep.durasi_masak
-    }
+    override fun onBindViewHolder(holder: ResepViewHolder, position: Int) {
+        val resep = daftarResep[position]
+        holder.textViewDurasi.text = resep.Durasi
 
+        // Menggunakan library Glide untuk memuat gambar dari URL
+        Glide.with(holder.itemView)
+            .load(resep.Gambar)
+            .into(holder.imageViewResep)
+    }
 }

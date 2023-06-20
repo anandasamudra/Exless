@@ -7,9 +7,6 @@ object object_resep {
 
     val DaftarResep: List<ResepMakanan> = listOf(
         ResepMakanan(R.drawable.nasigoreng, "10 min"),
-        ResepMakanan(R.drawable.rendang, "15 min"),
-        ResepMakanan(R.drawable.sopsayur, "11 min"),
-        ResepMakanan(R.drawable.ricaayam, "12 min"),
-        ResepMakanan(R.drawable.saladsayur, "7 min")
+        ResepMakanan(R.drawable.rendang, "15 min")
     )
 }
