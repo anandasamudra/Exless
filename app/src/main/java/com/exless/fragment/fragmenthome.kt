@@ -1,5 +1,6 @@
 package com.exless.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Layout
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.exless.adapter.adapter_resep
 import com.exless.databinding.PemberitahuanMakananterisiBinding
 import com.exless.`object`.object_berita
 import com.exless.`object`.object_resep
+import com.exless.view.Tambahbahan_Activity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
@@ -95,6 +97,7 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
                 // Handle error
             }
         })
+
         return rootView
 
 

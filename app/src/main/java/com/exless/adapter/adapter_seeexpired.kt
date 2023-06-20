@@ -17,7 +17,7 @@ class adapter_seeexpired(
         viewType: Int
     ): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_list_expired,parent,false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_expiredcopy,parent,false)
         )
     }
 

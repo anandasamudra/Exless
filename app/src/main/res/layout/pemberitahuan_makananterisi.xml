@@ -51,7 +51,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="55dp"
                 android:fontFamily="@font/semibold"
-                android:text="Masih ada stock makanan, cek you !"
+                android:text="Masih ada stock makanan, cek yuk !"
                 android:textColor="@color/white"
                 android:textSize="12dp" />
 
