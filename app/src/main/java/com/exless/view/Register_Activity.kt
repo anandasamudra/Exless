@@ -55,8 +55,8 @@ class Register_Activity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 // Registrasi berhasil, lakukan tindakan yang diinginkan
                                 val userId = firebaseAuth.currentUser?.uid
-                                val userRef = database.reference.child("users").child(userId ?: "")
-                                userRef.child("fullName").setValue(fullName)
+                                val userRef = database.reference.child("Users").child(userId ?: "")
+                                userRef.child("FullName").setValue(fullName)
 
                                 Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
                                 // Contoh: Pindah ke halaman utama aplikasi

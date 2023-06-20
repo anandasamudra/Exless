@@ -12,10 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
-import com.exless.view.fragment.fragmentbelanja
-import com.exless.view.fragment.fragmenthome
-import com.exless.view.fragment.fragmentkomunitas
-import com.exless.view.fragment.fragmentsimpanan
+import com.exless.adapter.adapter_jenisbahan
+import com.exless.adapter.adapter_seeexpiredsimpanan
+import com.exless.fragment.fragmentbelanja
+import com.exless.fragment.fragmenthome
+import com.exless.fragment.fragmentkomunitas
+import com.exless.fragment.fragmentsimpanan
+import com.exless.`object`.Datarv_jenisbahan
+import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -91,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         jumbahanmainex = ArrayList()
         bahanarraylistex = ArrayList<Datarv_seeexperired>()
         getbahandataex()
+
         //Jumlah makanan di kategori fragment simpanan /\/\/\
     }
 
@@ -107,6 +112,14 @@ class MainActivity : AppCompatActivity() {
     }
     fun toseeitem(view: View) {
         startActivity(Intent(this, seeitems_Activity::class.java))
+        finish()
+    }
+    fun tosimpanan(view: View) {
+        setfragment(fragmentsimpanan())
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
+    }
+    fun toseeexpired(view: View) {
+        startActivity(Intent(this, SeeExpiredActivity::class.java))
         finish()
     }
 
@@ -131,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 bahanList.description = "Kamu mempunyai $count macam"
                 bahanarraylist.add(bahanList)
-               println(bahanarraylist)
+                println(bahanarraylist)
 
                 println(jumbahanmain+"ini datanya cokkkk")
                 println("done datachange")
