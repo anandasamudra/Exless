@@ -5,23 +5,18 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.exless.R
+import com.exless.`object`.datarv_bahan
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import java.util.Calendar
 
 class Tambahbahan_Activity : AppCompatActivity() {
@@ -43,7 +38,7 @@ var database = FirebaseDatabase.getInstance().reference //connect to firebase
 
             database.child("/Users/"+currentuser+"/Inventory").push().setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah +" pcs",jenissim))//push new value
             Toast.makeText(this, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, seeitems_Activity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
         supportActionBar?.hide()

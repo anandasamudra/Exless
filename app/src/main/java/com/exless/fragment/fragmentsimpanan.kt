@@ -1,10 +1,7 @@
 package com.exless.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,21 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
 import com.exless.databinding.FragmentHomeBinding
-import com.exless.view.Datarv_jenisbahan
-import com.exless.view.Datarv_seeexperired
+import com.exless.`object`.Datarv_jenisbahan
+import com.exless.`object`.Datarv_seeexperired
 import com.exless.view.MainActivity
-import com.exless.view.SeeExpiredActivity
-import com.exless.view.adapter_bahan
-import com.exless.view.adapter_jenisbahan
-import com.exless.view.adapter_seeexpiredsimpanan
-import com.exless.view.datarv_bahan
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
+import com.exless.adapter.adapter_jenisbahan
+import com.exless.adapter.adapter_seeexpiredsimpanan
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
-import com.google.firebase.database.ValueEventListener
 
 
 class fragmentsimpanan : Fragment() {

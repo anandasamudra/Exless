@@ -1,7 +1,5 @@
-package com.exless.view
+package com.exless.adapter
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.exless.R
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import com.jakewharton.threetenabp.AndroidThreeTen
+import com.exless.`object`.Datarv_seeexperired
 
 
-class adapter_seeexpiredsimpanan(val array: ArrayList<Datarv_seeexperired>) : RecyclerView.Adapter<adapter_seeexpiredsimpanan.viewholder_jenisbahan>() {
+class adapter_seeexpiredori(val array: ArrayList<Datarv_seeexperired>) : RecyclerView.Adapter<adapter_seeexpiredori.viewholder_jenisbahan>() {
     class viewholder_jenisbahan(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTitle: TextView = itemView.findViewById(R.id.title_expired)
         val tvtgl: TextView = itemView.findViewById(R.id.tglkadalexpired)
@@ -63,11 +59,5 @@ class adapter_seeexpiredsimpanan(val array: ArrayList<Datarv_seeexperired>) : Re
             holder.imgview.setImageResource(R.drawable.kacang)
         }
 
-        holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(context, SeeExpiredActivity::class.java)
-//            intent.putExtra("nama_bahan", title)
-            context.startActivity(intent)
-        }
     }
 }

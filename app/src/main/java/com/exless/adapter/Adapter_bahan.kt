@@ -1,4 +1,4 @@
-package com.exless.view
+package com.exless.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
+import com.exless.`object`.datarv_bahan
 
 class adapter_bahan(val bahanlist : ArrayList<datarv_bahan>) : RecyclerView.Adapter<adapter_bahan.viewholder_bahan>() {
     class viewholder_bahan(itemView: View) : RecyclerView.ViewHolder(itemView){

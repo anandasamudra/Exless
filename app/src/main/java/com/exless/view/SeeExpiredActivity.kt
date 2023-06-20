@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
+import com.exless.adapter.adapter_seeexpiredori
+import com.exless.`object`.Datarv_seeexperired
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,7 +23,6 @@ import com.google.firebase.database.ValueEventListener
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
 
@@ -49,30 +50,32 @@ class SeeExpiredActivity : AppCompatActivity() {
             isAppearanceLightStatusBars = true
         }
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // disable auto dark mode
-// Initialize ThreeTenABP
+        // Initialize ThreeTenABP
         AndroidThreeTen.init(this)
         rv_list_jenisbahan = findViewById(R.id.rv_seeexpiredori)
         rv_list_jenisbahan.setHasFixedSize(true)
         jumbahanmainex = ArrayList()
         bahanarrayliste = ArrayList<Datarv_seeexperired>()
         getbahandataex()
-
     }
+
     fun toback(view: View) {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
+
     @SuppressLint("SuspiciousIndentation")
     private fun getbahandataex() {
         val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         dbrefex = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
-        dbrefex.addValueEventListener(object : ValueEventListener{
+        dbrefex.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (bahanSnapshot in snapshot.children){
+                if (snapshot.exists()) {
+                    bahanarrayliste.clear() // Clear the list before adding new items
+                    for (bahanSnapshot in snapshot.children) {
                         val namabahan = bahanSnapshot.child("nama").getValue().toString()
                         //compare today date with expired date \/\/\/
-                        var tglkadal : String
+                        var tglkadal: String
                         if (bahanSnapshot.child("tglkadaluarsa").getValue().toString() != "") {
                             tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
 
@@ -91,21 +94,16 @@ class SeeExpiredActivity : AppCompatActivity() {
                                 }
 
                                 println("Number of days: $tglkadal")
-                            } catch (e: DateTimeParseException) {
-                                // Handle the case when parsing the dates fails
-                                tglkadal = "EXPIRED"
-                                println("Invalid date format")
                             } catch (e: Exception) {
-                                // Handle any other exceptions that might occur
+                                // Handle any exceptions that might occur
                                 tglkadal = "EXPIRED"
                                 println("An error occurred: ${e.message}")
                             }
+                        } else {
+                            tglkadal = "-"
                         }
 
-                        else{
-                            tglkadal ="-"
-                        }
-                        println("Number of dayssadasda f: $tglkadal")
+                        println("Number of days: $tglkadal")
                         //compare today date with expired date /\/\/\
                         val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
                         val bahanList = Datarv_seeexperired(
@@ -118,22 +116,34 @@ class SeeExpiredActivity : AppCompatActivity() {
                         println(bahanarrayliste)
                         println(namabahan)
                     }
-//                    bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
+                    sortBahanArrayByExpirationDate() // Sort the bahanarrayliste
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                // Handle the cancellation
             }
-
         })
 
         showRecylerviewex()
     }
-    fun showRecylerviewex(){
-        rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
-        rv_list_jenisbahan.adapter= adapter_seeexpiredori(bahanarrayliste)
+
+    private fun sortBahanArrayByExpirationDate() {
+        bahanarrayliste.sortWith(Comparator { bahan1, bahan2 ->
+            when {
+                bahan1.tglkadaluarsa == "EXPIRED" && bahan2.tglkadaluarsa != "EXPIRED" -> -1 // bahan1 is "EXPIRED" and bahan2 is not, so bahan1 comes first
+                bahan1.tglkadaluarsa != "EXPIRED" && bahan2.tglkadaluarsa == "EXPIRED" -> 1 // bahan2 is "EXPIRED" and bahan1 is not, so bahan2 comes first
+                else -> bahan1.tglkadaluarsa.compareTo(bahan2.tglkadaluarsa) // Compare other cases based on the expiration date string
+            }
+        })
     }
+
+
+    fun showRecylerviewex() {
+        rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
+        rv_list_jenisbahan.adapter = adapter_seeexpiredori(bahanarrayliste)
+    }
+
     private fun getCurrentDate(): String {
         val c = Calendar.getInstance()
         val day = c.get(Calendar.DAY_OF_MONTH)
@@ -141,5 +151,4 @@ class SeeExpiredActivity : AppCompatActivity() {
         val year = c.get(Calendar.YEAR)
         return String.format("%02d/%02d/%04d", day, month, year)
     }
-
 }
