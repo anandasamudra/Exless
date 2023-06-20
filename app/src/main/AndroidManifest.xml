@@ -15,15 +15,18 @@
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
         <activity
+            android:name=".view.MenuResep"
+            android:exported="false" />
+        <activity
             android:name=".view.DetailItemActivity"
             android:exported="false" />
         <activity
             android:name=".view.SeeExpiredActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".view.Tambahbahan_Activity"
             android:exported="false"
-            android:theme="@style/Theme.dropdown"/>
+            android:theme="@style/Theme.dropdown" />
         <activity
             android:name=".view.seeitems_Activity"
             android:exported="false"

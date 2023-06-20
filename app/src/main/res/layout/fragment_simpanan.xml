@@ -33,17 +33,20 @@
                 android:onClick="toaddbahan"
                 app:srcCompat="@drawable/ic_add" />
         </RelativeLayout>
+
         <LinearLayout
+            android:id="@+id/layoutseeexpiredsimpan"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_seeexpired"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:orientation="horizontal"
-                tools:listitem="@layout/item_list_expired" />
+                tools:listitem="@layout/item_list_expiredcopy" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

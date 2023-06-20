@@ -1,4 +1,4 @@
-package com.exless.view.fragment
+package com.exless.fragment
 
 import androidx.fragment.app.Fragment
 import com.exless.R

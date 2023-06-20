@@ -1,4 +1,4 @@
-package com.exless.view.adapter
+package com.exless.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
-import com.exless.view.`object`.object_resep
+import com.exless.`object`.object_resep
 
 class adapter_resep(private val DaftarResep: List<object_resep.ResepMakanan>)
     :RecyclerView.Adapter<adapter_resep.resepViewHolder>(){

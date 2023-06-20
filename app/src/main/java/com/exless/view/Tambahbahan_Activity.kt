@@ -70,22 +70,25 @@ var database = FirebaseDatabase.getInstance().reference //connect to firebase
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
         //
-        findViewById<ImageView>(R.id.iv_tglkadal).setOnClickListener{
+        findViewById<ImageView>(R.id.iv_tglkadal).setOnClickListener {
             val dpd = DatePickerDialog(
                 this,
                 android.R.style.Theme_Holo_Dialog,
-                DatePickerDialog.OnDateSetListener{view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
-                    findViewById<EditText>(R.id.et_tglkadal).setText("$dayOfMonth/$month/$year")
+                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                    val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                    findViewById<EditText>(R.id.et_tglkadal).setText(formattedDate)
                 }, year, month, day
             )
             dpd.show()
         }
-        findViewById<ImageView>(R.id.iv_tglpembel).setOnClickListener{
+
+        findViewById<ImageView>(R.id.iv_tglpembel).setOnClickListener {
             val dpd = DatePickerDialog(
                 this,
                 android.R.style.Theme_Holo_Dialog,
-                DatePickerDialog.OnDateSetListener{view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
-                    findViewById<EditText>(R.id.et_tglpembel).setText("$dayOfMonth/$month/$year")
+                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                    val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                    findViewById<EditText>(R.id.et_tglpembel).setText(formattedDate)
                 }, year, month, day
             )
             dpd.show()
