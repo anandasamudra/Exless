@@ -57,9 +57,10 @@ class Tambahbahan_Activity : AppCompatActivity() {
                         val tglkadal = findViewById<EditText>(R.id.et_tglkadal).text.toString()
                         val tglbeli = findViewById<EditText>(R.id.et_tglpembel).text.toString()
                         val jumlah = findViewById<EditText>(R.id.et_jumlah).text.toString()
+                        val satuan = findViewById<AutoCompleteTextView>(R.id.auto_satuan).text.toString()
 
                         database.child("/Users/$currentuser/Inventory/$name$jenissim")
-                            .setValue(datarv_bahan(name, jenisbah, tglbeli, tglkadal, "$jumlah pcs", jenissim))
+                            .setValue(datarv_bahan(name, jenisbah, tglbeli, tglkadal, "$jumlah $satuan", jenissim))
                         Toast.makeText(this@Tambahbahan_Activity, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@Tambahbahan_Activity, MainActivity::class.java))
                         finish()
@@ -83,10 +84,16 @@ class Tambahbahan_Activity : AppCompatActivity() {
         val autocomplete2 = findViewById<AutoCompleteTextView>(R.id.auto_jenispenyimpanan)
         autocomplete2.setAdapter(adapter2)
 
+        val items4 = resources.getStringArray(R.array.satuan)
+        val adapter4 = ArrayAdapter(this, R.layout.list_dropdown, items4)
+        val autocomplete4 = findViewById<AutoCompleteTextView>(R.id.auto_satuan)
+        autocomplete4.setAdapter(adapter4)
+
         val items3 = resources.getStringArray(R.array.nama_bahan)
         val adapter3 = ArrayAdapter(this, R.layout.list_dropdown, items3)
         val autocomplete3 = findViewById<AutoCompleteTextView>(R.id.auto_namabahan)
         autocomplete3.setAdapter(adapter3)
+
 
         // Calendar picker
         val c = Calendar.getInstance()
