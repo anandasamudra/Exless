@@ -1,4 +1,4 @@
-package com.exless.view.adapter
+package com.exless.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
-import com.exless.view.`object`.object_berita
+import com.exless.`object`.object_berita
 
 class adapter_berita(private val DaftarBerita: List<object_berita.ListBerita>)
     :RecyclerView.Adapter<adapter_berita.beritaViewHolder>(){

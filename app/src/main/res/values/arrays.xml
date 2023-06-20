@@ -8,7 +8,7 @@
         <item>@drawable/kategori_meat</item>
         <item>@drawable/kategori_laut</item>
         <item>@drawable/kategori_spices</item>
-        <item>@drawable/kategori_bubuktepung</item>
+        <item>@drawable/kategori_tepung</item>
         <item>@drawable/kategori_botol</item>
         <item>@drawable/kategori_kaleng</item>
     </integer-array>

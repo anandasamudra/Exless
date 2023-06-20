@@ -1,4 +1,4 @@
-package com.exless.view
+package com.exless.`object`
 
 data class datarv_bahan(var nama: String ?= null,
                         var jenismakanan: String ?=null,

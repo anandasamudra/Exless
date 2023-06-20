@@ -5,23 +5,18 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.exless.R
+import com.exless.`object`.datarv_bahan
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import java.util.Calendar
 
 class Tambahbahan_Activity : AppCompatActivity() {
@@ -43,7 +38,7 @@ var database = FirebaseDatabase.getInstance().reference //connect to firebase
 
             database.child("/Users/"+currentuser+"/Inventory").push().setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah +" pcs",jenissim))//push new value
             Toast.makeText(this, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, seeitems_Activity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
         supportActionBar?.hide()
@@ -70,22 +65,25 @@ var database = FirebaseDatabase.getInstance().reference //connect to firebase
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
         //
-        findViewById<ImageView>(R.id.iv_tglkadal).setOnClickListener{
+        findViewById<ImageView>(R.id.iv_tglkadal).setOnClickListener {
             val dpd = DatePickerDialog(
                 this,
                 android.R.style.Theme_Holo_Dialog,
-                DatePickerDialog.OnDateSetListener{view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
-                    findViewById<EditText>(R.id.et_tglkadal).setText("$dayOfMonth/$month/$year")
+                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                    val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                    findViewById<EditText>(R.id.et_tglkadal).setText(formattedDate)
                 }, year, month, day
             )
             dpd.show()
         }
-        findViewById<ImageView>(R.id.iv_tglpembel).setOnClickListener{
+
+        findViewById<ImageView>(R.id.iv_tglpembel).setOnClickListener {
             val dpd = DatePickerDialog(
                 this,
                 android.R.style.Theme_Holo_Dialog,
-                DatePickerDialog.OnDateSetListener{view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
-                    findViewById<EditText>(R.id.et_tglpembel).setText("$dayOfMonth/$month/$year")
+                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                    val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                    findViewById<EditText>(R.id.et_tglpembel).setText(formattedDate)
                 }, year, month, day
             )
             dpd.show()

@@ -1,5 +1,6 @@
-package com.exless.view
+package com.exless.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.exless.R
+import com.exless.`object`.Datarv_jenisbahan
+import com.exless.view.seeitems_Activity
 
 class adapter_jenisbahan(val array: ArrayList<Datarv_jenisbahan>) : RecyclerView.Adapter<adapter_jenisbahan.viewholder_jenisbahan>() {
     class viewholder_jenisbahan(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,8 +34,18 @@ class adapter_jenisbahan(val array: ArrayList<Datarv_jenisbahan>) : RecyclerView
         val (title, description, imageView) = array[position]
         holder.tvTitle.text = title
         holder.tvdesk.text = description
+        //holder use glide to fix different image size issue and lag
         Glide.with(holder.itemView.context)
             .load(currentItem.imageView)
             .into(holder.imgview)
+
+        holder.itemView.setOnClickListener {
+            // Handle item click here
+            val context = holder.itemView.context
+            val intent = Intent(context, seeitems_Activity::class.java)
+            // Pass any necessary data to the new activity if needed
+            intent.putExtra("nama_bahan", title)
+            context.startActivity(intent)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.exless.view.`object`
+package com.exless.`object`
 
 import com.exless.R
 

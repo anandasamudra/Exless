@@ -5,10 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
+import com.exless.adapter.adapter_bahan
+import com.exless.`object`.datarv_bahan
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,6 +24,7 @@ class seeitems_Activity : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
     private lateinit var bahanrecylerview : RecyclerView
     private lateinit var bahanarraylist : ArrayList<datarv_bahan>
+    private lateinit var namaBahan: String
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,24 +40,31 @@ class seeitems_Activity : AppCompatActivity() {
             finish()
         }
         //Recylerview \/\/\/
+        retrieveDataFromIntent()
         bahanrecylerview = findViewById(R.id.recyclerView_seeitem)
         bahanrecylerview.layoutManager = LinearLayoutManager(this)
         bahanrecylerview.setHasFixedSize(true)
 
         bahanarraylist = arrayListOf<datarv_bahan>()
-        getbahandata()
+        val namabahan = intent.getStringExtra("nama_bahan")
+        var text = findViewById<TextView>(R.id.tvtitleseeitem).setText(namabahan)
+        getbahandata(namabahan.toString())
 
     }
 
-    private fun getbahandata() {
+    private fun getbahandata(nama : String) {
+//
         var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         dbref = FirebaseDatabase.getInstance().getReference("/Users/"+currentuser+"/Inventory")
         dbref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for (bahanSnapshot in snapshot.children){
-                        val bahan = bahanSnapshot.getValue(datarv_bahan::class.java)
-                        bahanarraylist.add(bahan!!)
+                        if (nama == bahanSnapshot.child("jenismakanan").getValue().toString()){
+                            val bahan = bahanSnapshot.getValue(datarv_bahan::class.java)
+                            bahanarraylist.add(bahan!!)
+                        }
+
                     }
                     bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
                 }
@@ -66,4 +77,12 @@ class seeitems_Activity : AppCompatActivity() {
         })
     }
     //Recylerview /\/\/\
+    private fun retrieveDataFromIntent() {
+        val intent = intent
+        if (intent.hasExtra("nama_bahan")) {
+            namaBahan = intent.getStringExtra("nama_bahan").toString()
+        } else {
+            // Handle the case when the intent extra is not available
+        }
+    }
 }

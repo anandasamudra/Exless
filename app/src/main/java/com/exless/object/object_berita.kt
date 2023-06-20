@@ -1,6 +1,5 @@
-package com.exless.view.`object`
+package com.exless.`object`
 
-import android.graphics.drawable.Drawable
 import com.exless.R
 
 object object_berita {
