@@ -1,7 +1,9 @@
 package com.exless.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,7 @@ import com.exless.databinding.FragmentHomeBinding
 import com.exless.view.Datarv_jenisbahan
 import com.exless.view.Datarv_seeexperired
 import com.exless.view.MainActivity
+import com.exless.view.SeeExpiredActivity
 import com.exless.view.adapter_bahan
 import com.exless.view.adapter_jenisbahan
 import com.exless.view.adapter_seeexpiredsimpanan
@@ -38,6 +41,8 @@ class fragmentsimpanan : Fragment() {
     private lateinit var dbqueryex : Query
     private lateinit var rv_list_jenisbahanex: RecyclerView
     private var jenisbahanarraylistex = ArrayList<Datarv_seeexperired>()
+    private var dataList: ArrayList<Datarv_seeexperired>? = null
+
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,

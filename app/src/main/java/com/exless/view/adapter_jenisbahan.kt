@@ -1,5 +1,6 @@
 package com.exless.view
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,5 +36,14 @@ class adapter_jenisbahan(val array: ArrayList<Datarv_jenisbahan>) : RecyclerView
         Glide.with(holder.itemView.context)
             .load(currentItem.imageView)
             .into(holder.imgview)
+
+        holder.itemView.setOnClickListener {
+            // Handle item click here
+            val context = holder.itemView.context
+            val intent = Intent(context, seeitems_Activity::class.java)
+            // Pass any necessary data to the new activity if needed
+            intent.putExtra("nama_bahan", title)
+            context.startActivity(intent)
+        }
     }
 }

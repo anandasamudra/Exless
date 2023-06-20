@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
@@ -31,6 +33,7 @@ import java.time.temporal.ChronoUnit
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.format.DateTimeParseException
 import java.util.Calendar
+import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -91,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         jumbahanmainex = ArrayList()
         bahanarraylistex = ArrayList<Datarv_seeexperired>()
         getbahandataex()
+
         //Jumlah makanan di kategori fragment simpanan /\/\/\
     }
 
@@ -131,7 +135,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 bahanList.description = "Kamu mempunyai $count macam"
                 bahanarraylist.add(bahanList)
-               println(bahanarraylist)
+                println(bahanarraylist)
 
                 println(jumbahanmain+"ini datanya cokkkk")
                 println("done datachange")
