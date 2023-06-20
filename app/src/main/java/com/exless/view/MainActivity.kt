@@ -4,20 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
+import com.exless.adapter.adapter_jenisbahan
+import com.exless.adapter.adapter_seeexpiredsimpanan
 import com.exless.fragment.fragmentbelanja
 import com.exless.fragment.fragmenthome
 import com.exless.fragment.fragmentkomunitas
 import com.exless.fragment.fragmentsimpanan
+import com.exless.`object`.Datarv_jenisbahan
+import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -33,7 +35,6 @@ import java.time.temporal.ChronoUnit
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.format.DateTimeParseException
 import java.util.Calendar
-import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -111,6 +112,14 @@ class MainActivity : AppCompatActivity() {
     }
     fun toseeitem(view: View) {
         startActivity(Intent(this, seeitems_Activity::class.java))
+        finish()
+    }
+    fun tosimpanan(view: View) {
+        setfragment(fragmentsimpanan())
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
+    }
+    fun toseeexpired(view: View) {
+        startActivity(Intent(this, SeeExpiredActivity::class.java))
         finish()
     }
 
