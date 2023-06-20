@@ -34,6 +34,7 @@ class fragmentsimpanan : Fragment() {
     private lateinit var dbref : DatabaseReference
     private lateinit var dbquery : Query
     private lateinit var rv_list_jenisbahan: RecyclerView
+    private lateinit var rv_seeexpired : RecyclerView
     private var jenisbahanarraylist = ArrayList<Datarv_jenisbahan>()
     private var binding: FragmentHomeBinding? =null
     //
@@ -53,6 +54,8 @@ class fragmentsimpanan : Fragment() {
 // Recylerview jenis/kategori bahan \/\/\/
         rv_list_jenisbahan = view.findViewById(R.id.rv_jenisbahan)
         rv_list_jenisbahan.setHasFixedSize(true)
+        rv_seeexpired = view.findViewById(R.id.rv_seeexpired)
+        rv_seeexpired.setHasFixedSize(true)
         val mainActivity = activity as? MainActivity
         val bahanarraylist = mainActivity?.getBahanArrayList()
         jenisbahanarraylist.clear()

@@ -113,6 +113,14 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, seeitems_Activity::class.java))
         finish()
     }
+    fun tosimpanan(view: View) {
+        setfragment(fragmentsimpanan())
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
+    }
+    fun toseeexpired(view: View) {
+        startActivity(Intent(this, SeeExpiredActivity::class.java))
+        finish()
+    }
 
     //Jumlah makanan di kategori fragment simpanan \/\/\/
     @SuppressLint("SuspiciousIndentation")

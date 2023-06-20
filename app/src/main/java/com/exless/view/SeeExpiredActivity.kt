@@ -1,12 +1,13 @@
 package com.exless.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
@@ -56,6 +57,10 @@ class SeeExpiredActivity : AppCompatActivity() {
         bahanarrayliste = ArrayList<Datarv_seeexperired>()
         getbahandataex()
 
+    }
+    fun toback(view: View) {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
     @SuppressLint("SuspiciousIndentation")
     private fun getbahandataex() {
@@ -127,7 +132,7 @@ class SeeExpiredActivity : AppCompatActivity() {
     }
     fun showRecylerviewex(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
-        rv_list_jenisbahan.adapter= adapter_seeexpiredsimpanan(bahanarrayliste)
+        rv_list_jenisbahan.adapter= adapter_seeexpiredori(bahanarrayliste)
     }
     private fun getCurrentDate(): String {
         val c = Calendar.getInstance()
