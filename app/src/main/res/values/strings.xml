@@ -27,10 +27,18 @@
         <item>Kulkas</item>
         <item>Rak</item>
     </string-array>
-    =
+
     <string-array name="nama_bahan">
         <item>daging</item>
         <item>ikan</item>
         <item>ayam</item>
+    </string-array>
+    <string-array name="satuan">
+        <item>pcs</item>
+        <item>g</item>
+        <item>dus</item>
+        <item>buah</item>
+        <item>buah</item>
+        <item>buahsfsdfdsf</item>
     </string-array>
 </resources>
