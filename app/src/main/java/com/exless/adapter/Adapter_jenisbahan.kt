@@ -1,4 +1,4 @@
-package com.exless.view
+package com.exless.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.exless.R
+import com.exless.`object`.Datarv_jenisbahan
+import com.exless.view.seeitems_Activity
 
 class adapter_jenisbahan(val array: ArrayList<Datarv_jenisbahan>) : RecyclerView.Adapter<adapter_jenisbahan.viewholder_jenisbahan>() {
     class viewholder_jenisbahan(itemView: View) : RecyclerView.ViewHolder(itemView) {
