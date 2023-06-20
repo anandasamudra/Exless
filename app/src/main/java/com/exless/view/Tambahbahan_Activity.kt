@@ -36,7 +36,7 @@ var database = FirebaseDatabase.getInstance().reference //connect to firebase
         var jumlah = findViewById<EditText>(R.id.et_jumlah).text.toString()
             var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()//get user id
 
-            database.child("/Users/"+currentuser+"/Inventory").push().setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah +" pcs",jenissim))//push new value
+            database.child("/Users/"+currentuser+"/Inventory/$name$jenissim").setValue(datarv_bahan(name, jenisbah,tglbeli,tglkadal,jumlah +" pcs",jenissim))//push new value
             Toast.makeText(this, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
@@ -94,5 +94,6 @@ var database = FirebaseDatabase.getInstance().reference //connect to firebase
             startActivity(Intent(this, MainActivity::class.java))
         }
         }
+
 
 }
