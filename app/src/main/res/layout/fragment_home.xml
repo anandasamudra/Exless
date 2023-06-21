@@ -333,6 +333,7 @@
                             android:layout_height="wrap_content"
                             android:text="Lihat Semua >"
                             android:id="@+id/fullberita"
+                            android:onClick="detailberita"
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/ijotuo"
                             android:fontFamily="@font/semibold"/>
