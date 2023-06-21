@@ -28,7 +28,7 @@
                     <ImageView
                         android:id="@+id/back_seeitem3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_marginStart="20dp"
                         android:onClick="backtohome"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_detailtitle"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/tv_detail1"
                     android:layout_width="380dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_detail_item"
@@ -99,7 +99,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/tv_detail2"
                     android:layout_width="380dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -111,10 +111,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_detail1" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/tv_detail3"
                     android:layout_width="380dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -126,10 +126,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_detail2" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/tv_detail4"
                     android:layout_width="380dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -141,10 +141,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_detail3" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/tv_detail5"
                     android:layout_width="380dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -156,7 +156,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_detail4" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

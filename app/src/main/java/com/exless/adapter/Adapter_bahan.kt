@@ -1,5 +1,6 @@
 package com.exless.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
 import com.exless.`object`.datarv_bahan
+import com.exless.view.DetailItemActivity
+import com.exless.view.seeitems_Activity
 
 class adapter_bahan(val bahanlist : ArrayList<datarv_bahan>) : RecyclerView.Adapter<adapter_bahan.viewholder_bahan>() {
     class viewholder_bahan(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -37,6 +40,14 @@ class adapter_bahan(val bahanlist : ArrayList<datarv_bahan>) : RecyclerView.Adap
         holder.jenissimpan.text = currentitem.jenissimpan
         holder.kadaluarsa.text = currentitem.tglkadaluarsa
         holder.jumlah.text = currentitem.jumlah
+        holder.itemView.setOnClickListener {
+            // Handle item click here
+            val context = holder.itemView.context
+            val intent = Intent(context, DetailItemActivity::class.java)
+            // Pass any necessary data to the new activity if needed
+            intent.putExtra("nama_bahan", currentitem.nama)
+            context.startActivity(intent)
+        }
     }
 
 
