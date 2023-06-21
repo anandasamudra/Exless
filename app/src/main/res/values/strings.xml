@@ -29,9 +29,45 @@
     </string-array>
 
     <string-array name="nama_bahan">
-        <item>daging</item>
-        <item>ikan</item>
-        <item>ayam</item>
+        <item>Buah Naga</item>
+        <item>Nangka</item>
+        <item>Nanas</item>
+
+        <item>Pisang</item>
+        <item>Jeruk</item>
+        <item>Jambu Air</item>
+
+        <item>Papaya</item>
+        <item>Alpukat</item>
+        <item>Jagung</item>
+
+        <item>Semangka</item>
+        <item>Melon</item>
+        <item>Lemon</item>
+
+        <item>Sayur Bayam</item>
+        <item>Sayur Kangkung</item>
+        <item>Sayur Sawi</item>
+
+        <item>Wortel</item>
+        <item>Timun</item>
+        <item>Kacang panjang</item>
+
+        <item>Cabe Merah</item>
+        <item>Cabe Rawit</item>
+        <item>Bawang Merah</item>
+
+        <item>Bawang Putih</item>
+        <item>Bawang Bombay</item>
+        <item>Kunyit</item>
+
+        <item>Jahe</item>
+        <item>Toge</item>
+        <item>Petai</item>
+
+        <item>Brokoli</item>
+        <item>Kepiting</item>
+        <item>Cumi Cumi</item>
     </string-array>
     <string-array name="satuan">
         <item>pcs</item>
