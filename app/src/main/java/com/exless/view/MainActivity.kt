@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         dbquery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val count: String = snapshot.childrenCount.toString()
-                println("countmain"+count)
+//                println("countmain"+count)
                 jumbahanmain.add(count)
                 val bahanList = Datarv_jenisbahan(
                     dataTitle[i],
@@ -148,10 +148,10 @@ class MainActivity : AppCompatActivity() {
                 )
                 bahanList.description = "Kamu mempunyai $count macam"
                 bahanarraylist.add(bahanList)
-                println(bahanarraylist)
+//                println(bahanarraylist)
 
-                println(jumbahanmain+"ini datanya cokkkk")
-                println("done datachange")
+//                println(jumbahanmain+"ini datanya cokkkk")
+//                println("done datachange")
 
             }
             override fun onCancelled(error: DatabaseError) {
