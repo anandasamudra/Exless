@@ -10,11 +10,11 @@
     <string name="subhome">Temukan referensi resep untuk dimasak hari ini</string>
     <string name="subwaster">Temukan kabar terbaru seputar sampah makanan</string>
 
-    <string name="detailitem1"><b>Dinginkan : </b></string>
-    <string name="detailitem2"><b>Segar dalam : </b></string>
-    <string name="detailitem3"><b>Penyimpanan : </b></string>
-    <string name="detailitem4"><b>Bekukan : </b></string>
-    <string name="detailitem5"><b>Penggunaan : </b></string>
+    <string name="detailitem1"><b>Penyimpanan : </b></string>
+    <string name="detailitem2"><b>Durasi Kesegaran : </b></string>
+    <string name="detailitem3"><b>Optimalisasi : </b></string>
+    <string name="detailitem4"><b>Pembekuan : </b></string>
+    <string name="detailitem5"><b>Pengolahan lain : </b></string>
 
     <string name="default_web_client_id">661553876416-pf1rf07549e7pg26q8o2rgs76nk1m9ko.apps.googleusercontent.com</string>
     <string-array name="Jenis_makanan">
