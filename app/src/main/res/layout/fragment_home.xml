@@ -52,12 +52,14 @@
                             android:textColor="@color/black"/>
                     </RelativeLayout>
                 </LinearLayout>
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="320dp"
                     android:layout_marginTop="60dp"
-                    android:src="@drawable/kucing"/>
+                    android:onClick="toprofile"
+                    android:src="@drawable/kucing" />
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"

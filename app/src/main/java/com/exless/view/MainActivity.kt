@@ -106,6 +106,10 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     // bottom navigation fragment /\/\/\
+    fun toprofile(view: View) {
+        startActivity(Intent(this, Profile_Activity::class.java))
+        finish()
+    }
     fun toaddbahan(view: View) {
         startActivity(Intent(this, TambahbahanMain_Activity::class.java))
         finish()
