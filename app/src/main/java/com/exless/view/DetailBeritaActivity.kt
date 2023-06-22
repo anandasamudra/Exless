@@ -1,18 +1,19 @@
 package com.exless.view
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
+import AdapterDetailBerita
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
-import com.exless.adapter.AdapterDetailBerita
 import com.exless.`object`.Datarv_detailberita
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.io.InputStream
+import com.google.firebase.database.ValueEventListener
 
 class DetailBeritaActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -23,15 +24,17 @@ class DetailBeritaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_berita)
-
+        findViewById<ImageView>(R.id.back_detailberita).setOnClickListener{
+            startActivity(Intent( this,MainActivity::class.java))
+        }
         recyclerView = findViewById(R.id.detailberita)
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         array = ArrayList()
         adapter = AdapterDetailBerita(array)
         recyclerView.adapter = adapter
 
-        // Inisialisasi dan mengambil referensi dari Firebase Realtime Database
         databaseRef = FirebaseDatabase.getInstance().getReference("Berita")
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -39,19 +42,18 @@ class DetailBeritaActivity : AppCompatActivity() {
                 for (dataSnapshot in snapshot.children) {
                     val title = dataSnapshot.child("title").getValue(String::class.java)
                     val description = dataSnapshot.child("description").getValue(String::class.java)
-                    val imageView = dataSnapshot.child("imageView").getValue(Int::class.java)
+                    val imageUrl = dataSnapshot.child("imageUrl").getValue(String::class.java)
 
-                    if (title != null && description != null && imageView != null) {
-                        val data = Datarv_detailberita(title, description, imageView)
+                    if (title != null && description != null && imageUrl != null) {
+                        val data = Datarv_detailberita(title, description, imageUrl)
                         array.add(data)
-
                     }
                 }
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle error
+                // Handle database error
             }
         })
     }
