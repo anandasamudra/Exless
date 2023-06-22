@@ -1,7 +1,8 @@
 package com.exless.`object`
 
 data class Datarv_detailberita(
-    var imageView: Int,
-    var tanggal: String
+    var title: String,
+    var description: String,
+    var imageView: Int
 
 )

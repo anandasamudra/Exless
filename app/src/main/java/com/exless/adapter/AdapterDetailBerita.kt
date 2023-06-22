@@ -1,6 +1,5 @@
 package com.exless.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,43 +7,39 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.exless.R
 import com.exless.`object`.Datarv_detailberita
 
 
-class AdapterDetailBerita(private val context: Context, mutableListOf: MutableList<Any>) :
-    RecyclerView.Adapter<AdapterDetailBerita.ViewHolder>() {
 
-    private val data: MutableList<Datarv_detailberita> = mutableListOf()
-
-    // Inner class ViewHolder untuk merepresentasikan tampilan item dalam RecyclerView
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.detailberita1)
-        val tanggalTextView: TextView = itemView.findViewById(R.id.tanggal)
+class AdapterDetailBerita(val array: ArrayList<Datarv_detailberita>) : RecyclerView.Adapter<AdapterDetailBerita.viewholder_detailberita>() {
+    class viewholder_detailberita(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvTitle: TextView = itemView.findViewById(R.id.titlesumber)
+        val tvdesk: TextView = itemView.findViewById(R.id.descriptionsumber)
+        val imgview: ImageView = itemView.findViewById(R.id.detailberita1)
     }
 
-    // Method onCreateViewHolder untuk membuat ViewHolder baru
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_list_detail_berita, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder_detailberita {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_detail_berita, parent, false)
+        return viewholder_detailberita(view)
     }
 
-    // Method onBindViewHolder untuk menghubungkan data dengan tampilan ViewHolder
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
-        holder.imageView.setImageResource(item.imageView)
-        holder.tanggalTextView.text = item.tanggal
-    }
-
-    // Method getItemCount untuk mengembalikan jumlah item dalam data
     override fun getItemCount(): Int {
-        return data.size
+        return array.size
     }
 
-    // Fungsi untuk mengatur data baru ke adapter
-    fun setData(newData: List<Datarv_detailberita>) {
-        data.clear()
-        data.addAll(newData)
-        notifyDataSetChanged()
+    override fun onBindViewHolder(holder: viewholder_detailberita, position: Int) {
+        val currentItem = array[position]
+        val (title, description, imageView) = array[position]
+        holder.tvTitle.text = title
+        holder.tvdesk.text = description
+        //holder use glide to fix different image size issue and lag
+        Glide.with(holder.itemView.context)
+            .load(currentItem.imageView)
+            .into(holder.imgview)
+
+
+        }
     }
-}
