@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.Calendar
 
-class Tambahbahan_Activity : AppCompatActivity() {
+class TambahbahanMain_Activity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
 
@@ -48,8 +48,8 @@ class Tambahbahan_Activity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         Toast.makeText(
-                            this@Tambahbahan_Activity,
-                            "Item already exists",
+                            this@TambahbahanMain_Activity,
+                            "Bahan sudah ada di inventory",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
@@ -61,8 +61,8 @@ class Tambahbahan_Activity : AppCompatActivity() {
 
                         database.child("/Users/$currentuser/Inventory/$name$jenissim")
                             .setValue(datarv_bahan(name, jenisbah, tglbeli, tglkadal, "$jumlah $satuan", jenissim))
-                        Toast.makeText(this@Tambahbahan_Activity, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@Tambahbahan_Activity, MainActivity::class.java))
+                        Toast.makeText(this@TambahbahanMain_Activity, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@TambahbahanMain_Activity, MainActivity::class.java))
                         finish()
                     }
                 }

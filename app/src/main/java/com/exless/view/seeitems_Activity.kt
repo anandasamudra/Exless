@@ -39,7 +39,7 @@ class seeitems_Activity : AppCompatActivity() {
             finish()
         }
         findViewById<ImageView>(R.id.bt_addbahan).setOnClickListener{
-            startActivity(Intent(this, Tambahbahan_Activity::class.java))
+            startActivity(Intent(this, TambahbahanMain_Activity::class.java))
             finish()
         }
         //Recylerview \/\/\/

@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         }
     // bottom navigation fragment /\/\/\
     fun toaddbahan(view: View) {
-        startActivity(Intent(this, Tambahbahan_Activity::class.java))
+        startActivity(Intent(this, TambahbahanMain_Activity::class.java))
         finish()
     }
     fun toseeitem(view: View) {
