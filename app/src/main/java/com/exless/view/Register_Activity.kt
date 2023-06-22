@@ -81,13 +81,6 @@ class Register_Activity : AppCompatActivity() {
             finish()
         }
         //         testing to tambah
-        findViewById<Button>(R.id.test_totambah).setOnClickListener {
-            val intent = Intent(this, Tambahbahan_Activity::class.java)
-            startActivity(intent)
-        }
-        findViewById<Button>(R.id.test_see_item).setOnClickListener {
-            val intent = Intent(this, seeitems_Activity::class.java)
-            startActivity(intent)
-        }
+
     }
 }

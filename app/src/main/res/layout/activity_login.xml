@@ -92,7 +92,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/border_inputtext"
         android:ems="10"
-        android:text="test@gmail.com"
+        android:text=""
         android:fontFamily="@font/regular"
         android:inputType="textEmailAddress"
         android:padding="10dp"
