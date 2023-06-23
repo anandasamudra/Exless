@@ -1,5 +1,7 @@
 package com.exless.fragment
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import com.exless.adapter.adapter_berita
 import com.exless.adapter.adapter_resep
 import com.exless.model.model_resep
 import com.exless.`object`.object_berita
+import com.exless.view.MenuResep
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -26,7 +29,9 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
     private lateinit var userRef: DatabaseReference
     private lateinit var currentUser: FirebaseUser
     private lateinit var textViewNama: TextView
+    private lateinit var textViewfullresep: TextView
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +39,13 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
     ): View? {
 
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+
+        // pindah ke activity resep makanan activity
+        textViewfullresep = rootView.findViewById(R.id.fullresep)
+        textViewfullresep.setOnClickListener {
+            val intent = Intent(requireContext(), MenuResep::class.java)
+            startActivity(intent)
+        }
         // recycleview resep makanan
         val recyclerViewresep = rootView.findViewById<RecyclerView>(R.id.rv_list_resep)
         recyclerViewresep.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

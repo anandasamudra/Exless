@@ -248,5 +248,10 @@ class MainActivity : AppCompatActivity() {
         return String.format("%02d/%02d/%04d", day, month, year)
     }
 
-
+    //shared preference untuk mencegah back ke login \/\/\/
+    override fun onBackPressed() {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        startActivity(intent)
+    }
 }

@@ -28,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var toRegisterTextView: TextView
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleButton: Button
-    private var previousUserId: String = ""
 
     companion object {
         private const val RC_SIGN_IN = 9001
@@ -53,14 +52,16 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-
+            //sharedpreferences untuk login
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isLogin", true).apply()
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // Login berhasil, lakukan tindakan yang diinginkan
                             Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
-                            // Contoh: Pindah ke halaman utama aplikasi
+                            // sharepreferences untuk login username dan password
+                            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isLogin", true).apply()
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         } else {
@@ -122,6 +123,8 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Login dengan akun Google berhasil
                     Toast.makeText(this, "Login dengan akun Google berhasil", Toast.LENGTH_SHORT).show()
+                    // menympan data sharedpreferences dengan login google
+                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isLogin", true).apply()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {

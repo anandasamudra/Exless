@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".view.detail_menu_resep">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salad"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/bold"
+                android:textSize="20sp"
+                android:id="@+id/tv_namamasakan"
+                android:layout_marginTop="55dp"/>
+
+            <ImageView
+                android:id="@+id/kembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="60dp"
+                app:srcCompat="@drawable/icon_back" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/saladsayur"
+                android:scaleType="centerCrop"
+                android:id="@+id/iv_gambarmasakan"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bahan yang diperlukan"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/bold"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"/>
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="55dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="insideInset"
+            android:scrollbarSize="5dp"
+            android:scrollbars="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    tools:listitem="@layout/item_list_bahan_menu_resep"
+                    android:id="@+id/rv_bahan"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/btn_selesai"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:backgroundTint="#FF9F29"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/bold"
+                        android:text="Selesai"
+                        android:textColor="@color/white"
+                        android:background="@drawable/rounded_buttom"
+                        app:layout_constraintStart_toStartOf="@+id/textView6"
+                        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

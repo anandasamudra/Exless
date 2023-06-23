@@ -12,21 +12,14 @@ import com.exless.model.model_resep
 
 class adapter_resep(private val daftarResep: List<model_resep>)
     : RecyclerView.Adapter<adapter_resep.ResepViewHolder>() {
-
     class ResepViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageViewResep: ImageView = itemView.findViewById(R.id.resepmakan)
         val textViewDurasi: TextView = itemView.findViewById(R.id.durasi)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResepViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_list_resep, parent, false)
         return ResepViewHolder(itemView)
     }
-
-    override fun getItemCount(): Int {
-        return daftarResep.size
-    }
-
     override fun onBindViewHolder(holder: ResepViewHolder, position: Int) {
         val resep = daftarResep[position]
         holder.textViewDurasi.text = resep.Durasi
@@ -35,5 +28,8 @@ class adapter_resep(private val daftarResep: List<model_resep>)
         Glide.with(holder.itemView)
             .load(resep.Gambar)
             .into(holder.imageViewResep)
+    }
+    override fun getItemCount(): Int {
+        return daftarResep.size
     }
 }
