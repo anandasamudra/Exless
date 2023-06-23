@@ -48,6 +48,7 @@ class MenuResep : AppCompatActivity() {
                 val Gambar = snapshot.child("Gambar").value.toString()
                 val Nama = snapshot.child("Nama").value.toString()
                 val menuResep = model_menu_resep(key, Nama, Gambar)
+                println("ini keyyyyy "+ key)
                 daftarMenuResep.add(menuResep)
                 adapterMenuResep.notifyItemInserted(daftarMenuResep.size - 1)
             }

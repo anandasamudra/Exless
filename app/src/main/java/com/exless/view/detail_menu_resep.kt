@@ -7,6 +7,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
 import com.exless.adapter.adapter_detail_menu_resep
@@ -55,15 +56,16 @@ class detail_menu_resep : AppCompatActivity() {
         tv_namamasakan.text = "$namaMasakan"
         Picasso.get().load(gambarMasakan).into(iv_gambarmasakan)
 
-        // implementasikan recyclerview dan adapter
+        // Implement RecyclerView and Adapter
         val recyclerView: RecyclerView = findViewById(R.id.rv_bahan)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         daftarBahan = mutableListOf()
         adapterBahan = adapter_detail_menu_resep(daftarBahan)
         recyclerView.adapter = adapterBahan
 
-        // implementasi Firebase Realtime Database
-        databaseReference = FirebaseDatabase.getInstance().getReference("Resep/Makanan")
-        databaseReference.addChildEventListener(object : ChildEventListener{
+        // Implement Firebase Realtime Database
+        databaseReference = FirebaseDatabase.getInstance().getReference("Resep/Makanan/$keyMasakan/Bahan")
+        databaseReference.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val key = snapshot.key
                 val Nama = snapshot.child("NamaBahan").value.toString()
@@ -98,11 +100,11 @@ class detail_menu_resep : AppCompatActivity() {
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                // tidak digunakan
+                // Not used
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // tidak digunakan
+                // Not used
             }
         })
 
