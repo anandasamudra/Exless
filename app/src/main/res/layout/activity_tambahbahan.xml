@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="0dp"
-    tools:context=".view.Tambahbahan_Activity">
+    tools:context=".view.TambahbahanMain_Activity">
 
     <EditText
         android:id="@+id/et_tglkadal"
@@ -44,7 +44,7 @@
         android:background="@drawable/bg_null"
         android:ems="10"
         android:fontFamily="@font/regular"
-        android:hint="1 buah"
+        android:hint="1 "
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/bold"
-        android:text="Kacang &amp; Protein"
+        android:text="Tambah Bahan"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -192,6 +192,8 @@
         android:background="@drawable/bg_null"
         app:boxBackgroundColor="#FFF"
         app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14">
@@ -206,6 +208,33 @@
             android:padding="0dp"
             android:paddingStart="0dp"
             android:text="Daging &amp; Unggas" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dp_satuan"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="200dp"
+        android:layout_height="34dp"
+        android:background="@drawable/bg_null"
+        app:boxBackgroundColor="#FFF"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view8"
+        app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
+        app:layout_constraintTop_toTopOf="@+id/et_jumlah">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_satuan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_null"
+            android:editable="false"
+            android:inputType="none"
+            android:padding="0dp"
+            android:paddingStart="0dp"
+            android:text="pcs"
+            android:textAlignment="textEnd" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -226,7 +255,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#000000"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/dp_jenismakanan"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/dp_jenismakanan"
@@ -240,6 +269,8 @@
         android:background="@drawable/bg_null"
         app:boxBackgroundColor="#FFF"
         app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="@+id/dp_jenismakanan"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -276,7 +307,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="#000000"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/auto_namabahan"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/auto_namabahan"
@@ -287,6 +318,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
+        android:onClick="tambahbahan"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
         android:text="Add Item"

@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.exless.callback.swipetodeletecallback
 
 class seeitems_Activity : AppCompatActivity() {
 
@@ -36,7 +39,7 @@ class seeitems_Activity : AppCompatActivity() {
             finish()
         }
         findViewById<ImageView>(R.id.bt_addbahan).setOnClickListener{
-            startActivity(Intent(this, Tambahbahan_Activity::class.java))
+            startActivity(Intent(this, TambahbahanMain_Activity::class.java))
             finish()
         }
         //Recylerview \/\/\/
@@ -44,12 +47,32 @@ class seeitems_Activity : AppCompatActivity() {
         bahanrecylerview = findViewById(R.id.recyclerView_seeitem)
         bahanrecylerview.layoutManager = LinearLayoutManager(this)
         bahanrecylerview.setHasFixedSize(true)
+        val swipetodelete = object : swipetodeletecallback(){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val bahan = bahanarraylist[position]
+                bahanarraylist.removeAt(position)
+                bahanrecylerview.adapter?.notifyItemRemoved(position)
+
+                // Remove the item from Firebase
+                val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                val dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
+                Toast.makeText(this@seeitems_Activity, "${bahan.nama} is deleted", Toast.LENGTH_SHORT).show()
+                dbref.child(bahan.getId()).removeValue()
+                println("id bahannya = "+bahan.getId())
+            }
+
+            override fun onSwiped(position: Int) {
+                TODO("Not yet implemented")
+            }
+        }
 
         bahanarraylist = arrayListOf<datarv_bahan>()
         val namabahan = intent.getStringExtra("nama_bahan")
         var text = findViewById<TextView>(R.id.tvtitleseeitem).setText(namabahan)
         getbahandata(namabahan.toString())
-
+        val itemtouch = ItemTouchHelper(swipetodelete)
+        itemtouch.attachToRecyclerView(bahanrecylerview)
     }
 
     private fun getbahandata(nama : String) {
@@ -59,6 +82,7 @@ class seeitems_Activity : AppCompatActivity() {
         dbref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
+                    bahanarraylist.clear()
                     for (bahanSnapshot in snapshot.children){
                         if (nama == bahanSnapshot.child("jenismakanan").getValue().toString()){
                             val bahan = bahanSnapshot.getValue(datarv_bahan::class.java)

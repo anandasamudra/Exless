@@ -135,4 +135,5 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
         })
         return rootView
     }
+
 }

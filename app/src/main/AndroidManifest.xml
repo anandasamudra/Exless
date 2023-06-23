@@ -18,6 +18,12 @@
             android:name=".view.detail_menu_resep"
             android:exported="false" />
         <activity
+            android:name=".view.Profile_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".view.DetailBeritaActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.MenuResep"
             android:exported="false" />
         <activity

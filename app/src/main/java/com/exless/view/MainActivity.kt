@@ -106,8 +106,12 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     // bottom navigation fragment /\/\/\
+    fun toprofile(view: View) {
+        startActivity(Intent(this, Profile_Activity::class.java))
+        finish()
+    }
     fun toaddbahan(view: View) {
-        startActivity(Intent(this, Tambahbahan_Activity::class.java))
+        startActivity(Intent(this, TambahbahanMain_Activity::class.java))
         finish()
     }
     fun toseeitem(view: View) {
@@ -120,6 +124,10 @@ class MainActivity : AppCompatActivity() {
     }
     fun toseeexpired(view: View) {
         startActivity(Intent(this, SeeExpiredActivity::class.java))
+        finish()
+    }
+    fun detailberita(view: View) {
+        startActivity(Intent(this,DetailBeritaActivity::class.java))
         finish()
     }
 
@@ -135,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         dbquery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val count: String = snapshot.childrenCount.toString()
-                println("countmain"+count)
+//                println("countmain"+count)
                 jumbahanmain.add(count)
                 val bahanList = Datarv_jenisbahan(
                     dataTitle[i],
@@ -144,10 +152,10 @@ class MainActivity : AppCompatActivity() {
                 )
                 bahanList.description = "Kamu mempunyai $count macam"
                 bahanarraylist.add(bahanList)
-                println(bahanarraylist)
+//                println(bahanarraylist)
 
-                println(jumbahanmain+"ini datanya cokkkk")
-                println("done datachange")
+//                println(jumbahanmain+"ini datanya cokkkk")
+//                println("done datachange")
 
             }
             override fun onCancelled(error: DatabaseError) {
