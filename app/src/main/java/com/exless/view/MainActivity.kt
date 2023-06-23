@@ -1,16 +1,20 @@
 package com.exless.view
 
+
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.exless.R
 import com.exless.adapter.adapter_jenisbahan
 import com.exless.adapter.adapter_seeexpiredsimpanan
@@ -28,6 +32,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 //get days
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -49,9 +54,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var jumbahanmainex : ArrayList<String>
     lateinit var bahanarraylistex : ArrayList<Datarv_seeexperired>
     private lateinit var rv_list_jenisbahanex: RecyclerView
+//    private lateinit var profilehome : ImageView
+    var i : Int = 0
+
 
     @SuppressLint("MissingInflatedId")
     private lateinit var firebaseAuth: FirebaseAuth
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//disable auto darkmode
         super.onCreate(savedInstanceState)
@@ -95,6 +104,45 @@ class MainActivity : AppCompatActivity() {
         jumbahanmainex = ArrayList()
         bahanarraylistex = ArrayList<Datarv_seeexperired>()
         getbahandataex()
+//        getphoto()
+        // Retrieve the image URL from the intent
+//        profilehome = findViewById(R.id.img_userphotohome)
+
+        try {
+            var imageUrl = intent.getIntExtra("imageUrl",0)
+
+            println("ini inisiasi\n\n\n\n"+imageUrl)
+            if (imageUrl == 1){
+                getphoto {
+                    imageUrl =0
+                    println("ini setelahnya ="+imageUrl)
+                }
+
+            }
+
+//
+//// Load the image using Glide or any other image loading library
+//            if (imageUrl == null){
+////            Glide.with(this@MainActivity)
+////                .load("https://firebasestorage.googleapis.com/v0/b/exless-455f4.appspot.com/o/images%2F9e0f5391-8809-4e8f-9ee6-407a25191438?alt=media&token=3fb11ed0-00fc-4eff-9ba4-2e4e46e1e2c4")
+////                .into(findViewById(R.id.img_userphotohome))
+////println(imageUrl)
+//            }
+//            if (imageUrl != null){
+////            Glide.with(this)
+////                .load(imageUrl)
+////                .into(findViewById(R.id.img_userphotohome))
+////            println("haii"+imageUrl)
+//            }
+//            Glide.with(this)
+//                .load("https://example.com/image.jpg") // Replace with your image URL
+//                .into(findViewById(R.id.img_userphotohome))
+//getphoto()
+            println("ini I\n\n\n\n"+i)
+        }
+        catch (e:Exception){
+            println("Erornya adalah = \n\n"+e)
+        }
 
         //Jumlah makanan di kategori fragment simpanan /\/\/\
     }
@@ -129,6 +177,43 @@ class MainActivity : AppCompatActivity() {
     fun detailberita(view: View) {
         startActivity(Intent(this,DetailBeritaActivity::class.java))
         finish()
+    }
+    interface PhotoUploadCallback {
+        fun onPhotoUploadComplete()
+    }
+    fun getphoto(callback: () -> Unit) {
+
+            val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+            dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/photos")
+            dbref.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.child("imageUrl").getValue() !=null){
+                        val imageUrl = snapshot.child("imageUrl").getValue(String::class.java)
+
+                        if (!imageUrl.isNullOrEmpty()) {
+                            Glide.with(this@MainActivity)
+                                .load(imageUrl)
+                                .into(findViewById(R.id.img_userphotohome))
+                        } else {
+                            // Handle the case when the image URL is not available
+                        }
+
+                        // Notify the listener that the upload is complete
+                        callback() // Call the callback function
+                    }
+
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the database error
+                    callback()
+                }
+            })
+            i++
+            println("ini i upload\n\n\n\n\n"+ i)
+
+
     }
 
     //Jumlah makanan di kategori fragment simpanan \/\/\/
@@ -193,22 +278,22 @@ class MainActivity : AppCompatActivity() {
                                     tglkadal = days.toString() + " hari"
                                 }
 
-                                println("Number of days: $tglkadal")
+//                                println("Number of days: $tglkadal")
                             } catch (e: DateTimeParseException) {
                                 // Handle the case when parsing the dates fails
                                 tglkadal = "EXPIRED"
-                                println("Invalid date format")
+//                                println("Invalid date format")
                             } catch (e: Exception) {
                                 // Handle any other exceptions that might occur
                                 tglkadal = "EXPIRED"
-                                println("An error occurred: ${e.message}")
+//                                println("An error occurred: ${e.message}")
                             }
                         }
 
                         else{
                             tglkadal ="-"
                         }
-                        println("Number of dayssadasda f: $tglkadal")
+//                        println("Number of dayssadasda f: $tglkadal")
                         //compare today date with expired date /\/\/\
                         val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
                         val bahanList = Datarv_seeexperired(
@@ -218,8 +303,8 @@ class MainActivity : AppCompatActivity() {
                             0
                         )
                         bahanarraylistex.add(bahanList)
-                        println(bahanarraylistex)
-                        println(namabahan)
+//                        println(bahanarraylistex)
+//                        println(namabahan)
                     }
 //                    bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
                 }
