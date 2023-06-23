@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -84,11 +85,33 @@ private lateinit var imageView: ImageView
 
         if (currentUserId != null) {
             val userPhotosRef = FirebaseDatabase.getInstance().getReference("/Users/$currentUserId/photos")
+            val userName = FirebaseDatabase.getInstance().getReference("/Users/$currentUserId")
+            userName.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()){
+                        val imageUrl = snapshot.child("FullName").getValue(String::class.java)
+                        findViewById<EditText>(R.id.tv_profilnama).setText(imageUrl)
+                    }
+                }
 
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
             userPhotosRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val imageUrl = snapshot.child("imageUrl").getValue(String::class.java)
 
+
+                    if (!imageUrl.isNullOrEmpty()) {
+                        Glide.with(this@Profile_Activity)
+                            .load(imageUrl)
+                            .into(imageView)
+
+                    } else {
+                        // Handle the case when the image URL is not available
+                    }
                     if (!imageUrl.isNullOrEmpty()) {
                         Glide.with(this@Profile_Activity)
                             .load(imageUrl)
@@ -121,17 +144,21 @@ private lateinit var imageView: ImageView
 
     private fun uploadPhoto() {
         try {
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            val newusername = findViewById<EditText>(R.id.tv_profilnama).text.toString()
+
+            databaseRef.child("Users").child(userId!!).child("FullName").setValue(newusername)
+
             if (imageUri != null) {
                 val imageRef = storageRef.child("images/${UUID.randomUUID()}")
                 val uploadTask = imageRef.putFile(imageUri!!)
 
                 uploadTask.addOnSuccessListener {
                     imageRef.downloadUrl.addOnSuccessListener { uri ->
-                        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
                         if (userId != null) {
                             val photoData = HashMap<String, Any>()
                             photoData["imageUrl"] = uri.toString()
-
                             databaseRef.child("Users").child(userId).child("photos").setValue(photoData)
                             println(photoData)
                         }
@@ -140,6 +167,7 @@ private lateinit var imageView: ImageView
                     // Handle the upload failure
                 }
             }
+            Toast.makeText(applicationContext, "Data anda berhasil diubah!", Toast.LENGTH_SHORT).show()
         }catch (e:Exception){
             println("Ini uploadPhoto ="+e)
         }

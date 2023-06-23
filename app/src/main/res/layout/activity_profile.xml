@@ -80,9 +80,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_null"
+        android:editable="true"
         android:fontFamily="@font/bold"
         android:paddingHorizontal="8dp"
-        android:text="TextView"
+        android:text="User Name"
         app:layout_constraintEnd_toEndOf="@+id/layout_select"
         app:layout_constraintStart_toStartOf="@+id/layout_select"
         app:layout_constraintTop_toBottomOf="@+id/layout_select" />
@@ -299,9 +300,14 @@
     <Button
         android:id="@+id/btn_saveprofile"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_orangebutton"
+        android:fontFamily="@font/regular"
         android:onClick="addtodatabase"
-        android:text="Button"
+        android:text="Save"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_profilnama"
         app:layout_constraintStart_toStartOf="@+id/tv_profilnama"
         app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
