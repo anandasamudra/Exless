@@ -113,6 +113,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/regular"
                 android:gravity="center|left"
+                android:onClick="profilemyaccount"
                 android:paddingVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="My Account"
@@ -129,12 +130,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
+                android:id="@+id/llmyaccount"
                 android:layout_width="339dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:onClick="profilemyaccount"
                 android:orientation="vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -142,7 +144,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/layout_select">
 
                 <TextView
-                    android:id="@+id/textView242"
+                    android:id="@+id/tv_useremail"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:drawablePadding="10dp"
@@ -173,6 +175,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/regular"
                 android:gravity="center|left"
+                android:onClick="privacypolicy"
                 android:paddingVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="Privacy Policy"
@@ -189,10 +192,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
 
             <LinearLayout
+                android:id="@+id/llpriv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
-                android:orientation="vertical">
+                android:onClick="privacypolicy"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView253"
@@ -201,6 +207,7 @@
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/regular"
                     android:gravity="center|left"
+                    android:onClick="privacypolicy"
                     android:paddingVertical="5dp"
                     android:text="pada hari minggu ku turut ayah ke kora, naik delam istimewa ku duduk di muka, pukul pala pak kusir yang sedang berkerja, aku pun masuk penjara di sel remaja"
                     android:textAlignment="center"
@@ -229,6 +236,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/regular"
                 android:gravity="center|left"
+                android:onClick="termandcon"
                 android:paddingVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="Terms and Conditions"
@@ -244,11 +252,15 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_profilnama"
                 app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
+                android:id="@+id/llterms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
-                android:orientation="vertical">
+                android:onClick="termandcon"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:ignore="MissingClass">
 
                 <TextView
                     android:id="@+id/textView25"
@@ -256,6 +268,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/regular"
                     android:gravity="center|left"
+                    android:onClick="termandcon"
                     android:paddingVertical="5dp"
                     android:text="pelangi pelangi, alangkah indahmu, pelukismu agung, siapa gerangan, tuk kitak kituk kitak kituk suara sepatu kuda, tuk kitak kituk kitak kituk suara sepatu kuda"
                     android:textAlignment="center"
@@ -269,7 +282,7 @@
                     android:background="#CCCCCC"
                     app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView21"

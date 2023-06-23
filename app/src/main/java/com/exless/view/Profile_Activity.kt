@@ -11,6 +11,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.exless.R
@@ -25,9 +27,10 @@ import com.google.firebase.storage.StorageReference
 import java.util.UUID
 
 class Profile_Activity : AppCompatActivity() {
-    private lateinit var dbref : DatabaseReference
-//    val image = findViewById<ImageView>(R.id.img_profiluser)
-private lateinit var imageView: ImageView
+    private lateinit var dbref: DatabaseReference
+
+    //    val image = findViewById<ImageView>(R.id.img_profiluser)
+    private lateinit var imageView: ImageView
     private lateinit var selectPhotoButton: Button
     private lateinit var uploadButton: Button
     private lateinit var viewSelect: View
@@ -37,6 +40,7 @@ private lateinit var imageView: ImageView
 
     private val PICK_IMAGE_REQUEST = 1
     private var imageUri: Uri? = null
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +64,8 @@ private lateinit var imageView: ImageView
         }
         try {
             getphoto()
-        }catch (e:Exception){
-            println("Ini profile eror photo ="+e)
+        } catch (e: Exception) {
+            println("Ini profile eror photo =" + e)
         }
 
     }
@@ -72,23 +76,29 @@ private lateinit var imageView: ImageView
         intent.putExtra("imageUrl", imageUrl)
         startActivity(intent)
     }
+
     fun addphoto(view: View) {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
+
     fun addtodatabase(view: View) {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
+
     private fun getphoto() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
-
+        val currentemail = FirebaseAuth.getInstance().currentUser?.email
+        println(currentemail)
+        findViewById<TextView>(R.id.tv_useremail).setText(currentemail)
         if (currentUserId != null) {
-            val userPhotosRef = FirebaseDatabase.getInstance().getReference("/Users/$currentUserId/photos")
+            val userPhotosRef =
+                FirebaseDatabase.getInstance().getReference("/Users/$currentUserId/photos")
             val userName = FirebaseDatabase.getInstance().getReference("/Users/$currentUserId")
             userName.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()){
+                    if (snapshot.exists()) {
                         val imageUrl = snapshot.child("FullName").getValue(String::class.java)
                         findViewById<EditText>(R.id.tv_profilnama).setText(imageUrl)
                     }
@@ -128,6 +138,7 @@ private lateinit var imageView: ImageView
             })
         }
     }
+
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
@@ -159,7 +170,8 @@ private lateinit var imageView: ImageView
                         if (userId != null) {
                             val photoData = HashMap<String, Any>()
                             photoData["imageUrl"] = uri.toString()
-                            databaseRef.child("Users").child(userId).child("photos").setValue(photoData)
+                            databaseRef.child("Users").child(userId).child("photos")
+                                .setValue(photoData)
                             println(photoData)
                         }
                     }
@@ -167,10 +179,39 @@ private lateinit var imageView: ImageView
                     // Handle the upload failure
                 }
             }
-            Toast.makeText(applicationContext, "Data anda berhasil diubah!", Toast.LENGTH_SHORT).show()
-        }catch (e:Exception){
-            println("Ini uploadPhoto ="+e)
+            Toast.makeText(applicationContext, "Data anda berhasil diubah!", Toast.LENGTH_SHORT)
+                .show()
+        } catch (e: Exception) {
+            println("Ini uploadPhoto =" + e)
         }
 
+    }
+
+    fun profilemyaccount(view: View) {
+        val llmyaccount = findViewById<LinearLayout>(R.id.llmyaccount)
+
+        if (llmyaccount.visibility == View.VISIBLE) {
+            llmyaccount.visibility = View.GONE
+        } else {
+            llmyaccount.visibility = View.VISIBLE
+        }
+    }
+    fun privacypolicy(view: View) {
+        val llpp = findViewById<LinearLayout>(R.id.llpriv)
+
+        if (llpp.visibility == View.VISIBLE) {
+            llpp.visibility = View.GONE
+        } else {
+            llpp.visibility = View.VISIBLE
+        }
+    }
+    fun termandcon(view: View) {
+        val lltan = findViewById<LinearLayout>(R.id.llterms)
+
+        if (lltan.visibility == View.VISIBLE) {
+            lltan.visibility = View.GONE
+        } else {
+            lltan.visibility = View.VISIBLE
+        }
     }
 }
