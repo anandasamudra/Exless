@@ -23,7 +23,7 @@ class adapter_bahan(val bahanlist : ArrayList<datarv_bahan>) : RecyclerView.Adap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder_bahan {
         val itemvieww = LayoutInflater.from(parent.context).inflate(R.layout.adapter_seeitems, parent, false)
-    return viewholder_bahan(itemvieww)
+        return viewholder_bahan(itemvieww)
     }
 
     override fun getItemCount(): Int {

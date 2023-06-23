@@ -20,11 +20,16 @@ class SplassScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splass_screen)
         //hiden action bar
         supportActionBar?.hide()
+        //menyimpan data riwayt login dengan sharedpreferences
         val handler= Handler(Looper.getMainLooper())
         handler.postDelayed({
-            val intent = Intent(this,onbonding1::class.java)
-            startActivity(intent)
-            finish()
+            if (getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isLogin", false)) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, onbonding1::class.java))
+                finish()
+            }
         }, 3000)
     }
 }

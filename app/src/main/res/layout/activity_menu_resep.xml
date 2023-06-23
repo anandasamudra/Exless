@@ -21,8 +21,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:fontFamily="@font/bold"
-                android:textSize="30sp"
-                android:layout_marginTop="50dp"/>
+                android:textSize="20sp"
+                android:layout_marginTop="55dp"/>
 
             <ImageView
                 android:id="@+id/kembali"
@@ -32,18 +32,22 @@
                 android:layout_marginTop="60dp"
                 app:srcCompat="@drawable/icon_back" />
         </RelativeLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:scrollbarSize="5dp"
-            android:scrollbarStyle="insideInset">
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_menu_resep"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </LinearLayout>
-        </ScrollView>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scrollbars="vertical"
+                android:scrollbarSize="5dp"
+                android:scrollbarStyle="insideInset"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_list_menu_resep" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

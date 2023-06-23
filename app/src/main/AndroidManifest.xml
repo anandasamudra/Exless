@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
         <activity
+            android:name=".view.detail_menu_resep"
+            android:exported="false" />
+        <activity
             android:name=".view.Profile_Activity"
             android:exported="false" />
         <activity
@@ -30,7 +33,7 @@
             android:name=".view.SeeExpiredActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TambahbahanMain_Activity"
+            android:name=".view.Tambahbahan_Activity"
             android:exported="false"
             android:theme="@style/Theme.dropdown" />
         <activity
