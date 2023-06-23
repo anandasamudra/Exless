@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rv_list_jenisbahanex: RecyclerView
 //    private lateinit var profilehome : ImageView
     var i : Int = 0
-
+    private var isDataFetched = false
 
     @SuppressLint("MissingInflatedId")
     private lateinit var firebaseAuth: FirebaseAuth
@@ -109,17 +109,17 @@ class MainActivity : AppCompatActivity() {
 //        profilehome = findViewById(R.id.img_userphotohome)
 
         try {
-            var imageUrl = intent.getIntExtra("imageUrl",0)
-
-            println("ini inisiasi\n\n\n\n"+imageUrl)
-            if (imageUrl == 1){
-                getphoto {
-                    imageUrl =0
-                    println("ini setelahnya ="+imageUrl)
-                }
-
-            }
-
+//            var imageUrl = intent.getIntExtra("imageUrl",0)
+//
+//            println("ini inisiasi\n\n\n\n"+imageUrl)
+//            if (imageUrl == 1){
+//                getphoto {
+//                    imageUrl =0
+//                    println("ini setelahnya ="+imageUrl)
+//                }
+//
+//            }
+getphoto()
 //
 //// Load the image using Glide or any other image loading library
 //            if (imageUrl == null){
@@ -181,25 +181,33 @@ class MainActivity : AppCompatActivity() {
     interface PhotoUploadCallback {
         fun onPhotoUploadComplete()
     }
-    fun getphoto(callback: () -> Unit) {
+    fun getphoto() {
+        if (!isDataFetched) {
+            // Set the flag to true to indicate that the function has been called
 
             val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
             dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/photos")
             dbref.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.child("imageUrl").getValue() !=null){
+                    if (snapshot.child("imageUrl").getValue() != null) {
                         val imageUrl = snapshot.child("imageUrl").getValue(String::class.java)
 
                         if (!imageUrl.isNullOrEmpty()) {
-                            Glide.with(this@MainActivity)
-                                .load(imageUrl)
-                                .into(findViewById(R.id.img_userphotohome))
+                            if (!isDataFetched) {
+                                Glide.with(this@MainActivity)
+                                    .load(imageUrl)
+                                    .into(findViewById(R.id.img_userphotohome))
+                                println("Lahhhhh\n\n\n\nsdfsdfsfs\n\n\ngdfgdfgfd")
+                                isDataFetched = true
+                                println(isDataFetched)
+
+                            }
                         } else {
                             // Handle the case when the image URL is not available
                         }
 
                         // Notify the listener that the upload is complete
-                        callback() // Call the callback function
+//                        callback() // Call the callback function
                     }
 
 
@@ -207,12 +215,13 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onCancelled(error: DatabaseError) {
                     // Handle the database error
-                    callback()
+//                    callback()
                 }
             })
             i++
-            println("ini i upload\n\n\n\n\n"+ i)
-
+            println("ini i upload\n\n\n\n\n" + i)
+            println(isDataFetched)
+        }
 
     }
 
