@@ -7,7 +7,12 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.exless.R
+import java.util.concurrent.TimeUnit
 
 
 class SplassScreen : AppCompatActivity() {
@@ -32,8 +37,12 @@ class SplassScreen : AppCompatActivity() {
                 finish()
             }
         }, 3000)
-        NotificationHelper(this).createNotification("hai",
-            "huha!")
-
+//        NotificationHelper(this).createNotification("hai",
+//            "huha!")
+val workreq = OneTimeWorkRequestBuilder<TodoWorker>()
+    .setInitialDelay(10,TimeUnit.SECONDS)
+    .setInputData(workDataOf("TITLE" to "todo created", "MESSAGE" to "a new todo has been created"))
+    .build()
+        WorkManager.getInstance(this).enqueue(workreq)
     }
 }

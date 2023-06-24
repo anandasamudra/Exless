@@ -66,4 +66,5 @@ dependencies {
 //
 //    workmanager
     implementation "androidx.work:work-multiprocess:2.5.0"
+    implementation("androidx.work:work-runtime-ktx:2.5.0")
 }
