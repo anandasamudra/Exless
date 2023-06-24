@@ -55,12 +55,15 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isLogin", true).apply()
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // Login berhasil, lakukan tindakan yang diinginkan
                             Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
+                            // sharepreferences untuk login username dan password
+                            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isLogin", true).apply()
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         } else {
@@ -132,6 +135,8 @@ class LoginActivity : AppCompatActivity() {
                         "Login dengan akun Google berhasil",
                         Toast.LENGTH_SHORT
                     ).show()
+                    // menympan data sharedpreferences dengan login google
+                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isLogin", true).apply()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {

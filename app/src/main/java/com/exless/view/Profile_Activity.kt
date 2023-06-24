@@ -227,11 +227,6 @@ class Profile_Activity : AppCompatActivity() {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             finish()
         }
-
-        val sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("UID", "")
-        editor.apply()
     }
     private fun requireContext(): Context {
         return this
