@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.exless.R
@@ -34,19 +35,25 @@ class NotificationHelper(val context:Context) {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or
                     Intent.FLAG_ACTIVITY_NEW_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_MUTABLE )//
-        val icon = BitmapFactory.decodeResource(context.resources, R.drawable.logo)
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE )//
+        // Inflate the custom layout
+        val contentView = RemoteViews(context.packageName, R.layout.notification)
+
+// Set the content of the custom layout
+        contentView.setTextViewText(R.id.title, title)
+        contentView.setTextViewText(R.id.description, message)
+
+// Create the notification with the custom view
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo)
-            .setLargeIcon(icon)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setStyle(
-                NotificationCompat.BigPictureStyle().bigPicture(icon).bigLargeIcon(null)
-            )
+            .setStyle(NotificationCompat.InboxStyle()
+                .addLine(title)
+                .addLine(message)
+                .setSummaryText("Sudah makan?"))
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
+
         NotificationManagerCompat.from(context).notify(NOTIFICATION_ID,notification)//missiong permision
     }
 }
