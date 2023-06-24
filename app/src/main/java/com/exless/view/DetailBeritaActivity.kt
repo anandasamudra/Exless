@@ -43,9 +43,9 @@ class DetailBeritaActivity : AppCompatActivity() {
                     val title = dataSnapshot.child("title").getValue(String::class.java)
                     val description = dataSnapshot.child("description").getValue(String::class.java)
                     val imageUrl = dataSnapshot.child("imageUrl").getValue(String::class.java)
-
-                    if (title != null && description != null && imageUrl != null) {
-                        val data = Datarv_detailberita(title, description, imageUrl)
+                    val newsUrl = dataSnapshot.child("newsUrl").getValue(String::class.java)
+                    if (title != null && description != null && imageUrl != null && newsUrl != null) {
+                        val data = Datarv_detailberita(title, description, imageUrl,newsUrl)
                         array.add(data)
                     }
                 }

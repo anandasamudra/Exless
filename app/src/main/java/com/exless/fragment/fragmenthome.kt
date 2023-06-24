@@ -1,5 +1,6 @@
 package com.exless.fragment
 
+import AdapterBerita
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -11,9 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exless.R
-import com.exless.adapter.adapter_berita
 import com.exless.adapter.adapter_resep
 import com.exless.model.model_resep
+import com.exless.`object`.Datarv_detailberita
 import com.exless.`object`.object_berita
 import com.exless.view.MenuResep
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -30,6 +31,9 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
     private lateinit var currentUser: FirebaseUser
     private lateinit var textViewNama: TextView
     private lateinit var textViewfullresep: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: AdapterBerita
+    private lateinit var array: ArrayList<Datarv_detailberita>
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
@@ -48,7 +52,8 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
         }
         // recycleview resep makanan
         val recyclerViewresep = rootView.findViewById<RecyclerView>(R.id.rv_list_resep)
-        recyclerViewresep.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewresep.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         database = FirebaseDatabase.getInstance()
         userRef = database.reference.child("Resep").child("Makanan")
         userRef.addValueEventListener(object : ValueEventListener {
@@ -74,10 +79,6 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
             }
         })
 
-        // recycleview berita
-        val recyclerViewberita = rootView.findViewById<RecyclerView>(R.id.rv_list_berita)
-        recyclerViewberita.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewberita.adapter = adapter_berita(object_berita.DaftarBerita)
 
         // Mendapatkan nama pengguna terdaftar
         firebaseAuth = FirebaseAuth.getInstance()
@@ -104,15 +105,17 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        val googleSignInAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
-            if (googleSignInAccount != null) {
-                val FullName = googleSignInAccount.displayName
-                textViewNama = rootView.findViewById(R.id.nama)
-                textViewNama.text = FullName
-            }
+        val googleSignInAccount: GoogleSignInAccount? =
+            GoogleSignIn.getLastSignedInAccount(requireContext())
+        if (googleSignInAccount != null) {
+            val FullName = googleSignInAccount.displayName
+            textViewNama = rootView.findViewById(R.id.nama)
+            textViewNama.text = FullName
+        }
 
         //menampilkan aktivitas makanan
-        val pemberitahuanMakananterisiLayout = rootView.findViewById<View>(R.id.pemberitahuan_terisi)
+        val pemberitahuanMakananterisiLayout =
+            rootView.findViewById<View>(R.id.pemberitahuan_terisi)
         val pemberitahuanMakananexpired = rootView.findViewById<View>(R.id.pemberitahuan_expired)
         val pemberitahuanKosong = rootView.findViewById<View>(R.id.aktifitas_kosong)
         userRef = database.reference.child("Users").child(currentUser.uid).child("Inventory")
@@ -136,4 +139,36 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
         return rootView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Inisialisasi RecyclerView dan adapter
+        recyclerView = view.findViewById(R.id.rv_list_berita)
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        array = ArrayList()
+        adapter = AdapterBerita(array)
+        recyclerView.adapter = adapter
+        userRef = FirebaseDatabase.getInstance().getReference("Berita")
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                array.clear()
+                for (dataSnapshot in snapshot.children) {
+                    val title = dataSnapshot.child("title").getValue(String::class.java)
+                    val description = dataSnapshot.child("description").getValue(String::class.java)
+                    val imageUrl = dataSnapshot.child("imageUrl").getValue(String::class.java)
+                    val newsUrl = dataSnapshot.child("newsUrl").getValue(String::class.java)
+                    if (title != null && description != null && imageUrl != null && newsUrl != null) {
+                        val data = Datarv_detailberita(title, description, imageUrl, newsUrl)
+                        array.add(data)
+                    }
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle database error
+            }
+        })
+    }
 }

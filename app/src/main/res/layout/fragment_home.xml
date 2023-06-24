@@ -347,7 +347,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:id="@+id/rv_list_berita"
-                    tools:listitem="@layout/item_list_berita"/>
+                    tools:listitem="@layout/item_list_detail_berita"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

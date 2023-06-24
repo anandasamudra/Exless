@@ -10,16 +10,17 @@ import com.bumptech.glide.Glide
 import com.exless.R
 import com.exless.`object`.Datarv_detailberita
 
-class AdapterDetailBerita(val array: ArrayList<Datarv_detailberita>) :
-    RecyclerView.Adapter<AdapterDetailBerita.viewholder_detailberita>() {
+class AdapterBerita(val array: ArrayList<Datarv_detailberita>) :
+    RecyclerView.Adapter<AdapterBerita.viewholder_berita>() {
 
-    inner class viewholder_detailberita(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class viewholder_berita(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvTitle: TextView = itemView.findViewById(R.id.titlesumber)
         private val tvDesk: TextView = itemView.findViewById(R.id.descriptionsumber)
         private val imgView: ImageView = itemView.findViewById(R.id.detailberita1)
         private var newsLink: String? = null
 
         init {
+
             imgView.setOnClickListener {
                 newsLink?.let { link ->
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
@@ -27,8 +28,6 @@ class AdapterDetailBerita(val array: ArrayList<Datarv_detailberita>) :
                 }
             }
         }
-
-
 
         fun bind(data: Datarv_detailberita) {
             tvTitle.text = data.title
@@ -42,17 +41,17 @@ class AdapterDetailBerita(val array: ArrayList<Datarv_detailberita>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder_detailberita {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder_berita {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_list_detail_berita, parent, false)
-        return viewholder_detailberita(view)
+        return viewholder_berita(view)
     }
 
     override fun getItemCount(): Int {
         return array.size
     }
 
-    override fun onBindViewHolder(holder: viewholder_detailberita, position: Int) {
+    override fun onBindViewHolder(holder: viewholder_berita, position: Int) {
         val currentItem = array[position]
         holder.bind(currentItem)
     }
