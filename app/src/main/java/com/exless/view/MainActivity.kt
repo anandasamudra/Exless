@@ -3,12 +3,14 @@ package com.exless.view
 
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
@@ -22,6 +24,7 @@ import com.exless.fragment.fragmentbelanja
 import com.exless.fragment.fragmenthome
 import com.exless.fragment.fragmentkomunitas
 import com.exless.fragment.fragmentsimpanan
+import com.exless.notification.AlarmReceiver
 import com.exless.`object`.Datarv_jenisbahan
 import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,7 +36,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 //get days
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     private lateinit var firebaseAuth: FirebaseAuth
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "UnspecifiedImmutableFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//disable auto darkmode
         super.onCreate(savedInstanceState)
@@ -146,6 +148,28 @@ getphoto()
         }
 
         //Jumlah makanan di kategori fragment simpanan /\/\/\
+
+        //alarm
+        val desiredCalendar = Calendar.getInstance()
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 5)
+        desiredCalendar.set(Calendar.MINUTE, 25)
+        desiredCalendar.set(Calendar.SECOND, 0)
+
+        val currentCalendar = Calendar.getInstance()
+        val currentTimeMillis = System.currentTimeMillis()
+
+// Check if the desired date and time have already passed
+        if (currentCalendar.before(desiredCalendar)) {
+            // Create an intent for the AlarmReceiver
+            val alarmIntent = Intent(this, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0)
+
+            // Schedule the one-time alarm
+            val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, desiredCalendar.timeInMillis, pendingIntent)
+        } else {
+            println("bakekok")
+        }
     }
 
     //bottom navigation fragment \/\/\/

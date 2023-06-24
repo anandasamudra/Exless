@@ -1,4 +1,4 @@
-package com.exless.view
+package com.exless.notification
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
@@ -6,12 +6,12 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.exless.R
+import com.exless.view.SplassScreen
 
 class NotificationHelper(val context:Context) {
     private val CHANNEL_ID ="todo_channel_id"

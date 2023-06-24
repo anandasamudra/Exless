@@ -1,4 +1,4 @@
-package com.exless.view
+package com.exless.notification
 
 import android.content.Context
 import androidx.work.Worker

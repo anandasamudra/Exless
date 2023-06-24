@@ -1,11 +1,8 @@
-package com.exless.view
+package com.exless.notification
 
 import android.content.Context
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import androidx.work.workDataOf
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,7 +14,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
-import java.util.concurrent.TimeUnit
 
 
 class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(context,params) {
@@ -52,19 +48,19 @@ class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(
                     var notificationTitle = "Check kulkas yuk!"//default text 1 atas
                     var notificationMessage = "Makan apa ya hari ini?"//default text 2 bawah
                     if (count == 0 && count2 == 0){
-                        notificationTitle = "Bahan segar, badan pun bugar!"//semuanya
+                        notificationTitle = "Bahan segar, badan pun bugar!"//semuanya segar
                         notificationMessage = "Yuk masak bahan-bahan mu selagi segar!"
                     }
                     if (count > 0 && count2 == 0){
-                        notificationTitle = "Walaupun keadaan belum mendesak"
+                        notificationTitle = "Walaupun keadaan belum mendesak"//ada yang hampir kadaluarsa
                         notificationMessage = "$count bahan mau kedaluarsa, yuk di masak!"
                     }
                     if (count == 0 && count2 > 0){
-                        notificationTitle = "Sayangnya nasi telah menjadi bubur"
+                        notificationTitle = "Sayangnya nasi telah menjadi bubur"//ada yang kadaluarsa
                         notificationMessage = "$count2 bahan yang kadaluarsa jangan di kubur"
                     }
                     if (count > 0 && count2 > 0){
-                        notificationTitle = "Gawat! $count2 bahan telah kadaluarsa,"
+                        notificationTitle = "Gawat! $count2 bahan telah kadaluarsa,"//ada yang kadaluarsa dan hampir
                         notificationMessage = "Dan $count sudah dekat kadaluarsa!"
                     }
 

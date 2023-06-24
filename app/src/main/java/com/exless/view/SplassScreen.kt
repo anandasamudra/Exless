@@ -100,40 +100,8 @@ class SplassScreen : AppCompatActivity() {
 //        calendar.set(Calendar.MINUTE, 0)
 //        calendar.set(Calendar.SECOND, 43)
 //
-//// Create an intent for the AlarmReceiver
-//        val alarmIntent = Intent(this, AlarmReceiver::class.java)
-//        val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0)
-//
-//// Schedule the one-time alarm
-//        val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-//        //
-//        val desiredCalendar = Calendar.getInstance()
-//        desiredCalendar.set(Calendar.HOUR_OF_DAY, 23)
-//        desiredCalendar.set(Calendar.MINUTE, 45)
-//        desiredCalendar.set(Calendar.SECOND, 0)
-//
-//        val currentCalendar = Calendar.getInstance()
-//        val currentTimeMillis = System.currentTimeMillis()
-//
-//// Check if the desired date and time have already passed
-//        if (currentCalendar.before(desiredCalendar)) {
-//            // Create an intent for the AlarmReceiver
-//            val alarmIntent = Intent(this, AlarmReceiver::class.java)
-//            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0)
-//
-//            // Schedule the one-time alarm
-//            val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, desiredCalendar.timeInMillis, pendingIntent)
-//        } else {
-//            println("bakekok")
-//        }
-        val workRequest = PeriodicWorkRequest.Builder(
-            ExpiredWorker::class.java,
-            24, // Repeat interval (in hours)
-            TimeUnit.HOURS
-        ).build()
 
-        WorkManager.getInstance(this).enqueue(workRequest)
+
+
     }
     }
