@@ -227,6 +227,8 @@ class Profile_Activity : AppCompatActivity() {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             finish()
         }
+        //menhapus data di shared preferences
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().clear().apply()
     }
     private fun requireContext(): Context {
         return this
