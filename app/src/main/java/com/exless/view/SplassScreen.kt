@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.core.view.WindowInsetsControllerCompat
 import com.exless.R
 
+
 class SplassScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +32,8 @@ class SplassScreen : AppCompatActivity() {
                 finish()
             }
         }, 3000)
+        NotificationHelper(this).createNotification("hai",
+            "huha!")
+
     }
 }
