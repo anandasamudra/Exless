@@ -69,7 +69,6 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_drawphoto"
             app:layout_constraintBottom_toBottomOf="@+id/img_profiluser"
             app:layout_constraintEnd_toEndOf="@+id/img_profiluser" />
 
@@ -292,12 +291,12 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/regular"
                 android:gravity="center|left"
+                android:onClick="logout"
                 android:paddingVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="Logout"
                 android:textColor="#666666"
                 android:textSize="14sp" />
-
             <View
                 android:id="@+id/view10"
                 android:layout_width="match_parent"
@@ -306,6 +305,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_profilnama"
                 app:layout_constraintStart_toStartOf="@+id/tv_profilnama"
                 app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
+
 
         </LinearLayout>
     </ScrollView>

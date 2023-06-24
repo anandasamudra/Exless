@@ -2,7 +2,9 @@ package com.exless.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,8 +16,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.bumptech.glide.Glide
 import com.exless.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -38,6 +43,8 @@ class Profile_Activity : AppCompatActivity() {
     private lateinit var storageRef: StorageReference
     private lateinit var databaseRef: DatabaseReference
 
+    private lateinit var logout: TextView
+
     private val PICK_IMAGE_REQUEST = 1
     private var imageUri: Uri? = null
 
@@ -49,7 +56,6 @@ class Profile_Activity : AppCompatActivity() {
         viewSelect = findViewById(R.id.viewselect)
         uploadButton = findViewById(R.id.btn_saveprofile)
 
-//
         storageRef = FirebaseStorage.getInstance().reference
         databaseRef = FirebaseDatabase.getInstance().reference
 
@@ -213,5 +219,28 @@ class Profile_Activity : AppCompatActivity() {
         } else {
             lltan.visibility = View.VISIBLE
         }
+    }
+    fun logout(view: View) {
+        val googleSignInClient = GoogleSignIn.getClient(requireContext(), GoogleSignInOptions.DEFAULT_SIGN_IN)
+        googleSignInClient.signOut().addOnCompleteListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            finish()
+        }
+
+        val sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("UID", "")
+        editor.apply()
+    }
+    private fun requireContext(): Context {
+        return this
+    }
+
+    //onBackPressed ke mainactivity
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
