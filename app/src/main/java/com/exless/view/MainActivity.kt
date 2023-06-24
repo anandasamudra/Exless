@@ -26,6 +26,7 @@ import com.exless.`object`.Datarv_jenisbahan
 import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -232,47 +233,78 @@ getphoto()
         dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
         val dataTitle = resources.getStringArray(R.array.data_name)
         val dataimage = resources.obtainTypedArray(R.array.data_photo)
+
+        // Clear the existing data
+        jumbahanmain.clear()
+        bahanarraylist.clear()
+
         for (i in dataTitle.indices) {
-        dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
-        dbquery.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val count: String = snapshot.childrenCount.toString()
-//                println("countmain"+count)
-                jumbahanmain.add(count)
-                val bahanList = Datarv_jenisbahan(
-                    dataTitle[i],
-                    "",
-                    dataimage.getResourceId(i, -1)
-                )
-                bahanList.description = "Kamu mempunyai $count macam"
-                bahanarraylist.add(bahanList)
-//                println(bahanarraylist)
+            dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
+            dbquery.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val count: String = snapshot.childrenCount.toString()
+                    jumbahanmain.add(count)
+                    val bahanList = Datarv_jenisbahan(
+                        dataTitle[i],
+                        "",
+                        dataimage.getResourceId(i, -1)
+                    )
+                    bahanList.description = "Kamu mempunyai $count macam"
+                    bahanarraylist.add(bahanList)
 
-//                println(jumbahanmain+"ini datanya cokkkk")
-//                println("done datachange")
+                    // Update the RecyclerView adapter
+                    rv_list_jenisbahan.adapter?.notifyDataSetChanged()
+                }
 
-            }
-            override fun onCancelled(error: DatabaseError) {
-                // Handle the error
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error
+                }
+            })
+
+            // Listen for child removed event
+            dbquery.addChildEventListener(object : ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Not used
+                }
+
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Not used
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+                    // Child removed from the database, update the RecyclerView
+                    getbahandata()
+                }
+
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Not used
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error
+                }
+            })
         }
+
         showRecylerview()
     }///////////////////////////////////////////////////////
     @SuppressLint("SuspiciousIndentation")
     private fun getbahandataex() {
         val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         dbrefex = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
-        dbrefex.addValueEventListener(object : ValueEventListener{
+        dbrefex.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (bahanSnapshot in snapshot.children){
+                // Clear the existing data
+                bahanarraylistex.clear()
+
+                if (snapshot.exists()) {
+                    for (bahanSnapshot in snapshot.children) {
                         val namabahan = bahanSnapshot.child("nama").getValue().toString()
-                        //compare today date with expired date \/\/\/
-                        var tglkadal : String
+                        var tglkadal: String
                         if (bahanSnapshot.child("tglkadaluarsa").getValue().toString() != "") {
                             tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
 
+                            // Compare today's date with the expired date
                             try {
                                 val startDateStr = getCurrentDate()
                                 val endDateStr = tglkadal
@@ -286,24 +318,15 @@ getphoto()
                                     val days = ChronoUnit.DAYS.between(startDate, endDate)
                                     tglkadal = days.toString() + " hari"
                                 }
-
-//                                println("Number of days: $tglkadal")
                             } catch (e: DateTimeParseException) {
-                                // Handle the case when parsing the dates fails
                                 tglkadal = "EXPIRED"
-//                                println("Invalid date format")
                             } catch (e: Exception) {
-                                // Handle any other exceptions that might occur
                                 tglkadal = "EXPIRED"
-//                                println("An error occurred: ${e.message}")
                             }
+                        } else {
+                            tglkadal = "-"
                         }
 
-                        else{
-                            tglkadal ="-"
-                        }
-//                        println("Number of dayssadasda f: $tglkadal")
-                        //compare today date with expired date /\/\/\
                         val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
                         val bahanList = Datarv_seeexperired(
                             namabahan,
@@ -312,21 +335,23 @@ getphoto()
                             0
                         )
                         bahanarraylistex.add(bahanList)
-//                        println(bahanarraylistex)
-//                        println(namabahan)
                     }
-//                    bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
+                } else {
+                    // Handle the case when there are no ingredients
                 }
+
+                // Update the RecyclerView adapter
+                rv_list_jenisbahanex.adapter?.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                // Handle the error
             }
-
         })
 
         showRecylerviewex()
     }
+
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
         rv_list_jenisbahan.adapter= adapter_jenisbahan(bahanarraylist)
