@@ -33,6 +33,9 @@
             android:name=".view.SeeExpiredActivity"
             android:exported="false" />
         <activity
+            android:name=".view.SeeExpiredMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.TambahbahanMain_Activity"
             android:exported="false"
             android:theme="@style/Theme.dropdown" />

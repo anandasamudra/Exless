@@ -35,8 +35,9 @@ class seeitems_Activity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//disable auto darkmode
         supportActionBar?.hide()
         findViewById<ImageView>(R.id.back_seeitem).setOnClickListener{
-            startActivity(Intent(this,MainActivity::class.java))
-            finish()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("fragment", "inventory")
+            startActivity(intent)
         }
         findViewById<ImageView>(R.id.bt_addbahan).setOnClickListener{
             startActivity(Intent(this, TambahbahanMain_Activity::class.java))

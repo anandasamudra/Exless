@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
 
-class SeeExpiredActivity : AppCompatActivity() {
+class SeeExpiredMainActivity : AppCompatActivity() {
     private lateinit var dbrefex: DatabaseReference
     private lateinit var dbqueryex: Query
     lateinit var jumbahanmainex: ArrayList<String>
@@ -61,7 +61,6 @@ class SeeExpiredActivity : AppCompatActivity() {
 
     fun toback(view: View) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("fragment", "inventory")
         startActivity(intent)
     }
 

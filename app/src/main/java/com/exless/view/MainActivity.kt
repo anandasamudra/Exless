@@ -231,6 +231,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, SeeExpiredActivity::class.java))
         finish()
     }
+    fun toseeexpiredmain(view: View) {
+        startActivity(Intent(this, SeeExpiredMainActivity::class.java))
+        finish()
+    }
     fun detailberita(view: View) {
         startActivity(Intent(this,DetailBeritaActivity::class.java))
         finish()
