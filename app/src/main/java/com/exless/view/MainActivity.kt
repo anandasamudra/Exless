@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> {
                     supportFragmentManager.beginTransaction().apply {
                         show(fraghome)
-                        hide(fragsim)
+                        replace(R.id.fragment_framelayout2,fragtrans)
                         commit()
                     }
                     true

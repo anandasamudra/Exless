@@ -17,9 +17,11 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/dt1"
                 android:layout_width="413dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -56,8 +58,10 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dt2"
                 android:layout_width="match_parent"
-                android:layout_height="186dp">
+                android:layout_height="186dp"
+                android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/img_detail"
@@ -66,23 +70,26 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/tahucina"
+                    app:srcCompat="@drawable/tahuchina"
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/dt3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/semibold"
                 android:text="Cara Menyimpan"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dt4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_detail1"
@@ -160,8 +167,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dt5"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -179,10 +188,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
+                android:id="@+id/dt7"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="2dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -190,6 +201,57 @@
                     android:orientation="horizontal"
                     tools:listitem="@layout/item_list_resep" />
             </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dt6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="275dp"
+                    android:layout_height="275dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:srcCompat="@drawable/futuredevelop" />
+
+                <TextView
+                    android:id="@+id/tv_detailtitle2"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:text="Fitur ini dalam tahap pengembangan, akan rilis segera!"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+                <TextView
+                    android:id="@+id/tv_detailtitle3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:text="Mohon tunggu"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/imageView4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>

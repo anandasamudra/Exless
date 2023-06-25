@@ -17,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
 
 
 class DetailItemActivity : AppCompatActivity() {
@@ -36,10 +40,21 @@ class DetailItemActivity : AppCompatActivity() {
         val namabahan = intent.getStringExtra("nama_bahan")
         findViewById<TextView>(R.id.tv_detailtitle).setText(namabahan)
         getbahandata(namabahan.toString())
+
+println(namabahan+"ini nama bahan")
+        val imageName =namabahan!!.replace("\\s+".toRegex(), "").toLowerCase()
+        val imageResId = resources.getIdentifier(imageName, "drawable", packageName)
+        println(imageName)
+        println(imageResId)
+        if (imageResId != 0) {
+            findViewById<ImageView>(R.id.img_detail).setImageResource(imageResId)
+        } else {
+            findViewById<ImageView>(R.id.img_detail).setImageResource(R.drawable.a1)
+        }
+
     }
 
     fun backtohome(view: View) {
-        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
@@ -109,6 +124,17 @@ class DetailItemActivity : AppCompatActivity() {
                     tvDetail3.text = three
                     tvDetail4.text = four
                     tvDetail5.text = five
+                    findViewById<ConstraintLayout>(R.id.dt2).visibility = View.VISIBLE
+                    findViewById<TextView>(R.id.dt3).visibility = View.VISIBLE
+                    findViewById<ConstraintLayout>(R.id.dt4).visibility = View.VISIBLE
+                    findViewById<ConstraintLayout>(R.id.dt6).visibility = View.GONE
+                }
+                else{
+
+                    findViewById<ConstraintLayout>(R.id.dt2).visibility = View.GONE
+                    findViewById<TextView>(R.id.dt3).visibility = View.GONE
+                    findViewById<ConstraintLayout>(R.id.dt4).visibility = View.GONE
+                    findViewById<ConstraintLayout>(R.id.dt6).visibility = View.VISIBLE
                 }
             }
 
