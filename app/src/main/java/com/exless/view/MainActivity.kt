@@ -3,12 +3,14 @@ package com.exless.view
 
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
@@ -22,17 +24,18 @@ import com.exless.fragment.fragmentbelanja
 import com.exless.fragment.fragmenthome
 import com.exless.fragment.fragmentkomunitas
 import com.exless.fragment.fragmentsimpanan
+import com.exless.notification.AlarmReceiver
 import com.exless.`object`.Datarv_jenisbahan
 import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 //get days
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -60,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     private lateinit var firebaseAuth: FirebaseAuth
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "UnspecifiedImmutableFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//disable auto darkmode
         super.onCreate(savedInstanceState)
@@ -145,6 +148,28 @@ getphoto()
         }
 
         //Jumlah makanan di kategori fragment simpanan /\/\/\
+
+        //alarm
+        val desiredCalendar = Calendar.getInstance()
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 5)
+        desiredCalendar.set(Calendar.MINUTE, 25)
+        desiredCalendar.set(Calendar.SECOND, 0)
+
+        val currentCalendar = Calendar.getInstance()
+        val currentTimeMillis = System.currentTimeMillis()
+
+// Check if the desired date and time have already passed
+        if (currentCalendar.before(desiredCalendar)) {
+            // Create an intent for the AlarmReceiver
+            val alarmIntent = Intent(this, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0)
+
+            // Schedule the one-time alarm
+            val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, desiredCalendar.timeInMillis, pendingIntent)
+        } else {
+            println("bakekok")
+        }
     }
 
     //bottom navigation fragment \/\/\/
@@ -232,47 +257,78 @@ getphoto()
         dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
         val dataTitle = resources.getStringArray(R.array.data_name)
         val dataimage = resources.obtainTypedArray(R.array.data_photo)
+
+        // Clear the existing data
+        jumbahanmain.clear()
+        bahanarraylist.clear()
+
         for (i in dataTitle.indices) {
-        dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
-        dbquery.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val count: String = snapshot.childrenCount.toString()
-//                println("countmain"+count)
-                jumbahanmain.add(count)
-                val bahanList = Datarv_jenisbahan(
-                    dataTitle[i],
-                    "",
-                    dataimage.getResourceId(i, -1)
-                )
-                bahanList.description = "Kamu mempunyai $count macam"
-                bahanarraylist.add(bahanList)
-//                println(bahanarraylist)
+            dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
+            dbquery.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val count: String = snapshot.childrenCount.toString()
+                    jumbahanmain.add(count)
+                    val bahanList = Datarv_jenisbahan(
+                        dataTitle[i],
+                        "",
+                        dataimage.getResourceId(i, -1)
+                    )
+                    bahanList.description = "Kamu mempunyai $count macam"
+                    bahanarraylist.add(bahanList)
 
-//                println(jumbahanmain+"ini datanya cokkkk")
-//                println("done datachange")
+                    // Update the RecyclerView adapter
+                    rv_list_jenisbahan.adapter?.notifyDataSetChanged()
+                }
 
-            }
-            override fun onCancelled(error: DatabaseError) {
-                // Handle the error
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error
+                }
+            })
+
+            // Listen for child removed event
+            dbquery.addChildEventListener(object : ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Not used
+                }
+
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Not used
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+                    // Child removed from the database, update the RecyclerView
+                    getbahandata()
+                }
+
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Not used
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error
+                }
+            })
         }
+
         showRecylerview()
     }///////////////////////////////////////////////////////
     @SuppressLint("SuspiciousIndentation")
     private fun getbahandataex() {
         val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         dbrefex = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
-        dbrefex.addValueEventListener(object : ValueEventListener{
+        dbrefex.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (bahanSnapshot in snapshot.children){
+                // Clear the existing data
+                bahanarraylistex.clear()
+
+                if (snapshot.exists()) {
+                    for (bahanSnapshot in snapshot.children) {
                         val namabahan = bahanSnapshot.child("nama").getValue().toString()
-                        //compare today date with expired date \/\/\/
-                        var tglkadal : String
+                        var tglkadal: String
                         if (bahanSnapshot.child("tglkadaluarsa").getValue().toString() != "") {
                             tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
 
+                            // Compare today's date with the expired date
                             try {
                                 val startDateStr = getCurrentDate()
                                 val endDateStr = tglkadal
@@ -286,24 +342,15 @@ getphoto()
                                     val days = ChronoUnit.DAYS.between(startDate, endDate)
                                     tglkadal = days.toString() + " hari"
                                 }
-
-//                                println("Number of days: $tglkadal")
                             } catch (e: DateTimeParseException) {
-                                // Handle the case when parsing the dates fails
                                 tglkadal = "EXPIRED"
-//                                println("Invalid date format")
                             } catch (e: Exception) {
-                                // Handle any other exceptions that might occur
                                 tglkadal = "EXPIRED"
-//                                println("An error occurred: ${e.message}")
                             }
+                        } else {
+                            tglkadal = "-"
                         }
 
-                        else{
-                            tglkadal ="-"
-                        }
-//                        println("Number of dayssadasda f: $tglkadal")
-                        //compare today date with expired date /\/\/\
                         val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
                         val bahanList = Datarv_seeexperired(
                             namabahan,
@@ -312,21 +359,23 @@ getphoto()
                             0
                         )
                         bahanarraylistex.add(bahanList)
-//                        println(bahanarraylistex)
-//                        println(namabahan)
                     }
-//                    bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
+                } else {
+                    // Handle the case when there are no ingredients
                 }
+
+                // Update the RecyclerView adapter
+                rv_list_jenisbahanex.adapter?.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                // Handle the error
             }
-
         })
 
         showRecylerviewex()
     }
+
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
         rv_list_jenisbahan.adapter= adapter_jenisbahan(bahanarraylist)

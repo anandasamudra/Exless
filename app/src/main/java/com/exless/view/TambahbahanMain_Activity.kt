@@ -129,4 +129,10 @@ class TambahbahanMain_Activity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
+    //shared preference untuk mencegah back ke login \/\/\/
+    override fun onBackPressed() {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        startActivity(intent)
+    }
 }
