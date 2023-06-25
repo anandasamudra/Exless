@@ -37,6 +37,10 @@
             android:exported="false"
             android:theme="@style/Theme.dropdown" />
         <activity
+            android:name=".view.TambahbahanSimpan_Activity"
+            android:exported="false"
+            android:theme="@style/Theme.dropdown" />
+        <activity
             android:name=".view.seeitems_Activity"
             android:exported="false"
             tools:ignore="ExtraText" />

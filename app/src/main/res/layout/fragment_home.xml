@@ -10,23 +10,28 @@
         android:layout_height="match_parent"
         android:id="@+id/sv_home"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="40dp"
                     android:orientation="vertical">
+
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -34,22 +39,24 @@
                             android:text="Halo,"
                             android:textColor="@color/black"
                             android:textSize="40dp" />
+
                         <TextView
                             android:id="@+id/nama"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/bold"
                             android:layout_marginTop="45dp"
+                            android:fontFamily="@font/bold"
                             android:text="Cahyo"
                             android:textColor="@color/black"
                             android:textSize="30dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/tettlehome"
                             android:layout_marginTop="105dp"
                             android:fontFamily="@font/regular"
-                            android:textColor="@color/black"/>
+                            android:text="@string/tettlehome"
+                            android:textColor="@color/black" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -62,6 +69,7 @@
                     android:onClick="toprofile"
                     android:src="@drawable/kucing" />
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -79,24 +87,26 @@
                     android:textColor="@color/black"
                     android:textSize="17sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="110dp"
+                    android:fontFamily="@font/semibold"
                     android:text="Aktivitas Makananmu"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/semibold"
-                    android:layout_marginRight="110dp"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
                 <!--                tab 1-->
                 <LinearLayout
+                    android:id="@+id/aktifitas_kosong"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:id="@+id/aktifitas_kosong">
+                    android:layout_height="170dp">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/aktivitas"
@@ -250,104 +260,128 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
+
                     <RelativeLayout
                         android:layout_width="280dp"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/semibold"
                             android:text="Resep Seimbang"
                             android:textColor="@color/black"
-                            android:fontFamily="@font/semibold"
-                            android:textSize="15sp"
-                            android:layout_marginLeft="20dp"/>
+                            android:textSize="15sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/subhome"
-                            android:textSize="10sp"
+                            android:layout_marginLeft="20dp"
                             android:layout_marginTop="25dp"
-                            android:layout_marginLeft="20dp"
-                            android:textColor="@color/grey"/>
+                            android:text="@string/subhome"
+                            android:textColor="@color/grey"
+                            android:textSize="10sp" />
                     </RelativeLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Lihat Semua >"
-                                android:id="@+id/fullresep"
-                                android:layout_marginLeft="10dp"
-                                android:textColor="@color/ijotuo"
-                                android:fontFamily="@font/semibold"/>
-                        </LinearLayout>
-                </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:id="@+id/rv_list_resep"
-                    tools:listitem="@layout/item_list_resep"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <RelativeLayout
-                        android:layout_width="280dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Food Wasting Update"
-                            android:textColor="@color/black"
-                            android:fontFamily="@font/semibold"
-                            android:layout_marginTop="5dp"
-                            android:textSize="15sp"
-                            android:layout_marginLeft="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/subwaster"
-                            android:textSize="10sp"
-                            android:layout_marginTop="30dp"
-                            android:layout_marginLeft="20dp"
-                            android:textColor="@color/grey"/>
-                    </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center">
+
                         <TextView
+                            android:id="@+id/fullresep"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Lihat Semua >"
-                            android:id="@+id/fullberita"
-                            android:onClick="detailberita"
                             android:layout_marginLeft="10dp"
-                            android:textColor="@color/ijotuo"
-                            android:fontFamily="@font/semibold"/>
+                            android:fontFamily="@font/semibold"
+                            android:text="Lihat Semua >"
+                            android:textColor="@color/ijotuo" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_list_resep"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/rv_list_berita"
-                    tools:listitem="@layout/item_list_detail_berita"/>
+                    tools:listitem="@layout/item_list_resep" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="280dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/semibold"
+                            android:text="Food Wasting Update"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="30dp"
+                            android:text="@string/subwaster"
+                            android:textColor="@color/grey"
+                            android:textSize="10sp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/fullberita"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/semibold"
+                            android:onClick="detailberita"
+                            android:text="Lihat Semua >"
+                            android:textColor="@color/ijotuo" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_list_berita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        tools:listitem="@layout/item_list_detail_berita" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

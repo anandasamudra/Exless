@@ -43,7 +43,9 @@ import java.time.format.DateTimeParseException
 import java.util.Calendar
 
 import android.animation.ObjectAnimator
+import android.os.Handler
 import android.view.animation.LinearInterpolator
+import com.exless.fragment.fragmentempty
 
 
 class MainActivity : AppCompatActivity() {
@@ -83,8 +85,35 @@ class MainActivity : AppCompatActivity() {
         val fragsim = fragmentsimpanan()
         val fragkom = fragmentkomunitas()
         val fragload = fragmentloading()
-        setfragment2(fragload)
-        setfragmentinisiasi(fraghome)
+        val fragtrans = fragmentempty()
+        val desiredFragmentTag = intent.getStringExtra("fragment")
+
+        setfragmentinisiasi(fraghome)//waasda
+        if (desiredFragmentTag == "inventory") {//safe loading to simpanan
+            setfragment2(fragload)
+            supportFragmentManager.beginTransaction().apply {
+                hide(fraghome)
+                commit()
+            }
+            Handler().postDelayed({
+                // Change to another fragment here
+                println("dari inven")
+                supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.fragment_framelayout2,fragsim)
+                    hide(fraghome)
+                    hide(fragload)//
+                    commit()
+                    findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
+                }
+            }, 200) // Adjust the delay time as needed
+
+        }
+        else{
+            println("ini mulaiiiiiasdklasdaslkdh alsdfhads kfsadjfgas")
+            setfragment2(fragtrans)
+        }
+
+
         findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.home -> {
@@ -148,10 +177,8 @@ class MainActivity : AppCompatActivity() {
 
         try {
         getphoto()
-            println("ini I\n\n\n\n"+i)
         }
         catch (e:Exception){
-            println("Erornya adalah = \n\n"+e)
         }
 
         //Jumlah makanan di kategori fragment simpanan /\/\/\
@@ -160,8 +187,9 @@ class MainActivity : AppCompatActivity() {
     //bottom navigation fragment \/\/\/
     private fun setfragmentinisiasi(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragment_framelayout,fragment)
+            replace(R.id.fragment_framelayout,fragment)
             commit()
+            println("setfragmen inisiasi")
         }
 
 
@@ -181,10 +209,15 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, TambahbahanMain_Activity::class.java))
         finish()
     }
-    fun toseeitem(view: View) {
-        startActivity(Intent(this, seeitems_Activity::class.java))
-        finish()
+    fun toaddbahansimpan(view: View) {
+        startActivity(Intent(this, TambahbahanSimpan_Activity::class.java))
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
+
     }
+//    fun toseeitem(view: View) {ga di pake
+//        startActivity(Intent(this, seeitems_Activity::class.java))
+//        finish()
+//    }
     fun tosimpanan(view: View) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_framelayout2,fragmentsimpanan())
@@ -221,9 +254,9 @@ class MainActivity : AppCompatActivity() {
                                 Glide.with(this@MainActivity)
                                     .load(imageUrl)
                                     .into(findViewById(R.id.img_userphotohome))
-                                println("Lahhhhh\n\n\n\nsdfsdfsfs\n\n\ngdfgdfgfd")
+
                                 isDataFetched = true
-                                println(isDataFetched)
+
 
                             }
                         } else {
@@ -243,8 +276,8 @@ class MainActivity : AppCompatActivity() {
                 }
             })
             i++
-            println("ini i upload\n\n\n\n\n" + i)
-            println(isDataFetched)
+
+
         }
 
     }
@@ -270,10 +303,6 @@ class MainActivity : AppCompatActivity() {
                 )
                 bahanList.description = "Kamu mempunyai $count macam"
                 bahanarraylist.add(bahanList)
-//                println(bahanarraylist)
-
-//                println(jumbahanmain+"ini datanya cokkkk")
-//                println("done datachange")
 
             }
             override fun onCancelled(error: DatabaseError) {
@@ -336,8 +365,7 @@ class MainActivity : AppCompatActivity() {
                             0
                         )
                         bahanarraylistex.add(bahanList)
-//                        println(bahanarraylistex)
-//                        println(namabahan)
+
                     }
 //                    bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
                 }
