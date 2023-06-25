@@ -21,6 +21,7 @@ import com.exless.adapter.adapter_seeexpiredsimpanan
 import com.exless.fragment.fragmentbelanja
 import com.exless.fragment.fragmenthome
 import com.exless.fragment.fragmentkomunitas
+import com.exless.fragment.fragmentloading
 import com.exless.fragment.fragmentsimpanan
 import com.exless.`object`.Datarv_jenisbahan
 import com.exless.`object`.Datarv_seeexperired
@@ -40,6 +41,9 @@ import java.time.temporal.ChronoUnit
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.format.DateTimeParseException
 import java.util.Calendar
+
+import android.animation.ObjectAnimator
+import android.view.animation.LinearInterpolator
 
 
 class MainActivity : AppCompatActivity() {
@@ -78,17 +82,54 @@ class MainActivity : AppCompatActivity() {
         val fragbel = fragmentbelanja()
         val fragsim = fragmentsimpanan()
         val fragkom = fragmentkomunitas()
-        setfragment(fraghome)
-        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> setfragment(fraghome)
-                R.id.inventory -> setfragment(fragsim)
-                R.id.shop -> setfragment(fragbel)
-                R.id.comunity -> setfragment(fragkom)
+        val fragload = fragmentloading()
+        setfragment2(fragload)
+        setfragmentinisiasi(fraghome)
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        show(fraghome)
+                        hide(fragsim)
+                        commit()
+                    }
+                    true
+                }
+                R.id.inventory -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.fragment_framelayout2,fragsim)
+                        show(fragsim)
+                        hide(fraghome)
+                        commit()
+                    }
+                    true
+                }
+                R.id.shop -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.fragment_framelayout2,fragbel)
+                        hide(fraghome)
+                        commit()
+                    }
+                    true
+                }
+                R.id.comunity -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.fragment_framelayout2,fragkom)
+                        hide(fraghome)
+                        commit()
+                    }
+                    true
+                }
+                else -> false
             }
-            true
         }
-        // bottom navigation fragment /\/\/\
+//        val rotationAnimator = ObjectAnimator.ofFloat(findViewById(R.id.img_loading), "rotation", 0f, 180f)
+//        rotationAnimator.duration = 100000
+//        rotationAnimator.interpolator = LinearInterpolator()
+//
+//        // Start the rotation animation
+//        rotationAnimator.start()
+// bottom navigation fragment /\/\/\
 
         //Jumlah makanan di kategori fragment simpanan \/\/\/
         val fragmensimpan = layoutInflater.inflate(R.layout.fragment_simpanan, null)
@@ -104,40 +145,9 @@ class MainActivity : AppCompatActivity() {
         jumbahanmainex = ArrayList()
         bahanarraylistex = ArrayList<Datarv_seeexperired>()
         getbahandataex()
-//        getphoto()
-        // Retrieve the image URL from the intent
-//        profilehome = findViewById(R.id.img_userphotohome)
 
         try {
-//            var imageUrl = intent.getIntExtra("imageUrl",0)
-//
-//            println("ini inisiasi\n\n\n\n"+imageUrl)
-//            if (imageUrl == 1){
-//                getphoto {
-//                    imageUrl =0
-//                    println("ini setelahnya ="+imageUrl)
-//                }
-//
-//            }
-getphoto()
-//
-//// Load the image using Glide or any other image loading library
-//            if (imageUrl == null){
-////            Glide.with(this@MainActivity)
-////                .load("https://firebasestorage.googleapis.com/v0/b/exless-455f4.appspot.com/o/images%2F9e0f5391-8809-4e8f-9ee6-407a25191438?alt=media&token=3fb11ed0-00fc-4eff-9ba4-2e4e46e1e2c4")
-////                .into(findViewById(R.id.img_userphotohome))
-////println(imageUrl)
-//            }
-//            if (imageUrl != null){
-////            Glide.with(this)
-////                .load(imageUrl)
-////                .into(findViewById(R.id.img_userphotohome))
-////            println("haii"+imageUrl)
-//            }
-//            Glide.with(this)
-//                .load("https://example.com/image.jpg") // Replace with your image URL
-//                .into(findViewById(R.id.img_userphotohome))
-//getphoto()
+        getphoto()
             println("ini I\n\n\n\n"+i)
         }
         catch (e:Exception){
@@ -148,11 +158,20 @@ getphoto()
     }
 
     //bottom navigation fragment \/\/\/
-    private fun setfragment(fragment: Fragment) =
+    private fun setfragmentinisiasi(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_framelayout,fragment)
+            add(R.id.fragment_framelayout,fragment)
             commit()
         }
+
+
+    private fun setfragment2(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_framelayout2,fragment)
+
+            commit()
+        }
+
     // bottom navigation fragment /\/\/\
     fun toprofile(view: View) {
         startActivity(Intent(this, Profile_Activity::class.java))
@@ -167,7 +186,12 @@ getphoto()
         finish()
     }
     fun tosimpanan(view: View) {
-        setfragment(fragmentsimpanan())
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_framelayout2,fragmentsimpanan())
+            show(fragmentsimpanan())
+            hide(fragmenthome())
+            commit()
+        }
         findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
     }
     fun toseeexpired(view: View) {
