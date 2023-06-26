@@ -52,6 +52,7 @@ import android.net.Uri
 import android.os.Handler
 import android.view.animation.LinearInterpolator
 import com.exless.fragment.fragmentempty
+import com.exless.notification.NotificationHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -194,7 +195,7 @@ class MainActivity : AppCompatActivity() {
 
         val desiredCalendar = Calendar.getInstance()
         desiredCalendar.set(Calendar.HOUR_OF_DAY, 19)
-        desiredCalendar.set(Calendar.MINUTE,2)
+        desiredCalendar.set(Calendar.MINUTE,41)
         desiredCalendar.set(Calendar.SECOND, 0)
 
         val currentCalendar = Calendar.getInstance()

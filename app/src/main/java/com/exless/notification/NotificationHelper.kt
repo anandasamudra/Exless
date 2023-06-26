@@ -19,7 +19,7 @@ import com.exless.R
 import com.exless.view.SplassScreen
 
 class NotificationHelper(val context: Context) {
-    private val CHANNEL_ID = "todo_channel_id"
+    private val CHANNEL_ID = "Kadaluarsa_Reminder"
     private val NOTIFICATION_ID = 1
 
     private fun notificationChannel() {
@@ -29,7 +29,7 @@ class NotificationHelper(val context: Context) {
                 CHANNEL_ID,
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "Todo channel description"
+                description = "Send kadaluarsa reminder"
             }
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE)
                     as NotificationManager
