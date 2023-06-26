@@ -32,17 +32,23 @@ class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(
                     val currentDate = getCurrentDate()
 
                     for (bahanSnapshot in snapshot.children) {
-                        val bahanDateStr = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
-                        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                        val bahanDate = LocalDate.parse(bahanDateStr, formatter)
-                        val daysBetween = ChronoUnit.DAYS.between(currentDate, bahanDate)
+                        try {
+                            val bahanDateStr = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
+                            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                            val bahanDate = LocalDate.parse(bahanDateStr, formatter)
+                            val daysBetween = ChronoUnit.DAYS.between(currentDate, bahanDate)
 
-                        if (daysBetween <= 7 && daysBetween > 0) {
-                            count++
+                            if (daysBetween <= 7 && daysBetween >= 0) {
+                                count++
+                            }
+                            if (daysBetween < 0) {
+                                count2++
+                            }
                         }
-                        if (daysBetween <= 0) {
-                            count2++
+                        catch (e:Exception){
+                            continue
                         }
+
                     }
 
                     var notificationTitle = "Check kulkas yuk!"//default text 1 atas
@@ -52,12 +58,12 @@ class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(
                         notificationMessage = "Yuk masak bahan-bahan mu selagi segar!"
                     }
                     if (count > 0 && count2 == 0){
-                        notificationTitle = "Walaupun keadaan belum mendesak"//ada yang hampir kadaluarsa
+                        notificationTitle = "Walaupun keadaan belum mendesak,"//ada yang hampir kadaluarsa
                         notificationMessage = "$count bahan mau kedaluarsa, yuk di masak!"
                     }
                     if (count == 0 && count2 > 0){
-                        notificationTitle = "Sayangnya nasi telah menjadi bubur"//ada yang kadaluarsa
-                        notificationMessage = "$count2 bahan yang kadaluarsa jangan di kubur"
+                        notificationTitle = "Sayangnya nasi telah menjadi bubur,"//ada yang kadaluarsa
+                        notificationMessage = "$count2 bahan yang kadaluarsa jangan di kubur!"
                     }
                     if (count > 0 && count2 > 0){
                         notificationTitle = "Gawat! $count2 bahan telah kadaluarsa,"//ada yang kadaluarsa dan hampir

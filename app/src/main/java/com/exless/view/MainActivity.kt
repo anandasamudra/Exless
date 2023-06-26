@@ -3,6 +3,9 @@ package com.exless.view
 
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,10 +26,12 @@ import com.exless.fragment.fragmenthome
 import com.exless.fragment.fragmentkomunitas
 import com.exless.fragment.fragmentloading
 import com.exless.fragment.fragmentsimpanan
+import com.exless.notification.AlarmReceiver
 import com.exless.`object`.Datarv_jenisbahan
 import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -66,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     private lateinit var firebaseAuth: FirebaseAuth
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "UnspecifiedImmutableFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//disable auto darkmode
         super.onCreate(savedInstanceState)
@@ -179,9 +184,34 @@ class MainActivity : AppCompatActivity() {
         getphoto()
         }
         catch (e:Exception){
+            println("Erornya adalah = \n\n"+e)
         }
 
         //Jumlah makanan di kategori fragment simpanan /\/\/\
+
+        //alarm
+
+        val desiredCalendar = Calendar.getInstance()
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 15)
+        desiredCalendar.set(Calendar.MINUTE,1)
+        desiredCalendar.set(Calendar.SECOND, 0)
+
+        val currentCalendar = Calendar.getInstance()
+        val currentTimeMillis = System.currentTimeMillis()
+
+// Check if the desired date and time have already passed
+        if (currentCalendar.before(desiredCalendar)) {
+            // Create an intent for the AlarmReceiver
+            val alarmIntent = Intent(this, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent,
+                PendingIntent.FLAG_IMMUTABLE)
+
+            // Schedule the one-time alarm
+            val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, desiredCalendar.timeInMillis, pendingIntent)
+        } else {
+            println("bakekok")
+        }
     }
 
     //bottom navigation fragment \/\/\/
@@ -258,9 +288,9 @@ class MainActivity : AppCompatActivity() {
                                 Glide.with(this@MainActivity)
                                     .load(imageUrl)
                                     .into(findViewById(R.id.img_userphotohome))
-
+                                println("Lahhhhh\n\n\n\nsdfsdfsfs\n\n\ngdfgdfgfd")
                                 isDataFetched = true
-
+                                println(isDataFetched)
 
                             }
                         } else {
@@ -280,8 +310,8 @@ class MainActivity : AppCompatActivity() {
                 }
             })
             i++
-
-
+            println("ini i upload\n\n\n\n\n" + i)
+            println(isDataFetched)
         }
 
     }
@@ -314,6 +344,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         }
+
         showRecylerview()
     }///////////////////////////////////////////////////////
     @SuppressLint("SuspiciousIndentation")
@@ -330,6 +361,7 @@ class MainActivity : AppCompatActivity() {
                         if (bahanSnapshot.child("tglkadaluarsa").getValue().toString() != "") {
                             tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
 
+                            // Compare today's date with the expired date
                             try {
                                 val startDateStr = getCurrentDate()
                                 val endDateStr = tglkadal
