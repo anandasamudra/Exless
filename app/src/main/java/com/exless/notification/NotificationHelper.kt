@@ -28,19 +28,19 @@ class NotificationHelper(val context:Context) {
             notificationManager.createNotificationChannel(channel)
         }
     }
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission", "UnspecifiedImmutableFlag")
     fun createNotification(title:String, message:String) {
         notificationChannel()
         val intent = Intent(context, SplassScreen::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or
                     Intent.FLAG_ACTIVITY_NEW_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE )//
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)//
         // Inflate the custom layout
         val contentView = RemoteViews(context.packageName, R.layout.notification)
 
 // Set the content of the custom layout
-        contentView.setTextViewText(R.id.title, title)
+        contentView.setTextViewText(R.id.titlenotif, title)
         contentView.setTextViewText(R.id.description, message)
 
 // Create the notification with the custom view

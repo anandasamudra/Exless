@@ -17,6 +17,7 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.exless.R
+import com.exless.notification.AlarmReceiver
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
@@ -53,10 +54,10 @@ class SplassScreen : AppCompatActivity() {
 //    .setInitialDelay(10,TimeUnit.SECONDS)
 //    .setInputData(workDataOf("TITLE" to "ta", "MESSAGE" to "a new a"))
 //    .build()
-//        WorkManager.getInstance(this).enqueue(workreq)
-        ///////////////////
+////        WorkManager.getInstance(this).enqueue(workreq)
+//        ///////////////////
 //        val workRequest = PeriodicWorkRequest.Builder(
-//            TodoWorker::class.java,
+//            AlarmReceiver::class.java,
 //            15, // Repeat interval (in days)
 //            TimeUnit.MINUTES
 //        ).setInputData(workDataOf("TITLE" to "v", "MESSAGE" to "a new v"))
@@ -64,9 +65,9 @@ class SplassScreen : AppCompatActivity() {
 //
 //        // Enqueue the work request
 //        WorkManager.getInstance(this).enqueue(workRequest)
-        // Schedule periodic task using AlarmManager
+////         Schedule periodic task using AlarmManager
 //        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//        alarmIntent = Intent(this, AlarmReceiver::class.java)
+//        alarmIntent = Intent(this, SplassScreen::class.java)
 //        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0)
 //
 //        val calendar = Calendar.getInstance()

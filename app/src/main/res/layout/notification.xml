@@ -14,7 +14,7 @@
             android:id="@+id/logo"
             android:src="@drawable/logo"/>
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/titlenotif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -28,7 +28,7 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title"
+            android:layout_below="@id/titlenotif"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/logo"
             android:text="this is message"

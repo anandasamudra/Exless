@@ -151,8 +151,8 @@ getphoto()
 
         //alarm
         val desiredCalendar = Calendar.getInstance()
-        desiredCalendar.set(Calendar.HOUR_OF_DAY, 5)
-        desiredCalendar.set(Calendar.MINUTE, 25)
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 12)
+        desiredCalendar.set(Calendar.MINUTE, 7)
         desiredCalendar.set(Calendar.SECOND, 0)
 
         val currentCalendar = Calendar.getInstance()
