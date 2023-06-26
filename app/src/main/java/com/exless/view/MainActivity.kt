@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     private lateinit var firebaseAuth: FirebaseAuth
-    @SuppressLint("MissingInflatedId", "UnspecifiedImmutableFlag")
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//disable auto darkmode
         super.onCreate(savedInstanceState)
@@ -151,8 +151,8 @@ getphoto()
 
         //alarm
         val desiredCalendar = Calendar.getInstance()
-        desiredCalendar.set(Calendar.HOUR_OF_DAY, 12)
-        desiredCalendar.set(Calendar.MINUTE, 7)
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 13)
+        desiredCalendar.set(Calendar.MINUTE,15)
         desiredCalendar.set(Calendar.SECOND, 0)
 
         val currentCalendar = Calendar.getInstance()
@@ -162,7 +162,8 @@ getphoto()
         if (currentCalendar.before(desiredCalendar)) {
             // Create an intent for the AlarmReceiver
             val alarmIntent = Intent(this, AlarmReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0)
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent,
+                PendingIntent.FLAG_IMMUTABLE)
 
             // Schedule the one-time alarm
             val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager

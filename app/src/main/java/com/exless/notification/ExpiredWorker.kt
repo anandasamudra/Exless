@@ -32,17 +32,23 @@ class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(
                     val currentDate = getCurrentDate()
 
                     for (bahanSnapshot in snapshot.children) {
-                        val bahanDateStr = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
-                        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                        val bahanDate = LocalDate.parse(bahanDateStr, formatter)
-                        val daysBetween = ChronoUnit.DAYS.between(currentDate, bahanDate)
+                        try {
+                            val bahanDateStr = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
+                            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                            val bahanDate = LocalDate.parse(bahanDateStr, formatter)
+                            val daysBetween = ChronoUnit.DAYS.between(currentDate, bahanDate)
 
-                        if (daysBetween <= 7 && daysBetween > 0) {
-                            count++
+                            if (daysBetween <= 7 && daysBetween >= 0) {
+                                count++
+                            }
+                            if (daysBetween < 0) {
+                                count2++
+                            }
                         }
-                        if (daysBetween <= 0) {
-                            count2++
+                        catch (e:Exception){
+                            continue
                         }
+
                     }
 
                     var notificationTitle = "Check kulkas yuk!"//default text 1 atas

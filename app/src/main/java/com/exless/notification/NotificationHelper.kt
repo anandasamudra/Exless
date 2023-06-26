@@ -13,47 +13,56 @@ import androidx.core.app.NotificationManagerCompat
 import com.exless.R
 import com.exless.view.SplassScreen
 
-class NotificationHelper(val context:Context) {
-    private val CHANNEL_ID ="todo_channel_id"
+class NotificationHelper(val context: Context) {
+    private val CHANNEL_ID = "todo_channel_id"
     private val NOTIFICATION_ID = 1
 
     private fun notificationChannel() {
-        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
-            val channel = NotificationChannel(CHANNEL_ID,CHANNEL_ID,
-                NotificationManager.IMPORTANCE_DEFAULT).apply {
-                    description = "Todo channel description"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_ID,
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Todo channel description"
             }
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE)
                     as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
-    @SuppressLint("MissingPermission", "UnspecifiedImmutableFlag")
-    fun createNotification(title:String, message:String) {
+
+    @SuppressLint("MissingPermission")
+    fun createNotification(title: String, message: String) {
         notificationChannel()
         val intent = Intent(context, SplassScreen::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or
-                    Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)//
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent,
+            PendingIntent.FLAG_IMMUTABLE)
         // Inflate the custom layout
         val contentView = RemoteViews(context.packageName, R.layout.notification)
 
-// Set the content of the custom layout
+        // Set the content of the custom layout
         contentView.setTextViewText(R.id.titlenotif, title)
         contentView.setTextViewText(R.id.description, message)
 
-// Create the notification with the custom view
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+        // Create the notification with the custom view
+        val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo)
-            .setStyle(NotificationCompat.InboxStyle()
-                .addLine(title)
-                .addLine(message)
-                .setSummaryText("Sudah makan?"))
+            .setCustomContentView(contentView)
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
             .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setShowWhen(true)
 
-        NotificationManagerCompat.from(context).notify(NOTIFICATION_ID,notification)//missiong permision
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            notificationBuilder.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
+        }
+
+        val notification = notificationBuilder.build()
+
+        NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification)
     }
 }
