@@ -44,7 +44,6 @@ class seeitems_Activity : AppCompatActivity() {
         findViewById<ImageView>(R.id.bt_addbahan).setOnClickListener{
             val intent = Intent(this, TambahbahanSeeitem_Activity::class.java)
             startActivity(intent)
-            finish()
         }
         //Recylerview \/\/\/
         retrieveDataFromIntent()
@@ -73,6 +72,7 @@ class seeitems_Activity : AppCompatActivity() {
 
         bahanarraylist = arrayListOf<datarv_bahan>()
         val namabahan = intent.getStringExtra("nama_bahan")
+        println("TTETTETETETETTE"+namabahan)
         findViewById<TextView>(R.id.tvtitleseeitem).setText(namabahan)
         getbahandata(namabahan.toString())
         val itemtouch = ItemTouchHelper(swipetodelete)
