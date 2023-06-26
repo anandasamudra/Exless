@@ -101,10 +101,8 @@ class NotificationHelper(val context: Context) {
                         .addLine(title)
                         .addLine(message)
                         .setSummaryText("Sudah makan?"))
-                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                     .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setShowWhen(true)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     notificationBuilder.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)

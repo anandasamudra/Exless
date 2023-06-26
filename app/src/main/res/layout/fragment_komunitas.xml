@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     android:background="#F9F9F9">
 
+    <Button
+        android:id="@+id/bt_addseeitem2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_orangebutton"
+        android:fontFamily="@font/regular"
+        android:onClick="tambahbahan"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="Lihat komunitas lainnya"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_detailtitle4"
+        app:layout_constraintStart_toStartOf="@+id/tv_detailtitle4"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detailtitle4" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="275dp"
@@ -17,14 +35,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/futuredevelop" />
+        app:srcCompat="@drawable/community" />
 
     <TextView
         android:id="@+id/tv_detailtitle4"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
-        android:text="Fitur ini dalam tahap pengembangan, akan rilis segera!"
+        android:text="Ayo liat website komunitas pengelola sisa makanan"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -33,20 +51,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <TextView
-        android:id="@+id/tv_detailtitle5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bold"
-        android:text="Mohon tunggu"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,7 @@ class seeitems_Activity : AppCompatActivity() {
         findViewById<ImageView>(R.id.bt_addbahan).setOnClickListener{
             val intent = Intent(this, TambahbahanSeeitem_Activity::class.java)
             startActivity(intent)
+            finish()
         }
         //Recylerview \/\/\/
         retrieveDataFromIntent()

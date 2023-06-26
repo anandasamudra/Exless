@@ -63,7 +63,8 @@ class TambahbahanSeeitem_Activity : AppCompatActivity() {
                         database.child("/Users/$currentuser/Inventory/$name$jenissim")
                             .setValue(datarv_bahan(name, jenisbah, tglbeli, tglkadal, "$jumlah $satuan", jenissim))
                         Toast.makeText(this@TambahbahanSeeitem_Activity, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
-
+                        startActivity(Intent(this@TambahbahanSeeitem_Activity, seeitems_Activity::class.java))
+                        intent.putExtra("fragment", "inventory")
                         finish()
                     }
                 }
@@ -127,6 +128,8 @@ class TambahbahanSeeitem_Activity : AppCompatActivity() {
         }
 
         findViewById<ImageView>(R.id.back_tambahbahan).setOnClickListener {
+            val intent = Intent(this, seeitems_Activity::class.java)
+            startActivity(intent)
             finish()
         }
     }

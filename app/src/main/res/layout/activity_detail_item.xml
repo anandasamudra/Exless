@@ -67,6 +67,7 @@
                     android:id="@+id/img_detail"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -219,14 +220,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5"
-                    app:srcCompat="@drawable/futuredevelop" />
+                    app:srcCompat="@drawable/emptybox" />
 
                 <TextView
                     android:id="@+id/tv_detailtitle2"
                     android:layout_width="275dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="Fitur ini dalam tahap pengembangan, akan rilis segera!"
+                    android:text="Mohon ditunggu dulu ya"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -241,7 +242,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="Mohon tunggu"
+                    android:text="Data bahan belum ada"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="20sp"
