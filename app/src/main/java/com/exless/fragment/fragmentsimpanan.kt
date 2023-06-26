@@ -50,6 +50,7 @@ class fragmentsimpanan : Fragment() {
         jenisbahanarraylist.clear()
         jenisbahanarraylist.addAll(bahanarraylist!!)
         showRecylerview()
+
         //
         rv_list_jenisbahanex = view.findViewById(R.id.rv_seeexpired)
         rv_list_jenisbahanex.setHasFixedSize(true)
@@ -58,6 +59,15 @@ class fragmentsimpanan : Fragment() {
         jenisbahanarraylistex.addAll(bahanarraylistex!!)
         println(jenisbahanarraylistex)
         showRecylerviewex()
+        if (bahanarraylistex.isEmpty()){
+            println("bahan expired === $bahanarraylist")
+            view.findViewById<RecyclerView>(R.id.rv_seeexpired).visibility = View.GONE
+        }
+        else{
+            println("bahan expired === $bahanarraylist")
+            view.findViewById<RecyclerView>(R.id.rv_seeexpired).visibility = View.VISIBLE
+        }
+
 //         Recylerview jenis/kategori bahan /\/\/\
         return view// harus paling bawah(?)
     }

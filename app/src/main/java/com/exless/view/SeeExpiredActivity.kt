@@ -119,13 +119,11 @@ class SeeExpiredActivity : AppCompatActivity() {
                         println(namabahan)
                     }
                     sortBahanArrayByExpirationDate() // Sort the bahanarrayliste
-                    if (bahanarrayliste.isEmpty()){
-                        findViewById<ConstraintLayout>(R.id.img_notavailablesee).visibility = View.VISIBLE
-                    }
+
 
                 }
                 else{
-                    findViewById<ConstraintLayout>(R.id.img_notavailablesee).visibility = View.GONE
+
 
                 }
             }
