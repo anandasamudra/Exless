@@ -62,7 +62,7 @@ println(namabahan+"ini nama bahan")
         dbref = FirebaseDatabase.getInstance().getReference("/Food/$nama")
         dbref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
+                if (snapshot.exists() && nama != "") {
                     val detailItemsMap = HashMap<String, String>()
                     detailItemsMap["detailitem1"] = snapshot.child("1").getValue().toString()
                     detailItemsMap["detailitem2"] = snapshot.child("2").getValue().toString()
@@ -124,6 +124,7 @@ println(namabahan+"ini nama bahan")
                     tvDetail3.text = three
                     tvDetail4.text = four
                     tvDetail5.text = five
+
                     findViewById<ConstraintLayout>(R.id.dt2).visibility = View.VISIBLE
                     findViewById<TextView>(R.id.dt3).visibility = View.VISIBLE
                     findViewById<ConstraintLayout>(R.id.dt4).visibility = View.VISIBLE
