@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
+        <receiver
+        android:name=".notification.AlarmReceiver"
+        android:enabled="true"
+        android:exported="false" />
+        <meta-data
+            android:name="androidx.work.WorkManagerInitializer"
+            android:value="androidx.work.impl.WorkManagerInitializer" />
         <activity
             android:name=".view.detail_menu_resep"
             android:exported="false" />
