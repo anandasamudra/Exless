@@ -62,7 +62,7 @@ class TambahbahanSimpan_Activity : AppCompatActivity() {
                         database.child("/Users/$currentuser/Inventory/$name$jenissim")
                             .setValue(datarv_bahan(name, jenisbah, tglbeli, tglkadal, "$jumlah $satuan", jenissim))
                         Toast.makeText(this@TambahbahanSimpan_Activity, "Bahan telah ditambahkan", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@TambahbahanSimpan_Activity, MainActivity::class.java))
+//                        startActivity(Intent(this@TambahbahanSimpan_Activity, MainActivity::class.java))// ternyata ga perlu make hehe
                         finish()
                     }
                 }
@@ -126,9 +126,7 @@ class TambahbahanSimpan_Activity : AppCompatActivity() {
         }
 
         findViewById<ImageView>(R.id.back_tambahbahan).setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("fragment", "inventory")
-            startActivity(intent)
+            finish()
         }
     }
 }
