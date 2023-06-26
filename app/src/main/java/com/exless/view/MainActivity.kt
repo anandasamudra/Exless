@@ -48,6 +48,7 @@ import java.time.format.DateTimeParseException
 import java.util.Calendar
 
 import android.animation.ObjectAnimator
+import android.net.Uri
 import android.os.Handler
 import android.view.animation.LinearInterpolator
 import com.exless.fragment.fragmentempty
@@ -132,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.inventory -> {
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.fragment_framelayout2,fragsim)
-                        show(fragsim)
+//                        show(fragsim)
                         hide(fraghome)
                         commit()
                     }
@@ -192,8 +193,8 @@ class MainActivity : AppCompatActivity() {
         //alarm
 
         val desiredCalendar = Calendar.getInstance()
-        desiredCalendar.set(Calendar.HOUR_OF_DAY, 18)
-        desiredCalendar.set(Calendar.MINUTE,20)
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 19)
+        desiredCalendar.set(Calendar.MINUTE,2)
         desiredCalendar.set(Calendar.SECOND, 0)
 
         val currentCalendar = Calendar.getInstance()
@@ -204,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             // Create an intent for the AlarmReceiver
             val alarmIntent = Intent(this, AlarmReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent,
-                PendingIntent.FLAG_IMMUTABLE)
+                PendingIntent.FLAG_MUTABLE)
 
             // Schedule the one-time alarm
             val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -235,6 +236,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, Profile_Activity::class.java))
         finish()
     }
+    fun tocomunity(view: View) {
+        val url = "http://www.google.com"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+        }
+
     fun toaddbahan(view: View) {
         startActivity(Intent(this, TambahbahanMain_Activity::class.java))
         finish()

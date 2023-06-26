@@ -27,7 +27,7 @@ class NotificationHelper(val context: Context) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_ID,
-                NotificationManager.IMPORTANCE_HIGH
+                NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
                 description = "Todo channel description"
             }
@@ -95,14 +95,21 @@ class NotificationHelper(val context: Context) {
 
                 // Create the notification with the custom view
                 val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.logonotif)
-                    .setCustomContentView(contentView)
+                    .setSmallIcon(R.drawable.logo)
                     .setStyle(NotificationCompat.InboxStyle()
                         .addLine(title)
                         .addLine(message)
                         .setSummaryText("Sudah makan?"))
                     .setContentIntent(pendingIntent)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                    .setSmallIcon(R.drawable.logonotif)
+//                    .setCustomContentView(contentView)
+//                    .setStyle(NotificationCompat.InboxStyle()
+//                        .addLine(title)
+//                        .addLine(message)
+//                        .setSummaryText("Sudah makan?"))
+//                    .setContentIntent(pendingIntent)
+//                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     notificationBuilder.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
