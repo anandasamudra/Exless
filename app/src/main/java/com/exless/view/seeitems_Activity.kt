@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -92,6 +94,20 @@ class seeitems_Activity : AppCompatActivity() {
 
                     }
                     bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
+                    println("cek $bahanarraylist")
+                    if (bahanarraylist.isEmpty()){
+
+                        findViewById<ConstraintLayout>(R.id.img_notavailable).visibility = View.VISIBLE
+                        println("hayolo ilang $bahanarraylist")
+                    }
+                    else{
+                        println("hayolo ga ilang $bahanarraylist")
+                        findViewById<ConstraintLayout>(R.id.img_notavailable).visibility = View.GONE
+                    }
+                }
+                else{
+                    println("hayolo ga ilang")
+                    findViewById<ConstraintLayout>(R.id.img_notavailable).visibility = View.VISIBLE
                 }
             }
 
@@ -102,6 +118,8 @@ class seeitems_Activity : AppCompatActivity() {
         })
     }
     //Recylerview /\/\/\
+
+
     private fun retrieveDataFromIntent() {
         val intent = intent
         if (intent.hasExtra("nama_bahan")) {
@@ -110,4 +128,5 @@ class seeitems_Activity : AppCompatActivity() {
             // Handle the case when the intent extra is not available
         }
     }
+
 }

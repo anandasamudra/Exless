@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -118,6 +119,14 @@ class SeeExpiredActivity : AppCompatActivity() {
                         println(namabahan)
                     }
                     sortBahanArrayByExpirationDate() // Sort the bahanarrayliste
+                    if (bahanarrayliste.isEmpty()){
+                        findViewById<ConstraintLayout>(R.id.img_notavailablesee).visibility = View.VISIBLE
+                    }
+
+                }
+                else{
+                    findViewById<ConstraintLayout>(R.id.img_notavailablesee).visibility = View.GONE
+
                 }
             }
 

@@ -65,6 +65,7 @@ class fragmentsimpanan : Fragment() {
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(requireContext())
         rv_list_jenisbahan.adapter= adapter_jenisbahan(jenisbahanarraylist)
+
     }
     fun showRecylerviewex(){
         rv_list_jenisbahanex.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

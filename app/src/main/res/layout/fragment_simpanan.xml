@@ -3,28 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#80F9F9F9">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp">
-
             <TextView
                 android:id="@+id/tvtoseeitem"
+                android:onClick="toseeitem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/bold"
                 android:text="Penyimpananku"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="30sp" />
+                android:fontFamily="@font/bold"
+                android:textSize="30sp"
+                android:layout_marginTop="50dp"/>
 
             <ImageView
                 android:id="@+id/addbahan"
@@ -32,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="350dp"
                 android:layout_marginTop="60dp"
-                android:onClick="toaddbahansimpan"
+                android:onClick="toaddbahan"
                 app:srcCompat="@drawable/ic_add" />
         </RelativeLayout>
 
@@ -50,32 +48,28 @@
                 android:orientation="horizontal"
                 tools:listitem="@layout/item_list_expiredcopy" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:gravity="center">
-
             <View
                 android:layout_width="350dp"
                 android:layout_height="3dp"
-                android:layout_gravity="center"
-                android:background="#CCCCCC" />
+                android:background="#CCCCCC"
+                android:layout_gravity="center"/>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/semibold"
                 android:text="Gudang Makananku"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:fontFamily="@font/semibold"
+                android:textSize="20sp"
+                android:layout_marginLeft="20dp"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
