@@ -126,12 +126,63 @@ class TambahbahanSimpan_Activity : AppCompatActivity() {
             )
             dpd.show()
         }
-
+        findViewById<EditText>(R.id.et_tglkadal).setOnClickListener {
+            val dpd = DatePickerDialog(
+                this,
+                android.R.style.Theme_Holo_Dialog,
+                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                    val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                    findViewById<EditText>(R.id.et_tglkadal).setText(formattedDate)
+                }, year, month, day
+            )
+            dpd.show()
+        }
+        findViewById<EditText>(R.id.et_tglpembel).setOnClickListener {
+            val dpd = DatePickerDialog(
+                this,
+                android.R.style.Theme_Holo_Dialog,
+                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                    val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                    findViewById<EditText>(R.id.et_tglpembel).setText(formattedDate)
+                }, year, month, day
+            )
+            dpd.show()
+        }
         findViewById<ImageView>(R.id.back_tambahbahan).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("fragment", "inventory")
             startActivity(intent)
 
         }
+    }
+    fun opencalendarpembel(){
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val dpd = DatePickerDialog(
+            this,
+            android.R.style.Theme_Holo_Dialog,
+            DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                findViewById<EditText>(R.id.et_tglpembel).setText(formattedDate)
+            }, year, month, day
+        )
+        dpd.show()
+    }
+    fun opencalendarkadal(){
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val dpd = DatePickerDialog(
+            this,
+            android.R.style.Theme_Holo_Dialog,
+            DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                findViewById<EditText>(R.id.et_tglpembel).setText(formattedDate)
+            }, year, month, day
+        )
+        dpd.show()
     }
 }

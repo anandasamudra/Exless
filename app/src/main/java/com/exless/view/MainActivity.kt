@@ -194,8 +194,8 @@ class MainActivity : AppCompatActivity() {
         //alarm
 
         val desiredCalendar = Calendar.getInstance()
-        desiredCalendar.set(Calendar.HOUR_OF_DAY, 19)
-        desiredCalendar.set(Calendar.MINUTE,41)
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 8)
+        desiredCalendar.set(Calendar.MINUTE, 0)
         desiredCalendar.set(Calendar.SECOND, 0)
 
         val currentCalendar = Calendar.getInstance()
