@@ -50,7 +50,9 @@ import java.util.Calendar
 import android.animation.ObjectAnimator
 import android.net.Uri
 import android.os.Handler
+import android.os.Looper
 import android.view.animation.LinearInterpolator
+import android.widget.Toast
 import com.exless.fragment.fragmentempty
 import com.exless.notification.NotificationHelper
 
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var jumbahanmainex : ArrayList<String>
     lateinit var bahanarraylistex : ArrayList<Datarv_seeexperired>
     private lateinit var rv_list_jenisbahanex: RecyclerView
+    private var doubleBackToExitPressedOnce = false
 //    private lateinit var profilehome : ImageView
     var i : Int = 0
     private var isDataFetched = false
@@ -448,8 +451,14 @@ class MainActivity : AppCompatActivity() {
 
     //shared preference untuk mencegah back ke login \/\/\/
     override fun onBackPressed() {
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        startActivity(intent)
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 }

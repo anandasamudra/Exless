@@ -95,7 +95,6 @@
         android:fontFamily="@font/regular"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:text="test@gmail.com"
         android:textColor="#626262"
         android:textCursorDrawable="@drawable/cursorcolor"
         app:layout_constraintStart_toStartOf="@+id/textView3"
@@ -122,7 +121,7 @@
             android:ems="10"
             android:gravity="center|start|left"
             android:inputType="textPassword"
-            android:text="123456"
+            android:paddingLeft="10dp"
             android:textColor="#626262"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>

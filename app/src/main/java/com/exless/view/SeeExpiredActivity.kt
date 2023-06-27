@@ -161,8 +161,8 @@ class SeeExpiredActivity : AppCompatActivity() {
     }
     //shared preference untuk mencegah back ke login \/\/\/
     override fun onBackPressed() {
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fragment", "inventory")
         startActivity(intent)
     }
 }
