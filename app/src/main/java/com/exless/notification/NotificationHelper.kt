@@ -68,9 +68,7 @@ class NotificationHelper(val context: Context) {
                 throw SecurityException("Notification permission not granted")
             }
         } catch (e: SecurityException) {
-            // Handle the security exception here
             e.printStackTrace()
-            // You can choose to log the error, show a toast, or handle it in any other way
         }
     }
 
@@ -86,14 +84,10 @@ class NotificationHelper(val context: Context) {
                 }
                 val pendingIntent = PendingIntent.getActivity(context, 0, intent,
                     PendingIntent.FLAG_IMMUTABLE)
-                // Inflate the custom layout
                 val contentView = RemoteViews(context.packageName, R.layout.notification)
-
-                // Set the content of the custom layout
                 contentView.setTextViewText(R.id.titlenotif, title)
                 contentView.setTextViewText(R.id.description, message)
 
-                // Create the notification with the custom view
                 val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.logo)
                     .setStyle(NotificationCompat.InboxStyle()
@@ -102,14 +96,6 @@ class NotificationHelper(val context: Context) {
                         .setSummaryText("Sudah makan?"))
                     .setContentIntent(pendingIntent)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//                    .setSmallIcon(R.drawable.logonotif)
-//                    .setCustomContentView(contentView)
-//                    .setStyle(NotificationCompat.InboxStyle()
-//                        .addLine(title)
-//                        .addLine(message)
-//                        .setSummaryText("Sudah makan?"))
-//                    .setContentIntent(pendingIntent)
-//                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     notificationBuilder.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
@@ -122,7 +108,6 @@ class NotificationHelper(val context: Context) {
                 showPermissionRequestNotification()
             }
         } catch (e: SecurityException) {
-            // Handle the security exception (e.g., show an error message)
             e.printStackTrace()
         }
     }

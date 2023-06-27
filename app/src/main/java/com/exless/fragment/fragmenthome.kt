@@ -167,7 +167,6 @@ class fragmenthome : Fragment(R.layout.fragment_home) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle database error
             }
         })
     }

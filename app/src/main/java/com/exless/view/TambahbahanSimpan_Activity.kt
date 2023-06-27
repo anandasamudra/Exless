@@ -70,7 +70,6 @@ class TambahbahanSimpan_Activity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    // Handle error
                 }
             })
         }

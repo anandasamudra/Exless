@@ -100,11 +100,9 @@ class detail_menu_resep : AppCompatActivity() {
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                // Not used
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Not used
             }
         })
 

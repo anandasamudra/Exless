@@ -26,7 +26,6 @@ class fragmentsimpanan : Fragment() {
     private lateinit var rv_seeexpired : RecyclerView
     private var jenisbahanarraylist = ArrayList<Datarv_jenisbahan>()
     private var binding: FragmentHomeBinding? =null
-    //
     private lateinit var dbrefex : DatabaseReference
     private lateinit var dbqueryex : Query
     private lateinit var rv_list_jenisbahanex: RecyclerView

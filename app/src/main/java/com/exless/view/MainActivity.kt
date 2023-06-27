@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
@@ -31,14 +30,12 @@ import com.exless.`object`.Datarv_jenisbahan
 import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 //get days
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -47,14 +44,11 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.format.DateTimeParseException
 import java.util.Calendar
 
-import android.animation.ObjectAnimator
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import com.exless.fragment.fragmentempty
-import com.exless.notification.NotificationHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -87,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         firebaseAuth = FirebaseAuth.getInstance()
         supportActionBar?.hide()
-// Initialize ThreeTenABP
+// inisialisasi untuk hitung tanggal
         AndroidThreeTen.init(this)
 //bottom navigation fragment \/\/\/
         val fraghome = fragmenthome()
@@ -162,12 +156,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-//        val rotationAnimator = ObjectAnimator.ofFloat(findViewById(R.id.img_loading), "rotation", 0f, 180f)
-//        rotationAnimator.duration = 100000
-//        rotationAnimator.interpolator = LinearInterpolator()
-//
-//        // Start the rotation animation
-//        rotationAnimator.start()
+
 // bottom navigation fragment /\/\/\
 
         //Jumlah makanan di kategori fragment simpanan \/\/\/
@@ -185,16 +174,17 @@ class MainActivity : AppCompatActivity() {
         bahanarraylistex = ArrayList<Datarv_seeexperired>()
         getbahandataex()
 
+
+        //Jumlah makanan di kategori fragment simpanan /\/\/\
+        //dapatkan bahan dari profile \/\/\/
         try {
-        getphoto()
+            getphoto()
         }
         catch (e:Exception){
             println("Erornya adalah = \n\n"+e)
         }
-
-        //Jumlah makanan di kategori fragment simpanan /\/\/\
-
-        //alarm
+//dapatkan bahan dari profile /\/\/\
+        //alarm \/\/\/
 
         val desiredCalendar = Calendar.getInstance()
         desiredCalendar.set(Calendar.HOUR_OF_DAY, 8)
@@ -204,7 +194,7 @@ class MainActivity : AppCompatActivity() {
         val currentCalendar = Calendar.getInstance()
         val currentTimeMillis = System.currentTimeMillis()
 
-// Check if the desired date and time have already passed
+// cek udah lewat tanggalnya
         if (currentCalendar.before(desiredCalendar)) {
             // Create an intent for the AlarmReceiver
             val alarmIntent = Intent(this, AlarmReceiver::class.java)
@@ -217,6 +207,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             println("bakekok")
         }
+        //alarm /\/\/\
     }
 
     //bottom navigation fragment \/\/\/
@@ -236,12 +227,13 @@ class MainActivity : AppCompatActivity() {
         }
 
     // bottom navigation fragment /\/\/\
+    //button
     fun toprofile(view: View) {
         startActivity(Intent(this, Profile_Activity::class.java))
         finish()
     }
     fun tocomunity(view: View) {
-        val url = "http://www.google.com"
+        val url = "http://www.google.com"//link website kalau udah ada
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
         }
@@ -255,10 +247,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
 
     }
-//    fun toseeitem(view: View) {ga di pake
-//        startActivity(Intent(this, seeitems_Activity::class.java))
-//        finish()
-//    }
     fun tosimpanan(view: View) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_framelayout2,fragmentsimpanan())
@@ -268,10 +256,7 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
     }
-    fun toseeexpired(view: View) {
-        startActivity(Intent(this, SeeExpiredActivity::class.java))
-        finish()
-    }
+
     fun toseeexpiredmain(view: View) {
         startActivity(Intent(this, SeeExpiredMainActivity::class.java))
         finish()
@@ -280,13 +265,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this,DetailBeritaActivity::class.java))
         finish()
     }
-    interface PhotoUploadCallback {
-        fun onPhotoUploadComplete()
-    }
     fun getphoto() {
         if (!isDataFetched) {
-            // Set the flag to true to indicate that the function has been called
-
             val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
             dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/photos")
             dbref.addValueEventListener(object : ValueEventListener {
@@ -305,19 +285,16 @@ class MainActivity : AppCompatActivity() {
 
                             }
                         } else {
-                            // Handle the case when the image URL is not available
+
                         }
 
-                        // Notify the listener that the upload is complete
-//                        callback() // Call the callback function
                     }
 
 
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    // Handle the database error
-//                    callback()
+
                 }
             })
             i++
@@ -351,7 +328,6 @@ class MainActivity : AppCompatActivity() {
 
             }
             override fun onCancelled(error: DatabaseError) {
-                // Handle the error
             }
         })
         }
@@ -386,23 +362,16 @@ class MainActivity : AppCompatActivity() {
                                     val days = ChronoUnit.DAYS.between(startDate, endDate)
                                     tglkadal = days.toString() + " hari"
                                 }
-
-//                                println("Number of days: $tglkadal")
                             } catch (e: DateTimeParseException) {
-                                // Handle the case when parsing the dates fails
                                 tglkadal = "EXPIRED"
-//                                println("Invalid date format")
                             } catch (e: Exception) {
-                                // Handle any other exceptions that might occur
                                 tglkadal = "EXPIRED"
-//                                println("An error occurred: ${e.message}")
                             }
                         }
 
                         else{
                             tglkadal ="-"
                         }
-//                        println("Number of dayssadasda f: $tglkadal")
                         //compare today date with expired date /\/\/\
                         val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
                         val bahanList = Datarv_seeexperired(
@@ -414,7 +383,6 @@ class MainActivity : AppCompatActivity() {
                         bahanarraylistex.add(bahanList)
 
                     }
-//                    bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
                 }
             }
 
@@ -444,7 +412,7 @@ class MainActivity : AppCompatActivity() {
     private fun getCurrentDate(): String {
         val c = Calendar.getInstance()
         val day = c.get(Calendar.DAY_OF_MONTH)
-        val month = c.get(Calendar.MONTH) + 1 // Months are zero-based, so add 1
+        val month = c.get(Calendar.MONTH) + 1
         val year = c.get(Calendar.YEAR)
         return String.format("%02d/%02d/%04d", day, month, year)
     }

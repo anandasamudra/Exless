@@ -140,7 +140,6 @@ println(namabahan+"ini nama bahan")
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle onCancelled
             }
         })
     }
