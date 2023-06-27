@@ -54,6 +54,7 @@
         <item>Sayur Bayam</item>
         <item>Sayur Kangkung</item>
         <item>Sayur Sawi</item>
+        <item>Sayur Kol</item>
 
         <item>Wortel</item>
         <item>Timun</item>
@@ -74,12 +75,15 @@
         <item>Brokoli</item>
         <item>Kepiting</item>
         <item>Cumi Cumi</item>
+
+
     </string-array>
     <string-array name="satuan">
         <item>pcs</item>
         <item>g</item>
         <item>dus</item>
         <item>buah</item>
+        <item>L</item>
     </string-array>
 
 </resources>
