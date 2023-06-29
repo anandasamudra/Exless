@@ -73,6 +73,7 @@
         android:fontFamily="@font/medium"
         android:text="@string/ketentuan_layanan"
         android:textColor="#626262"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
 
@@ -133,10 +134,11 @@
             android:id="@+id/pass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:ems="10"
             android:background="@drawable/bg_null"
+            android:ems="10"
             android:gravity="center|start|left"
             android:inputType="textPassword"
+            android:paddingLeft="10dp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
             android:textColor="#626262" />
@@ -158,10 +160,11 @@
             android:id="@+id/pass2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:ems="10"
             android:background="@drawable/bg_null"
+            android:ems="10"
             android:gravity="center|start|left"
             android:inputType="textPassword"
+            android:paddingLeft="10dp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
             android:textColor="#626262" />
