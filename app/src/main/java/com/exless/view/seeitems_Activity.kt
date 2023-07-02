@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,12 +37,13 @@ class seeitems_Activity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//disable auto darkmode
         supportActionBar?.hide()
         findViewById<ImageView>(R.id.back_seeitem).setOnClickListener{
-            startActivity(Intent(this,MainActivity::class.java))
-            finish()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("fragment", "inventory")
+            startActivity(intent)
         }
         findViewById<ImageView>(R.id.bt_addbahan).setOnClickListener{
-            startActivity(Intent(this, TambahbahanMain_Activity::class.java))
-            finish()
+            val intent = Intent(this, TambahbahanSeeitem_Activity::class.java)
+            startActivity(intent)
         }
         //Recylerview \/\/\/
         retrieveDataFromIntent()
@@ -69,7 +72,8 @@ class seeitems_Activity : AppCompatActivity() {
 
         bahanarraylist = arrayListOf<datarv_bahan>()
         val namabahan = intent.getStringExtra("nama_bahan")
-        var text = findViewById<TextView>(R.id.tvtitleseeitem).setText(namabahan)
+        println("TTETTETETETETTE"+namabahan)
+        findViewById<TextView>(R.id.tvtitleseeitem).setText(namabahan)
         getbahandata(namabahan.toString())
         val itemtouch = ItemTouchHelper(swipetodelete)
         itemtouch.attachToRecyclerView(bahanrecylerview)
@@ -91,6 +95,20 @@ class seeitems_Activity : AppCompatActivity() {
 
                     }
                     bahanrecylerview.adapter = adapter_bahan(bahanarraylist)
+                    println("cek $bahanarraylist")
+                    if (bahanarraylist.isEmpty()){
+
+                        findViewById<ConstraintLayout>(R.id.img_notavailable).visibility = View.VISIBLE
+                        println("hayolo ilang $bahanarraylist")
+                    }
+                    else{
+                        println("hayolo ga ilang $bahanarraylist")
+                        findViewById<ConstraintLayout>(R.id.img_notavailable).visibility = View.GONE
+                    }
+                }
+                else{
+                    println("hayolo ga ilang")
+                    findViewById<ConstraintLayout>(R.id.img_notavailable).visibility = View.VISIBLE
                 }
             }
 
@@ -101,6 +119,8 @@ class seeitems_Activity : AppCompatActivity() {
         })
     }
     //Recylerview /\/\/\
+
+
     private fun retrieveDataFromIntent() {
         val intent = intent
         if (intent.hasExtra("nama_bahan")) {
@@ -109,10 +129,5 @@ class seeitems_Activity : AppCompatActivity() {
             // Handle the case when the intent extra is not available
         }
     }
-    //shared preference untuk mencegah back ke login \/\/\/
-    override fun onBackPressed() {
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        startActivity(intent)
-    }
+
 }

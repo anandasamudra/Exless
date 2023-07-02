@@ -4,17 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
->
+    android:background="#F9F9F9">
 
-    <TextView
-        android:id="@+id/textView9"
+    <Button
+        android:id="@+id/bt_addseeitem2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Komunitas"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_orangebutton"
+        android:fontFamily="@font/regular"
+        android:onClick="tocomunity"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="Lihat komunitas lainnya"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_detailtitle4"
+        app:layout_constraintStart_toStartOf="@+id/tv_detailtitle4"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detailtitle4" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="275dp"
+        android:layout_height="275dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/community" />
+
+    <TextView
+        android:id="@+id/tv_detailtitle4"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bold"
+        android:text="Ayo liat website komunitas pengelola sisa makanan"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

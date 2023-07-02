@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.exless.R
 import com.exless.`object`.Datarv_seeexperired
 import com.exless.view.SeeExpiredActivity
+import java.util.Random
 
 
 class adapter_seeexpiredsimpanan(val array: ArrayList<Datarv_seeexperired>) : RecyclerView.Adapter<adapter_seeexpiredsimpanan.viewholder_jenisbahan>() {
@@ -58,7 +59,7 @@ class adapter_seeexpiredsimpanan(val array: ArrayList<Datarv_seeexperired>) : Re
                 .into(holder.imgview)
         } else {
             //default  image
-            holder.imgview.setImageResource(R.drawable.kacang)
+            holder.imgview.setImageResource(randomimage())
         }
 
         holder.itemView.setOnClickListener {
@@ -67,5 +68,29 @@ class adapter_seeexpiredsimpanan(val array: ArrayList<Datarv_seeexperired>) : Re
 //            intent.putExtra("nama_bahan", title)
             context.startActivity(intent)
         }
+    }
+    fun randomimage (): Int {
+        var random = Random().nextInt(5)+1
+        val img1 = R.drawable.a1
+        val img2 = R.drawable.a2
+        val img3 = R.drawable.a3
+        val img4 = R.drawable.a4
+        val img5 = R.drawable.a5
+        if (random ==1){
+            random = img1
+        }
+        if (random ==2){
+            random = img2
+        }
+        if (random ==3){
+            random = img3
+        }
+        if (random ==4){
+            random = img4
+        }
+        if (random ==5){
+            random = img5
+        }
+        return random
     }
 }

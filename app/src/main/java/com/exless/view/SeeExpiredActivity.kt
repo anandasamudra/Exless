@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -60,8 +61,9 @@ class SeeExpiredActivity : AppCompatActivity() {
     }
 
     fun toback(view: View) {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fragment", "inventory")
+        startActivity(intent)
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -117,6 +119,12 @@ class SeeExpiredActivity : AppCompatActivity() {
                         println(namabahan)
                     }
                     sortBahanArrayByExpirationDate() // Sort the bahanarrayliste
+
+
+                }
+                else{
+
+
                 }
             }
 
@@ -153,8 +161,8 @@ class SeeExpiredActivity : AppCompatActivity() {
     }
     //shared preference untuk mencegah back ke login \/\/\/
     override fun onBackPressed() {
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fragment", "inventory")
         startActivity(intent)
     }
 }

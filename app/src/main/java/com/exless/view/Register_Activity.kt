@@ -80,7 +80,5 @@ class Register_Activity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-        //         testing to tambah
-
     }
 }

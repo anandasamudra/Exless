@@ -5,8 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REQUEST_NOTIFICATION_BADGE" />
 
     <application
         android:allowBackup="true"
@@ -19,9 +20,10 @@
         android:theme="@style/Theme.Exless"
         tools:targetApi="31">
         <receiver
-        android:name=".notification.AlarmReceiver"
-        android:enabled="true"
-        android:exported="false" />
+            android:name=".notification.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
         <meta-data
             android:name="androidx.work.WorkManagerInitializer"
             android:value="androidx.work.impl.WorkManagerInitializer" />
@@ -44,7 +46,18 @@
             android:name=".view.SeeExpiredActivity"
             android:exported="false" />
         <activity
+            android:name=".view.SeeExpiredMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.TambahbahanMain_Activity"
+            android:exported="false"
+            android:theme="@style/Theme.dropdown" />
+        <activity
+            android:name=".view.TambahbahanSimpan_Activity"
+            android:exported="false"
+            android:theme="@style/Theme.dropdown" />
+        <activity
+            android:name=".view.TambahbahanSeeitem_Activity"
             android:exported="false"
             android:theme="@style/Theme.dropdown" />
         <activity

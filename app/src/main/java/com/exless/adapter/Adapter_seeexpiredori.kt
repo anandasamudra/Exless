@@ -58,7 +58,6 @@ class adapter_seeexpiredori(val array: ArrayList<Datarv_seeexperired>) : Recycle
                 .into(holder.imgview)
         } else {
             //default  image
-
             holder.imgview.setImageResource(randomimage())
         }
 

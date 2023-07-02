@@ -26,7 +26,6 @@ class fragmentsimpanan : Fragment() {
     private lateinit var rv_seeexpired : RecyclerView
     private var jenisbahanarraylist = ArrayList<Datarv_jenisbahan>()
     private var binding: FragmentHomeBinding? =null
-    //
     private lateinit var dbrefex : DatabaseReference
     private lateinit var dbqueryex : Query
     private lateinit var rv_list_jenisbahanex: RecyclerView
@@ -50,6 +49,7 @@ class fragmentsimpanan : Fragment() {
         jenisbahanarraylist.clear()
         jenisbahanarraylist.addAll(bahanarraylist!!)
         showRecylerview()
+
         //
         rv_list_jenisbahanex = view.findViewById(R.id.rv_seeexpired)
         rv_list_jenisbahanex.setHasFixedSize(true)
@@ -58,6 +58,15 @@ class fragmentsimpanan : Fragment() {
         jenisbahanarraylistex.addAll(bahanarraylistex!!)
         println(jenisbahanarraylistex)
         showRecylerviewex()
+        if (bahanarraylistex.isEmpty()){
+            println("bahan expired === $bahanarraylist")
+            view.findViewById<RecyclerView>(R.id.rv_seeexpired).visibility = View.GONE
+        }
+        else{
+            println("bahan expired === $bahanarraylist")
+            view.findViewById<RecyclerView>(R.id.rv_seeexpired).visibility = View.VISIBLE
+        }
+
 //         Recylerview jenis/kategori bahan /\/\/\
         return view// harus paling bawah(?)
     }
@@ -65,6 +74,7 @@ class fragmentsimpanan : Fragment() {
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(requireContext())
         rv_list_jenisbahan.adapter= adapter_jenisbahan(jenisbahanarraylist)
+
     }
     fun showRecylerviewex(){
         rv_list_jenisbahanex.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

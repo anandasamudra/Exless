@@ -15,8 +15,8 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val workRequest = PeriodicWorkRequest.Builder(
             ExpiredWorker::class.java,
-            15, // Repeat interval (in hours)
-            TimeUnit.MINUTES
+            25,
+            TimeUnit.HOURS
         ).build()
 
         WorkManager.getInstance(context).enqueue(workRequest)

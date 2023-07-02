@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="350dp"
                 android:layout_marginTop="60dp"
-                android:onClick="toaddbahan"
+                android:onClick="toaddbahansimpan"
                 app:srcCompat="@drawable/ic_add" />
         </RelativeLayout>
 
@@ -39,15 +39,28 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_seeexpired"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:orientation="horizontal"
-                tools:listitem="@layout/item_list_expiredcopy" />
+                android:visibility="visible"
+                tools:listitem="@layout/item_list_expiredcopy">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <ImageView
+                android:id="@+id/img_seeexpiredsimpanan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/emptybox" />
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="5dp"

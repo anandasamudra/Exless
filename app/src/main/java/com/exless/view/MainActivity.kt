@@ -23,13 +23,13 @@ import com.exless.adapter.adapter_seeexpiredsimpanan
 import com.exless.fragment.fragmentbelanja
 import com.exless.fragment.fragmenthome
 import com.exless.fragment.fragmentkomunitas
+import com.exless.fragment.fragmentloading
 import com.exless.fragment.fragmentsimpanan
 import com.exless.notification.AlarmReceiver
 import com.exless.`object`.Datarv_jenisbahan
 import com.exless.`object`.Datarv_seeexperired
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -44,6 +44,12 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.format.DateTimeParseException
 import java.util.Calendar
 
+import android.net.Uri
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
+import com.exless.fragment.fragmentempty
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
@@ -57,6 +63,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var jumbahanmainex : ArrayList<String>
     lateinit var bahanarraylistex : ArrayList<Datarv_seeexperired>
     private lateinit var rv_list_jenisbahanex: RecyclerView
+    private var doubleBackToExitPressedOnce = false
 //    private lateinit var profilehome : ImageView
     var i : Int = 0
     private var isDataFetched = false
@@ -74,24 +81,83 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         firebaseAuth = FirebaseAuth.getInstance()
         supportActionBar?.hide()
-// Initialize ThreeTenABP
+// inisialisasi untuk hitung tanggal
         AndroidThreeTen.init(this)
 //bottom navigation fragment \/\/\/
         val fraghome = fragmenthome()
         val fragbel = fragmentbelanja()
         val fragsim = fragmentsimpanan()
         val fragkom = fragmentkomunitas()
-        setfragment(fraghome)
-        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> setfragment(fraghome)
-                R.id.inventory -> setfragment(fragsim)
-                R.id.shop -> setfragment(fragbel)
-                R.id.comunity -> setfragment(fragkom)
+        val fragload = fragmentloading()
+        val fragtrans = fragmentempty()
+        val desiredFragmentTag = intent.getStringExtra("fragment")
+
+        setfragmentinisiasi(fraghome)//waasda
+        if (desiredFragmentTag == "inventory") {//safe loading to simpanan
+            setfragment2(fragload)
+            supportFragmentManager.beginTransaction().apply {
+                hide(fraghome)
+                commit()
             }
-            true
+            Handler().postDelayed({
+                // Change to another fragment here
+                println("dari inven")
+                supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.fragment_framelayout2,fragsim)
+                    hide(fraghome)
+                    hide(fragload)//
+                    commit()
+                    findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
+                }
+            }, 200) // Adjust the delay time as needed
+
         }
-        // bottom navigation fragment /\/\/\
+        else{
+            println("ini mulaiiiiiasdklasdaslkdh alsdfhads kfsadjfgas")
+            setfragment2(fragtrans)
+        }
+
+
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        show(fraghome)
+                        replace(R.id.fragment_framelayout2,fragtrans)
+                        commit()
+                    }
+                    true
+                }
+                R.id.inventory -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.fragment_framelayout2,fragsim)
+//                        show(fragsim)
+                        hide(fraghome)
+                        commit()
+                    }
+                    true
+                }
+                R.id.shop -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.fragment_framelayout2,fragbel)
+                        hide(fraghome)
+                        commit()
+                    }
+                    true
+                }
+                R.id.comunity -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.fragment_framelayout2,fragkom)
+                        hide(fraghome)
+                        commit()
+                    }
+                    true
+                }
+                else -> false
+            }
+        }
+
+// bottom navigation fragment /\/\/\
 
         //Jumlah makanan di kategori fragment simpanan \/\/\/
         val fragmensimpan = layoutInflater.inflate(R.layout.fragment_simpanan, null)
@@ -107,62 +173,33 @@ class MainActivity : AppCompatActivity() {
         jumbahanmainex = ArrayList()
         bahanarraylistex = ArrayList<Datarv_seeexperired>()
         getbahandataex()
-//        getphoto()
-        // Retrieve the image URL from the intent
-//        profilehome = findViewById(R.id.img_userphotohome)
 
+
+        //Jumlah makanan di kategori fragment simpanan /\/\/\
+        //dapatkan bahan dari profile \/\/\/
         try {
-//            var imageUrl = intent.getIntExtra("imageUrl",0)
-//
-//            println("ini inisiasi\n\n\n\n"+imageUrl)
-//            if (imageUrl == 1){
-//                getphoto {
-//                    imageUrl =0
-//                    println("ini setelahnya ="+imageUrl)
-//                }
-//
-//            }
-getphoto()
-//
-//// Load the image using Glide or any other image loading library
-//            if (imageUrl == null){
-////            Glide.with(this@MainActivity)
-////                .load("https://firebasestorage.googleapis.com/v0/b/exless-455f4.appspot.com/o/images%2F9e0f5391-8809-4e8f-9ee6-407a25191438?alt=media&token=3fb11ed0-00fc-4eff-9ba4-2e4e46e1e2c4")
-////                .into(findViewById(R.id.img_userphotohome))
-////println(imageUrl)
-//            }
-//            if (imageUrl != null){
-////            Glide.with(this)
-////                .load(imageUrl)
-////                .into(findViewById(R.id.img_userphotohome))
-////            println("haii"+imageUrl)
-//            }
-//            Glide.with(this)
-//                .load("https://example.com/image.jpg") // Replace with your image URL
-//                .into(findViewById(R.id.img_userphotohome))
-//getphoto()
-            println("ini I\n\n\n\n"+i)
+            getphoto()
         }
         catch (e:Exception){
             println("Erornya adalah = \n\n"+e)
         }
+//dapatkan bahan dari profile /\/\/\
+        //alarm \/\/\/
 
-        //Jumlah makanan di kategori fragment simpanan /\/\/\
-
-        //alarm
         val desiredCalendar = Calendar.getInstance()
-        desiredCalendar.set(Calendar.HOUR_OF_DAY, 5)
-        desiredCalendar.set(Calendar.MINUTE, 25)
+        desiredCalendar.set(Calendar.HOUR_OF_DAY, 8)
+        desiredCalendar.set(Calendar.MINUTE, 0)
         desiredCalendar.set(Calendar.SECOND, 0)
 
         val currentCalendar = Calendar.getInstance()
         val currentTimeMillis = System.currentTimeMillis()
 
-// Check if the desired date and time have already passed
+// cek udah lewat tanggalnya
         if (currentCalendar.before(desiredCalendar)) {
             // Create an intent for the AlarmReceiver
             val alarmIntent = Intent(this, AlarmReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0)
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent,
+                PendingIntent.FLAG_MUTABLE)
 
             // Schedule the one-time alarm
             val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -170,46 +207,66 @@ getphoto()
         } else {
             println("bakekok")
         }
+        //alarm /\/\/\
     }
 
     //bottom navigation fragment \/\/\/
-    private fun setfragment(fragment: Fragment) =
+    private fun setfragmentinisiasi(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_framelayout,fragment)
             commit()
+            println("setfragmen inisiasi")
         }
+
+
+    private fun setfragment2(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_framelayout2,fragment)
+
+            commit()
+        }
+
     // bottom navigation fragment /\/\/\
+    //button
     fun toprofile(view: View) {
         startActivity(Intent(this, Profile_Activity::class.java))
         finish()
     }
+    fun tocomunity(view: View) {
+        val url = "http://www.google.com"//link website kalau udah ada
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+        }
+
     fun toaddbahan(view: View) {
         startActivity(Intent(this, TambahbahanMain_Activity::class.java))
         finish()
     }
-    fun toseeitem(view: View) {
-        startActivity(Intent(this, seeitems_Activity::class.java))
-        finish()
+    fun toaddbahansimpan(view: View) {
+        startActivity(Intent(this, TambahbahanSimpan_Activity::class.java))
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
+
     }
     fun tosimpanan(view: View) {
-        setfragment(fragmentsimpanan())
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_framelayout2,fragmentsimpanan())
+            show(fragmentsimpanan())
+            hide(fragmenthome())
+            commit()
+        }
         findViewById<BottomNavigationView>(R.id.bottomNavigationView_layout).selectedItemId =R.id.inventory
     }
-    fun toseeexpired(view: View) {
-        startActivity(Intent(this, SeeExpiredActivity::class.java))
+
+    fun toseeexpiredmain(view: View) {
+        startActivity(Intent(this, SeeExpiredMainActivity::class.java))
         finish()
     }
     fun detailberita(view: View) {
         startActivity(Intent(this,DetailBeritaActivity::class.java))
         finish()
     }
-    interface PhotoUploadCallback {
-        fun onPhotoUploadComplete()
-    }
     fun getphoto() {
         if (!isDataFetched) {
-            // Set the flag to true to indicate that the function has been called
-
             val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
             dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/photos")
             dbref.addValueEventListener(object : ValueEventListener {
@@ -228,19 +285,16 @@ getphoto()
 
                             }
                         } else {
-                            // Handle the case when the image URL is not available
+
                         }
 
-                        // Notify the listener that the upload is complete
-//                        callback() // Call the callback function
                     }
 
 
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    // Handle the database error
-//                    callback()
+
                 }
             })
             i++
@@ -257,57 +311,25 @@ getphoto()
         dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
         val dataTitle = resources.getStringArray(R.array.data_name)
         val dataimage = resources.obtainTypedArray(R.array.data_photo)
-
-        // Clear the existing data
-        jumbahanmain.clear()
-        bahanarraylist.clear()
-
         for (i in dataTitle.indices) {
-            dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
-            dbquery.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val count: String = snapshot.childrenCount.toString()
-                    jumbahanmain.add(count)
-                    val bahanList = Datarv_jenisbahan(
-                        dataTitle[i],
-                        "",
-                        dataimage.getResourceId(i, -1)
-                    )
-                    bahanList.description = "Kamu mempunyai $count macam"
-                    bahanarraylist.add(bahanList)
+        dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
+        dbquery.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val count: String = snapshot.childrenCount.toString()
+//                println("countmain"+count)
+                jumbahanmain.add(count)
+                val bahanList = Datarv_jenisbahan(
+                    dataTitle[i],
+                    "",
+                    dataimage.getResourceId(i, -1)
+                )
+                bahanList.description = "Kamu mempunyai $count macam"
+                bahanarraylist.add(bahanList)
 
-                    // Update the RecyclerView adapter
-                    rv_list_jenisbahan.adapter?.notifyDataSetChanged()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    // Handle the error
-                }
-            })
-
-            // Listen for child removed event
-            dbquery.addChildEventListener(object : ChildEventListener {
-                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                    // Not used
-                }
-
-                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                    // Not used
-                }
-
-                override fun onChildRemoved(snapshot: DataSnapshot) {
-                    // Child removed from the database, update the RecyclerView
-                    getbahandata()
-                }
-
-                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                    // Not used
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    // Handle the error
-                }
-            })
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
         }
 
         showRecylerview()
@@ -316,15 +338,13 @@ getphoto()
     private fun getbahandataex() {
         val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         dbrefex = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
-        dbrefex.addValueEventListener(object : ValueEventListener {
+        dbrefex.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                // Clear the existing data
-                bahanarraylistex.clear()
-
-                if (snapshot.exists()) {
-                    for (bahanSnapshot in snapshot.children) {
+                if (snapshot.exists()){
+                    for (bahanSnapshot in snapshot.children){
                         val namabahan = bahanSnapshot.child("nama").getValue().toString()
-                        var tglkadal: String
+                        //compare today date with expired date \/\/\/
+                        var tglkadal : String
                         if (bahanSnapshot.child("tglkadaluarsa").getValue().toString() != "") {
                             tglkadal = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
 
@@ -347,10 +367,12 @@ getphoto()
                             } catch (e: Exception) {
                                 tglkadal = "EXPIRED"
                             }
-                        } else {
-                            tglkadal = "-"
                         }
 
+                        else{
+                            tglkadal ="-"
+                        }
+                        //compare today date with expired date /\/\/\
                         val jumlah = bahanSnapshot.child("jumlah").getValue().toString()
                         val bahanList = Datarv_seeexperired(
                             namabahan,
@@ -359,23 +381,19 @@ getphoto()
                             0
                         )
                         bahanarraylistex.add(bahanList)
-                    }
-                } else {
-                    // Handle the case when there are no ingredients
-                }
 
-                // Update the RecyclerView adapter
-                rv_list_jenisbahanex.adapter?.notifyDataSetChanged()
+                    }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle the error
+                TODO("Not yet implemented")
             }
+
         })
 
         showRecylerviewex()
     }
-
     fun showRecylerview(){
         rv_list_jenisbahan.layoutManager = LinearLayoutManager(this)
         rv_list_jenisbahan.adapter= adapter_jenisbahan(bahanarraylist)
@@ -394,15 +412,21 @@ getphoto()
     private fun getCurrentDate(): String {
         val c = Calendar.getInstance()
         val day = c.get(Calendar.DAY_OF_MONTH)
-        val month = c.get(Calendar.MONTH) + 1 // Months are zero-based, so add 1
+        val month = c.get(Calendar.MONTH) + 1
         val year = c.get(Calendar.YEAR)
         return String.format("%02d/%02d/%04d", day, month, year)
     }
 
     //shared preference untuk mencegah back ke login \/\/\/
     override fun onBackPressed() {
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        startActivity(intent)
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 }
