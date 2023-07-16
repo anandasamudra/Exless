@@ -9,31 +9,29 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
 
+class ExpiredWorker(val context: Context, val params: WorkerParameters) : Worker(context, params) {
+    private lateinit var dbref: DatabaseReference
 
-class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(context,params) {
-    private lateinit var dbref : DatabaseReference
     override fun doWork(): Result {
-        AndroidThreeTen.init(context)
-        var currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        dbref = FirebaseDatabase.getInstance().getReference("/Users/"+currentuser+"/Inventory")
+        val currentuser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        dbref = FirebaseDatabase.getInstance().getReference("/Users/$currentuser/Inventory")
 
-        var count = 0//hampir
-        var count2 = 0//expired
+        var count = 0 // hampir
+        var count2 = 0 // expired
 
         val valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val currentDate = getCurrentDate()
+                    val currentDate = LocalDate.now()
 
                     for (bahanSnapshot in snapshot.children) {
                         try {
-                            val bahanDateStr = bahanSnapshot.child("tglkadaluarsa").getValue().toString()
+                            val bahanDateStr = bahanSnapshot.child("tglkadaluarsa").getValue(String::class.java)
                             val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                             val bahanDate = LocalDate.parse(bahanDateStr, formatter)
                             val daysBetween = ChronoUnit.DAYS.between(currentDate, bahanDate)
@@ -44,29 +42,27 @@ class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(
                             if (daysBetween < 0) {
                                 count2++
                             }
-                        }
-                        catch (e:Exception){
+                        } catch (e: Exception) {
                             continue
                         }
-
                     }
 
-                    var notificationTitle = "Check kulkas yuk!"//default text 1 atas
-                    var notificationMessage = "Makan apa ya hari ini?"//default text 2 bawah
-                    if (count == 0 && count2 == 0){
-                        notificationTitle = "Bahan segar, badan pun bugar!"//semuanya segar
+                    var notificationTitle = "Check kulkas yuk!" // default text 1 atas
+                    var notificationMessage = "Makan apa ya hari ini?" // default text 2 bawah
+                    if (count == 0 && count2 == 0) {
+                        notificationTitle = "Bahan segar, badan pun bugar!" // semuanya segar
                         notificationMessage = "Yuk masak bahan-bahan mu selagi segar!"
                     }
-                    if (count > 0 && count2 == 0){
-                        notificationTitle = "Walaupun keadaan belum mendesak,"//ada yang hampir kadaluarsa
+                    if (count > 0 && count2 == 0) {
+                        notificationTitle = "Walaupun keadaan belum mendesak," // ada yang hampir kadaluarsa
                         notificationMessage = "$count bahan mau kedaluarsa, yuk di masak!"
                     }
-                    if (count == 0 && count2 > 0){
-                        notificationTitle = "Sayangnya nasi telah menjadi bubur,"//ada yang kadaluarsa
+                    if (count == 0 && count2 > 0) {
+                        notificationTitle = "Sayangnya nasi telah menjadi bubur," // ada yang kadaluarsa
                         notificationMessage = "$count2 bahan yang kadaluarsa jangan di kubur!"
                     }
-                    if (count > 0 && count2 > 0){
-                        notificationTitle = "Gawat! $count2 bahan telah kadaluarsa,"//ada yang kadaluarsa dan hampir
+                    if (count > 0 && count2 > 0) {
+                        notificationTitle = "Gawat! $count2 bahan telah kadaluarsa," // ada yang kadaluarsa dan hampir
                         notificationMessage = "Dan $count sudah dekat kadaluarsa!"
                     }
 
@@ -75,30 +71,22 @@ class ExpiredWorker(val context: Context, val params: WorkerParameters): Worker(
                     // Remove the ValueEventListener to stop listening for further changes
                     dbref.removeEventListener(this)
                 }
-                if (snapshot ==null){
-                    var notificationTitle = "Bahan segar, badan pun bugar!"//default text 1 atas
-                    var notificationMessage = "Makan apa ya hari ini?"//default text 2 bawah
+
+                if (!snapshot.exists()) {
+                    val notificationTitle = "Bahan segar, badan pun bugar!" // default text 1 atas
+                    val notificationMessage = "Makan apa ya hari ini?" // default text 2 bawah
                     NotificationHelper(context).createNotification(notificationTitle, notificationMessage)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                // Handle onCancelled if needed
             }
-
         }
 
         // Add the ValueEventListener to start listening for data changes
-        dbref.addValueEventListener(valueEventListener)
+        dbref.addListenerForSingleValueEvent(valueEventListener)
 
         return Result.success()
-    }
-
-    private fun getCurrentDate(): LocalDate {
-        val c = Calendar.getInstance()
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        val month = c.get(Calendar.MONTH) + 1 // Months are zero-based, so add 1
-        val year = c.get(Calendar.YEAR)
-        return LocalDate.of(year, month, day)
     }
 }
