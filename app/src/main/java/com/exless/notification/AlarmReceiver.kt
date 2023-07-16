@@ -5,12 +5,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import com.exless.notification.ExpiredWorker
 import com.google.firebase.database.DatabaseReference
 import java.util.concurrent.TimeUnit
 
 class AlarmReceiver : BroadcastReceiver() {
-    private lateinit var dbref : DatabaseReference
+    private lateinit var dbref: DatabaseReference
 
     override fun onReceive(context: Context, intent: Intent) {
         val workRequest = PeriodicWorkRequest.Builder(
@@ -21,5 +20,4 @@ class AlarmReceiver : BroadcastReceiver() {
 
         WorkManager.getInstance(context).enqueue(workRequest)
     }
-
 }
