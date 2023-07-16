@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
     private lateinit var dbquery : Query
     lateinit var jumbahanmain : ArrayList<String>
-     lateinit var bahanarraylist : ArrayList<Datarv_jenisbahan>
+    lateinit var bahanarraylist : ArrayList<Datarv_jenisbahan>
     private lateinit var rv_list_jenisbahan: RecyclerView
     //
     private lateinit var dbrefex : DatabaseReference
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var bahanarraylistex : ArrayList<Datarv_seeexperired>
     private lateinit var rv_list_jenisbahanex: RecyclerView
     private var doubleBackToExitPressedOnce = false
-//    private lateinit var profilehome : ImageView
+    //    private lateinit var profilehome : ImageView
     var i : Int = 0
     private var isDataFetched = false
 
@@ -236,7 +236,7 @@ class MainActivity : AppCompatActivity() {
         val url = "http://www.google.com"//link website kalau udah ada
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
-        }
+    }
 
     fun toaddbahan(view: View) {
         startActivity(Intent(this, TambahbahanMain_Activity::class.java))
@@ -312,24 +312,24 @@ class MainActivity : AppCompatActivity() {
         val dataTitle = resources.getStringArray(R.array.data_name)
         val dataimage = resources.obtainTypedArray(R.array.data_photo)
         for (i in dataTitle.indices) {
-        dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
-        dbquery.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val count: String = snapshot.childrenCount.toString()
+            dbquery = dbref.orderByChild("jenismakanan").equalTo(dataTitle[i])
+            dbquery.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val count: String = snapshot.childrenCount.toString()
 //                println("countmain"+count)
-                jumbahanmain.add(count)
-                val bahanList = Datarv_jenisbahan(
-                    dataTitle[i],
-                    "",
-                    dataimage.getResourceId(i, -1)
-                )
-                bahanList.description = "Kamu mempunyai $count macam"
-                bahanarraylist.add(bahanList)
+                    jumbahanmain.add(count)
+                    val bahanList = Datarv_jenisbahan(
+                        dataTitle[i],
+                        "",
+                        dataimage.getResourceId(i, -1)
+                    )
+                    bahanList.description = "Kamu mempunyai $count macam"
+                    bahanarraylist.add(bahanList)
 
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
         }
 
         showRecylerview()
