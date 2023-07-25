@@ -193,6 +193,24 @@ class Profile_Activity : AppCompatActivity() {
 
     }
 
+    fun openAboutPage(view: View) {
+        val llabout = findViewById<LinearLayout>(R.id.llabout)
+
+        if (llabout.visibility == View.VISIBLE) {
+            llabout.visibility = View.GONE
+        } else {
+            llabout.visibility = View.VISIBLE
+        }
+    }
+    fun openHelpPage(view: View) {
+        val llhelp = findViewById<LinearLayout>(R.id.llhelp)
+
+        if (llhelp.visibility == View.VISIBLE) {
+            llhelp.visibility = View.GONE
+        } else {
+            llhelp.visibility = View.VISIBLE
+        }
+    }
     fun profilemyaccount(view: View) {
         val llmyaccount = findViewById<LinearLayout>(R.id.llmyaccount)
 
