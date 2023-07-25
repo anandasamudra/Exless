@@ -135,13 +135,13 @@
                 android:layout_marginStart="24dp"
                 android:onClick="profilemyaccount"
                 android:orientation="vertical"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_select"
-                tools:visibility="invisible">
+                tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_useremail"
@@ -288,14 +288,6 @@
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/view10"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#CCCCCC"
-                app:layout_constraintEnd_toEndOf="@+id/tv_profilnama"
-                app:layout_constraintStart_toStartOf="@+id/tv_profilnama"
-                app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
             <TextView
                 android:id="@+id/textViewAbout"
                 android:layout_width="match_parent"
@@ -311,6 +303,15 @@
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
+            <View
+                android:id="@+id/view10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                app:layout_constraintEnd_toEndOf="@+id/tv_profilnama"
+                app:layout_constraintStart_toStartOf="@+id/tv_profilnama"
+                app:layout_constraintTop_toBottomOf="@+id/tv_profilnama" />
+
             <LinearLayout
                 android:id="@+id/llabout"
                 android:layout_width="match_parent"
@@ -318,24 +319,24 @@
                 android:layout_marginStart="24dp"
                 android:onClick="openAboutPage"
                 android:orientation="vertical"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_select"
-                tools:visibility="invisible">
+                tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_about"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp"
+                    android:layout_height="80dp"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/regular"
                     android:gravity="center|left"
                     android:paddingVertical="5dp"
                     android:paddingStart="10dp"
-                    android:text="Aplikasi ini dibuat untuk "
+                    android:text="Aplikasi ini dibuat oleh tim massive challenge yang dibentuk pada MSIB 4 pada Infinite Learning yang beranggotakan Ananda,Peja,Adi,Kevin,Mikais "
                     android:textColor="#000000"
                     android:textSize="12sp" />
 
@@ -382,24 +383,24 @@
                 android:layout_marginStart="24dp"
                 android:onClick="OpenHelpPage"
                 android:orientation="vertical"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_select"
-                tools:visibility="invisible">
+                tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_help"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp"
+                    android:layout_height="100dp"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/regular"
                     android:gravity="center|left"
                     android:paddingVertical="5dp"
                     android:paddingStart="10dp"
-                    android:text="Aplikasi ada beberapa menu "
+                    android:text="Aplikasi ada beberapa menu yang sudah bisa digunakan seperti tambah bahan itu hanya diklik saja tambah bahan dan juga mengisi sesuai yang diperlukan,lalu untuk melihat penyimpanan ada dibagian Simpanan,lalu juga ada Profile yang dapat menginformasikan alamat email,bagian help dan bagian about "
                     android:textColor="#000000"
                     android:textSize="12sp" />
 
